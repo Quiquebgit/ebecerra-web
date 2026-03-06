@@ -9,7 +9,7 @@ const terminalLines = [
   { delay: 2000, text: "$ ./skills --top", type: "cmd" },
   { delay: 2600, text: "Java · Magnolia CMS · Architecture · Spring", type: "out" },
   { delay: 3000, text: "$ echo $STATUS", type: "cmd" },
-  { delay: 3600, text: "Curious. Building. Always learning. ▋", type: "out blink" },
+  { delay: 3600, text: "Curious. Building. Always learning. 😊 ▋", type: "out blink" },
 ];
 
 function TerminalHero() {
@@ -70,7 +70,7 @@ export default function Hero({ scrollTo }) {
           <div className="hero-text">
             <div className="hero-status">
               <span className="dot-active" />
-              DISPONIBLE PARA NUEVOS RETOS
+              SUPERANDO RETOS 🤖
             </div>
             <h1 className="hero-title">
               Enrique<br />

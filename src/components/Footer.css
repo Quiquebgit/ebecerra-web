@@ -9,11 +9,36 @@
 }
 
 .footer-text {
-  color: #333;
+  color: #666;
   font-size: 12px;
   font-family: monospace;
 }
 
 .footer-status {
+  color: #00ff88;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-link {
+  color: #777;
+  text-decoration: none;
+  font-size: 13px;
+  font-family: "JetBrains Mono", monospace;
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
   color: #00ff88;
 }

@@ -41,7 +41,7 @@
 }
 
 .logo-domain {
-  color: #333;
+  color: #666;
   font-size: 13px;
   font-family: monospace;
 }
@@ -53,7 +53,7 @@
 
 .nav-link {
   cursor: pointer;
-  color: #888;
+  color: #aaa;
   font-size: 13px;
   font-family: "JetBrains Mono", monospace;
   letter-spacing: 0.05em;

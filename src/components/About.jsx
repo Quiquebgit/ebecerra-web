@@ -12,7 +12,7 @@ export default function About() {
     <section className="about" id="sobre-mí">
       <div className="about-container">
         <span className="section-label">// 01. sobre mí</span>
-        <h2 className="section-title">Un poco sobre mí</h2>
+        <h2 className="section-title">Un poco sobre mí 📖</h2>
         <div className="about-grid">
           <div className="about-text">
             <p>

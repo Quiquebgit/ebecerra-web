@@ -1,13 +1,7 @@
 import { useState } from "react";
 import "./Contact.css";
 
-const links = [
-  { label: "LinkedIn", url: "https://www.linkedin.com/in/enrique-becerra-garcia/" },
-  { label: "Email", url: "mailto:quique.ebecerra@gmail.com" },
-];
-
 export default function Contact() {
-  const [hoveredLink, setHoveredLink] = useState(null);
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
@@ -51,7 +45,7 @@ export default function Contact() {
     <section className="contact" id="contacto">
       <div className="contact-container">
         <span className="section-label">// 04. contacto</span>
-        <h2 className="section-title">Hablemos</h2>
+        <h2 className="section-title">Hablemos 💌</h2>
         <p className="contact-description">
           ¿Tienes un proyecto interesante, una idea o simplemente quieres conectar? Escríbeme.
         </p>
@@ -93,22 +87,6 @@ export default function Contact() {
             </p>
           )}
         </form>
-        <div className="contact-links">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.url}
-              className="contact-link"
-              style={{
-                color: hoveredLink === link.label ? "#00ff88" : "#555",
-              }}
-              onMouseEnter={() => setHoveredLink(link.label)}
-              onMouseLeave={() => setHoveredLink(null)}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
       </div>
     </section>
   );

@@ -58,7 +58,7 @@ export default function Skills() {
     <section className="skills" id="skills">
       <div className="skills-container">
         <span className="section-label">// 03. skills</span>
-        <h2 className="section-title">Stack técnico</h2>
+        <h2 className="section-title">Stack técnico 💡</h2>
         <div className="skills-grid">
           <div className="skills-column">
             {skills.slice(0, 4).map((s, i) => (
