@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import "./Skills.css";
 
 const skills = [
@@ -29,7 +29,6 @@ const tags = [
 
 function SkillBar({ name, level, index }) {
   const [animated, setAnimated] = useState(false);
-  const ref = useRef();
 
   useEffect(() => {
     const timer = setTimeout(() => setAnimated(true), index * 100 + 300);

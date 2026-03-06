@@ -67,3 +67,50 @@
   color: #00ff88;
   background: rgba(0, 255, 136, 0.06);
 }
+
+/* Hamburger button */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  gap: 4px;
+}
+
+.hamburger-line {
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  transition: 0.3s;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: rgba(8, 8, 8, 0.95);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
