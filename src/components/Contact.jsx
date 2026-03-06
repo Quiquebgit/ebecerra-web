@@ -3,7 +3,6 @@ import "./Contact.css";
 
 const links = [
   { label: "LinkedIn", url: "https://www.linkedin.com/in/enrique-becerra-garcia/" },
-  { label: "GitHub", url: "#" },
   { label: "Email", url: "mailto:quique.ebecerra@gmail.com" },
 ];
 
