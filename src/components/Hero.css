@@ -184,6 +184,21 @@
   animation: blink 1s infinite;
 }
 
+.terminal-input {
+  background: none;
+  border: none;
+  color: #e0e0e0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  outline: none;
+  flex: 1;
+  margin-left: 4px;
+}
+
+.terminal-input::placeholder {
+  color: #666;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
