@@ -4,7 +4,7 @@ export default function About() {
   const features = [
     { icon: "🏗️", label: "Arquitectura de Software", desc: "Diseño de sistemas escalables y mantenibles" },
     { icon: "👨‍🏫", label: "Formación técnica", desc: "Tutor, formador y coordinador de comunidades" },
-    { icon: "🔍", label: "Magnolia CMS", desc: "Especialista certificado con +6 años de experiencia" },
+    { icon: "🔍", label: "Magnolia CMS", desc: "Especialista certificado" },
     { icon: "⚙️", label: "Java & Spring", desc: "Backend sólido como base de todo lo demás" },
   ];
 
