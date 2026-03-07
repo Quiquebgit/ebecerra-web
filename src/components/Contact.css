@@ -65,3 +65,15 @@
 .contact-link:hover {
   color: #00ff88;
 }
+
+.submit-message {
+  margin-top: 10px;
+}
+
+.submit-message.success {
+  color: #00ff88;
+}
+
+.submit-message.error {
+  color: #ff4444;
+}

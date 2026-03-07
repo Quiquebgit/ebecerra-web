@@ -2,14 +2,18 @@ import { useState, useEffect } from "react";
 import "./Skills.css";
 
 const skills = [
-  { name: "Java", level: 95 },
   { name: "Magnolia CMS", level: 98 },
-  { name: "Spring", level: 85 },
+  { name: "Java", level: 95 },
   { name: "Architecture", level: 90 },
+  { name: "Leadership", level: 92 },
+  { name: "Spring", level: 85 },
+  { name: "Agile", level: 90 },
+  { name: "Mentoring", level: 88 },
   { name: "JavaScript", level: 75 },
   { name: "SQL", level: 80 },
   { name: "Groovy", level: 78 },
   { name: "FreeMarker", level: 82 },
+  { name: "Artificial Intelligence", level: 65 },
 ];
 
 const tags = [
@@ -60,28 +64,17 @@ export default function Skills() {
         <span className="section-label">// 03. skills</span>
         <h2 className="section-title">Stack técnico 💡</h2>
         <div className="skills-grid">
-          <div className="skills-column">
-            {skills.slice(0, 4).map((s, i) => (
-              <SkillBar key={s.name} {...s} index={i} />
-            ))}
-          </div>
-          <div className="skills-column">
-            {skills.slice(4).map((s, i) => (
-              <SkillBar key={s.name} {...s} index={i + 4} />
-            ))}
-          </div>
+          {skills.map((s, i) => (
+            <SkillBar key={s.name} {...s} index={i} />
+          ))}
         </div>
         <div className="skills-tags">
           {tags.map((tag) => (
             <span
               key={tag}
-              className="tag-item"
+              className={`tag-item ${hoveredTag === tag ? "hovered" : ""}`}
               onMouseEnter={() => setHoveredTag(tag)}
               onMouseLeave={() => setHoveredTag(null)}
-              style={{
-                borderColor: hoveredTag === tag ? "#00ff88" : "#222",
-                color: hoveredTag === tag ? "#00ff88" : "#666",
-              }}
             >
               {tag}
             </span>

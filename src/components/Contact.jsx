@@ -82,7 +82,7 @@ export default function Contact() {
             {isSubmitting ? "Enviando..." : "$ send_message →"}
           </button>
           {submitMessage && (
-            <p className="submit-message" style={{ color: submitMessage.includes("correctamente") ? "#00ff88" : "#ff4444", marginTop: "10px" }}>
+            <p className={`submit-message ${submitMessage.includes("correctamente") ? "success" : "error"}`}>
               {submitMessage}
             </p>
           )}
