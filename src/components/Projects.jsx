@@ -11,8 +11,7 @@ const projects = [
     status: "beta",
     statusText: "beta disponible",
     links: [
-      { text: "$ ver_landing", href: "/piezas-game/", external: false },
-      { text: "./jugar_beta →", href: "https://piezas-game.vercel.app", external: true },
+      { text: "$ ver_landing", href: "/piezas-game/", external: true },
     ],
   },
   {
