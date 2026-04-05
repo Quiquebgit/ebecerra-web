@@ -43,7 +43,7 @@ export default function Projects() {
     <section className="projects" id="proyectos">
       <div className="projects-container">
         <span className="section-label">// 04. proyectos</span>
-        <h2 className="section-title">Side projects</h2>
+        <h2 className="section-title">Proyectos propios</h2>
         <div className="projects-grid">
           {projects.map((p) => (
             <div key={p.id} className="project-card">
