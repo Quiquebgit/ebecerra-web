@@ -44,7 +44,7 @@ export default function Contact() {
   return (
     <section className="contact" id="contacto">
       <div className="contact-container">
-        <span className="section-label">// 04. contacto</span>
+        <span className="section-label">// 05. contacto</span>
         <h2 className="section-title">Hablemos 💌</h2>
         <p className="contact-description">
           ¿Tienes un proyecto interesante, una idea o simplemente quieres conectar? Escríbeme.

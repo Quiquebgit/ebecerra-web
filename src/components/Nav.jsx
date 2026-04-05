@@ -3,7 +3,7 @@ import "./Nav.css";
 
 export default function Nav({ scrollTo }) {
   const [isOpen, setIsOpen] = useState(false);
-  const navItems = ["home", "sobre mí", "experiencia", "skills", "contacto"];
+  const navItems = ["home", "sobre mí", "experiencia", "skills", "proyectos", "contacto"];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
