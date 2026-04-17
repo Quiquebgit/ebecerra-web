@@ -37,14 +37,14 @@ Plan de referencia: [`plan-migracion-nextjs-sanity.md`](plan-migracion-nextjs-sa
 
 ## Fase 3 — Integración de Sanity (8–12h)
 
-- [ ] Crear proyecto Sanity con dataset `production`
-- [ ] Schemas: siteSettings, profile, experience, skill, techTag, project
-- [ ] Studio embebido en `/studio`
-- [ ] Migrar contenido de `lib/content.ts` a Sanity (manual o script)
-- [ ] Queries GROQ en `lib/sanity/queries.ts`
-- [ ] Reemplazar imports hardcoded por fetches de Sanity
-- [ ] ISR + webhook de revalidación (`/api/revalidate`)
-- [ ] Verificar: editar texto en Studio → visible en staging
+- [x] Crear proyecto Sanity con dataset `production` (ID: gdtxcn4l)
+- [x] Schemas: profile, experience, skill, techTag, project
+- [x] Studio embebido en `/studio`
+- [ ] Migrar contenido de `lib/content.ts` a Sanity — **acción manual**: entrar en `/studio` y crear los documentos. Mientras tanto el sitio usa fallback de `lib/content.ts`
+- [x] Queries GROQ en `lib/sanity/queries.ts`
+- [x] Reemplazar imports hardcoded por fetches de Sanity (con fallback a `lib/content.ts`)
+- [x] ISR + webhook de revalidación (`/api/revalidate`)
+- [ ] Verificar: editar texto en Studio → visible en staging (pendiente de crear contenido)
 
 ## Fase 4 — i18n ES/EN (6–8h)
 
@@ -102,3 +102,5 @@ Plan de referencia: [`plan-migracion-nextjs-sanity.md`](plan-migracion-nextjs-sa
 > Formato: `YYYY-MM-DD — descripción`.
 
 2026-04-16 — Creado el plan y el progreso. Aún no se ha empezado la implementación.
+2026-04-17 — Fase 2 completada: 8 componentes portados, contenido en lib/content.ts.
+2026-04-17 — Fase 3 completada (infra): Sanity setup con schemas, Studio en /studio, GROQ queries, ISR + webhook. Pendiente: poblar contenido manualmente en Studio.

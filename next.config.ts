@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   // sea la URL canónica y los assets relativos (styles.css, assets/) resuelvan bien.
   trailingSlash: true,
 
+  // Evita que Turbopack bundle sanity/studio server-side (usan browser APIs)
+  serverExternalPackages: ["sanity", "@sanity/ui", "@sanity/vision"],
+
   async rewrites() {
     return [
       // Next.js no sirve index.html como índice de directorio automáticamente.

@@ -6,26 +6,30 @@ import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
-import {
-  aboutFeatures,
-  experience,
-  skills,
-  tags,
-  projects,
-  footerLinks,
-} from "@/lib/content";
+import { getSiteData } from "@/lib/sanity/queries";
+import * as content from "@/lib/content";
 
-export default function Home() {
+export const revalidate = 3600;
+
+export default async function Home() {
+  const sanity = await getSiteData().catch(() => null);
+
+  const experienceItems = sanity?.experience ?? content.experience;
+  const skillItems = sanity?.skills ?? content.skills;
+  const tagItems = sanity?.tags ?? content.tags;
+  const projectItems = sanity?.projects ?? content.projects;
+  const featureItems = sanity?.aboutFeatures ?? content.aboutFeatures;
+
   return (
     <main>
       <Nav />
       <Hero />
-      <About features={aboutFeatures} />
-      <Experience items={experience} />
-      <Skills skills={skills} tags={tags} />
-      <Projects items={projects} />
+      <About features={featureItems} />
+      <Experience items={experienceItems} />
+      <Skills skills={skillItems} tags={tagItems} />
+      <Projects items={projectItems} />
       <Contact />
-      <Footer links={footerLinks} />
+      <Footer links={content.footerLinks} />
     </main>
   );
 }
