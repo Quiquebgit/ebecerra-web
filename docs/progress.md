@@ -18,8 +18,8 @@ Plan de referencia: [`plan-migracion-nextjs-sanity.md`](plan-migracion-nextjs-sa
 - [x] Layout raíz con fonts (DM Sans, JetBrains Mono vía `next/font`)
 - [x] Integrar `@vercel/analytics` + `@vercel/speed-insights`
 - [x] Home placeholder desplegable — `npm run build` ✓
-- [ ] Deploy a staging en Vercel (preview URL via PR o push a rama)
-- [ ] Validar `/piezas-game/*` y `/.well-known/assetlinks.json` en staging
+- [x] Deploy a staging en Vercel (preview URL via push a rama `migracion-nextjs`)
+- [x] Validar `/piezas-game/`, `/piezas-game/privacidad.html`, `/.well-known/assetlinks.json` en staging ✓
 
 ## Fase 2 — Port 1:1 con contenido hardcoded (10–14h)
 
