@@ -23,15 +23,15 @@ Plan de referencia: [`plan-migracion-nextjs-sanity.md`](plan-migracion-nextjs-sa
 
 ## Fase 2 — Port 1:1 con contenido hardcoded (10–14h)
 
-- [ ] Portar Nav (hamburger + scroll)
-- [ ] Portar Hero (terminal interactiva completa)
-- [ ] Portar About (bio + feature cards)
-- [ ] Portar Experience (timeline)
-- [ ] Portar Skills (barras animadas + tags)
-- [ ] Portar Projects (cards con links)
-- [ ] Portar Contact (form Formspree)
-- [ ] Portar Footer
-- [ ] Contenido centralizado en `lib/content.ts` temporal
+- [x] Portar Nav (hamburger + scroll)
+- [x] Portar Hero (terminal interactiva completa)
+- [x] Portar About (bio + feature cards)
+- [x] Portar Experience (timeline)
+- [x] Portar Skills (barras animadas + tags)
+- [x] Portar Projects (cards con links)
+- [x] Portar Contact (form Formspree)
+- [x] Portar Footer
+- [x] Contenido centralizado en `lib/content.ts` temporal
 - [ ] Paridad visual con sitio actual verificada
 - [ ] Lighthouse ≥ 90 en staging
 
