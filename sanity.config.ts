@@ -8,6 +8,7 @@ export default defineConfig({
   title: "ebecerra.es",
   projectId: "gdtxcn4l",
   dataset: "production",
+  basePath: "/studio",
   plugins: [structureTool(), visionTool()],
   schema: {
     types: schemaTypes,
