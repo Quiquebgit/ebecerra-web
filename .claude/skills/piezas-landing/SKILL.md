@@ -38,11 +38,11 @@ Definida en `public/piezas-game/styles.css` como variables CSS:
 ## Routing
 
 - `/piezas-game` → redirect 301 a `/piezas-game/`.
-- `/piezas-game/` → Vercel sirve el `index.html` estático (prioridad sobre cualquier rewrite SPA).
-- Todo lo demás → fallback a la web principal.
+- `/piezas-game/` → rewrite a `/piezas-game/index.html` (Next.js no sirve index.html como directorio automáticamente, a diferencia de Vite).
+- Todo lo demás → fallback a Next.js router.
 - `/.well-known/assetlinks.json` — deep links de Android, no tocar.
 
-En Vite actual: reglas en `vercel.json`.
+En Next.js: rewrites en `next.config.ts` (redirect + rewrites para cada subpágina).
 Tras migración a Next.js: reglas equivalentes en `next.config.ts` (`redirects()` + la carpeta `public/piezas-game/` se copia tal cual).
 
 ## Reglas
