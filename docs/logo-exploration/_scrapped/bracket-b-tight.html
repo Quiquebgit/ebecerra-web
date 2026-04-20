@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>&lt;B&gt; — tight & gordo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700;900&family=Space+Grotesk:wght@700&family=Archivo+Black&family=Bowlby+One&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0C0A09; --paper:#FAFAF9; --muted:#78716C; --border:#E7E5E4;
+    --green:#047857;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"DM Sans",system-ui;background:var(--paper);color:var(--ink);line-height:1.6}
+  .wrap{max-width:1180px;margin:0 auto;padding:48px 24px 96px}
+  h1{font-size:32px;letter-spacing:-.02em;margin:0 0 8px}
+  h2{font-size:20px;letter-spacing:-.01em;margin:48px 0 16px;font-weight:600}
+  .sub{color:var(--muted);margin:0 0 40px;max-width:60ch}
+  .mono{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted)}
+  .row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:16px 0 32px}
+  .card{background:white;border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}
+  .card h3{margin:0;font-size:14px;font-weight:600}
+  .card .spec{font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--muted)}
+  .canvas-square{background:#FAFAF9;border-radius:8px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:12px}
+  .canvas-square svg{width:100%;height:100%}
+  .ctx{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
+  .ctx .dark{background:#080808;border-radius:8px;padding:16px;display:flex;align-items:center;justify-content:center;aspect-ratio:1/1}
+  .ctx .dark svg{width:100%;height:100%}
+  .avatar-circle{width:64px;height:64px;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--border);overflow:hidden}
+  .avatar-circle svg{width:70%;height:70%}
+  .avatar-row{display:flex;gap:12px;align-items:center;padding:12px;background:white;border-radius:8px;border:1px solid var(--border)}
+  .avatar-row .handle{font-size:13px}
+  .avatar-row .handle .name{font-weight:600}
+  .avatar-row .handle .sub-h{color:var(--muted);font-size:11px;font-family:"JetBrains Mono",monospace}
+  .scales{display:flex;gap:14px;align-items:flex-end;justify-content:center;padding:14px;background:#FAFAF9;border-radius:8px;margin-top:8px}
+  .scales > div{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .scales .sz{font-family:"JetBrains Mono",monospace;font-size:9px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="mono">EXPLORACIÓN · &lt;B&gt; TIGHT &amp; GORDO · viewBox 1:1</p>
+  <h1>4 variantes cuadradas con brackets pegados</h1>
+  <p class="sub">viewBox <code>0 0 1024 1024</code> (cuadrado). Brackets justo al lado de la B, pesos heavy (900/Black), tamaños reducidos para dejar respirar a la B. Pensado para favicon y avatar.</p>
+
+  <h2>Comparativa base (canvas cuadrado)</h2>
+
+  <div class="row">
+
+    <!-- DM Sans Black -->
+    <div class="card">
+      <h3>1 · DM Sans Black</h3>
+      <span class="spec">900 · humanista</span>
+      <div class="canvas-square">
+        <svg viewBox="0 0 1024 1024">
+          <text x="175" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text>
+          <g transform="translate(-180, 128)" fill="#047857">
+            <path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/>
+            <path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/>
+          </g>
+          <text x="850" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Space Grotesk Bold -->
+    <div class="card">
+      <h3>2 · Space Grotesk 700</h3>
+      <span class="spec">700 · retro-geom</span>
+      <div class="canvas-square">
+        <svg viewBox="0 0 1024 1024">
+          <text x="175" y="512" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="540" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text>
+          <g transform="translate(-180, 128)" fill="#047857">
+            <path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/>
+            <path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/>
+          </g>
+          <text x="850" y="512" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="540" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Archivo Black -->
+    <div class="card">
+      <h3>3 · Archivo Black</h3>
+      <span class="spec">900 · geom heavy</span>
+      <div class="canvas-square">
+        <svg viewBox="0 0 1024 1024">
+          <text x="175" y="512" font-family="'Archivo Black', sans-serif" font-weight="900" font-size="540" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text>
+          <g transform="translate(-180, 128)" fill="#047857">
+            <path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/>
+            <path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/>
+          </g>
+          <text x="850" y="512" font-family="'Archivo Black', sans-serif" font-weight="900" font-size="540" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Bowlby One -->
+    <div class="card">
+      <h3>4 · Bowlby One</h3>
+      <span class="spec">400 · display redondo</span>
+      <div class="canvas-square">
+        <svg viewBox="0 0 1024 1024">
+          <text x="180" y="512" font-family="'Bowlby One', sans-serif" font-weight="400" font-size="480" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text>
+          <g transform="translate(-180, 128)" fill="#047857">
+            <path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/>
+            <path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/>
+          </g>
+          <text x="845" y="512" font-family="'Bowlby One', sans-serif" font-weight="400" font-size="480" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>Sobre fondo oscuro (modo geek)</h2>
+  <div class="ctx">
+    <div class="dark">
+      <svg viewBox="0 0 1024 1024">
+        <text x="175" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text>
+        <g transform="translate(-180, 128)" fill="#047857"><path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/><path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/></g>
+        <text x="850" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text>
+      </svg>
+    </div>
+    <div class="dark">
+      <svg viewBox="0 0 1024 1024">
+        <text x="175" y="512" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="540" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text>
+        <g transform="translate(-180, 128)" fill="#047857"><path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/><path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/></g>
+        <text x="850" y="512" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="540" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text>
+      </svg>
+    </div>
+    <div class="dark">
+      <svg viewBox="0 0 1024 1024">
+        <text x="175" y="512" font-family="'Archivo Black', sans-serif" font-weight="900" font-size="540" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text>
+        <g transform="translate(-180, 128)" fill="#047857"><path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/><path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/></g>
+        <text x="850" y="512" font-family="'Archivo Black', sans-serif" font-weight="900" font-size="540" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text>
+      </svg>
+    </div>
+    <div class="dark">
+      <svg viewBox="0 0 1024 1024">
+        <text x="180" y="512" font-family="'Bowlby One', sans-serif" font-weight="400" font-size="480" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text>
+        <g transform="translate(-180, 128)" fill="#047857"><path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/><path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/></g>
+        <text x="845" y="512" font-family="'Bowlby One', sans-serif" font-weight="400" font-size="480" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text>
+      </svg>
+    </div>
+  </div>
+
+  <h2>Avatar social (círculo 64px)</h2>
+  <div class="row">
+    <div class="avatar-row">
+      <div class="avatar-circle">
+        <svg viewBox="0 0 1024 1024">
+          <text x="175" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text>
+          <g transform="translate(-180, 128)" fill="#047857"><path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/><path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/></g>
+          <text x="850" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text>
+        </svg>
+      </div>
+      <div class="handle"><div class="name">Enrique Becerra</div><div class="sub-h">DM Sans 900</div></div>
+    </div>
+    <div class="avatar-row">
+      <div class="avatar-circle">
+        <svg viewBox="0 0 1024 1024">
+          <text x="175" y="512" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="540" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text>
+          <g transform="translate(-180, 128)" fill="#047857"><path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/><path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/></g>
+          <text x="850" y="512" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="540" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text>
+        </svg>
+      </div>
+      <div class="handle"><div class="name">Enrique Becerra</div><div class="sub-h">Space Grotesk 700</div></div>
+    </div>
+    <div class="avatar-row">
+      <div class="avatar-circle">
+        <svg viewBox="0 0 1024 1024">
+          <text x="175" y="512" font-family="'Archivo Black', sans-serif" font-weight="900" font-size="540" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text>
+          <g transform="translate(-180, 128)" fill="#047857"><path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/><path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/></g>
+          <text x="850" y="512" font-family="'Archivo Black', sans-serif" font-weight="900" font-size="540" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text>
+        </svg>
+      </div>
+      <div class="handle"><div class="name">Enrique Becerra</div><div class="sub-h">Archivo Black 900</div></div>
+    </div>
+    <div class="avatar-row">
+      <div class="avatar-circle">
+        <svg viewBox="0 0 1024 1024">
+          <text x="180" y="512" font-family="'Bowlby One', sans-serif" font-weight="400" font-size="480" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text>
+          <g transform="translate(-180, 128)" fill="#047857"><path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/><path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/></g>
+          <text x="845" y="512" font-family="'Bowlby One', sans-serif" font-weight="400" font-size="480" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text>
+        </svg>
+      </div>
+      <div class="handle"><div class="name">Enrique Becerra</div><div class="sub-h">Bowlby One</div></div>
+    </div>
+  </div>
+
+  <h2>Escala (el test de favicon)</h2>
+
+  <p style="font-size:13px;color:var(--muted);margin:0 0 6px">DM Sans 900</p>
+  <div class="scales">
+    <div><svg viewBox="0 0 1024 1024" width="16"><text x="175" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text><g transform="translate(-180, 128)" fill="#047857"><path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/><path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/></g><text x="850" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text></svg><span class="sz">16</span></div>
+    <div><svg viewBox="0 0 1024 1024" width="32"><text x="175" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text><g transform="translate(-180, 128)" fill="#047857"><path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/><path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/></g><text x="850" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text></svg><span class="sz">32</span></div>
+    <div><svg viewBox="0 0 1024 1024" width="48"><text x="175" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text><g transform="translate(-180, 128)" fill="#047857"><path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/><path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/></g><text x="850" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text></svg><span class="sz">48</span></div>
+    <div><svg viewBox="0 0 1024 1024" width="96"><text x="175" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text><g transform="translate(-180, 128)" fill="#047857"><path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/><path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/></g><text x="850" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text></svg><span class="sz">96</span></div>
+    <div><svg viewBox="0 0 1024 1024" width="180"><text x="175" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&lt;</text><g transform="translate(-180, 128)" fill="#047857"><path d="M791.874,294.249c40.825-3.171,67.589-25.252,85-49.136c19.299-26.46,28.363-65.125,19.137-108.096C880.272,64.659,822.382,5.966,746.137,1.227c-35.185-2.185-72.26,0-108.099,0c-35.761,0-74.262-3.885-108.987,0c-32.665,3.655-51.625,30.172-51.369,66.108c-0.089,63.897,12.952,166.09,19.384,226.914c0,0,173.115,0,203.127,0C730.205,294.249,764.949,296.341,791.874,294.249z"/><path d="M1002.887,573.827C999.5,472.648,924.11,398.178,859.296,372.849c-37.743-14.691-99.73-12.305-151.111-12.305h-81.007c-25.8,0-59.251-2.46-81.917,1.025c-15.647,2.408-29.677,11.999-34.886,26.661c-7.635,21.492,1.634,60.99,4.648,86.134c1.955,15.817,6.396,63.695,9.104,89.209c4.118,37.304,7.445,85.921,9.958,129.201c0.979,16.362-0.641,31.498,3.348,42.041c13.534,36.173,53.67,31.787,101.837,31.787h81.007c48.596,0,115.498,4.641,154.813-7.178C951.619,736.445,1005.933,666.316,1002.887,573.827z"/></g><text x="850" y="512" font-family="'DM Sans', sans-serif" font-weight="900" font-size="520" fill="#047857" text-anchor="middle" dominant-baseline="central">&gt;</text></svg><span class="sz">180</span></div>
+  </div>
+
+  <h2>Análisis</h2>
+  <ul>
+    <li><strong>DM Sans 900</strong> — más humanista, en coherencia con el stack que ya usas. Los brackets tienen curvas que dialogan con las de la B. Mi favorita ahora que están gordos.</li>
+    <li><strong>Space Grotesk 700</strong> — más geométrica, el bracket más "corporate-moderno". Puede quedar frío al lado del eB orgánico.</li>
+    <li><strong>Archivo Black 900</strong> — competencia directa con la B — los brackets tan masivos pueden quitarle protagonismo.</li>
+    <li><strong>Bowlby One</strong> — demasiado redonda/cartoon. Choca con el eB que es más sobrio.</li>
+  </ul>
+
+  <p><strong>Mi recomendación:</strong> <strong>DM Sans 900</strong>. Encaja con el stack, los brackets son gordos pero no competitivos con la B, formato cuadrado perfecto para favicon/avatar. Si me dices que sí, vectorizo el texto (convierte a path, independiente de que el font cargue) y lo integramos en el sistema.</p>
+
+</div>
+</body>
+</html>
