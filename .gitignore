@@ -29,3 +29,9 @@ dist-ssr
 .claude/settings.local.json
 .playwright-mcp
 .mcp.json
+
+# Plantilla de mensajes de commit (workaround heredoc, no debe commitearse)
+commit-msg.txt
+
+# Screenshots ad-hoc en raíz (usados durante desarrollo, no se versionan)
+/*.png
