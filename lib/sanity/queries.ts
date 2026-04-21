@@ -4,6 +4,10 @@ import type {
   Skill,
   Project,
   Feature,
+  Service,
+  ProcessStep,
+  CaseStudy,
+  CaseStudySummary,
 } from "@/lib/content";
 import type { Locale } from "@/i18n/routing";
 
@@ -82,4 +86,115 @@ export async function getSiteData(locale: Locale) {
     aboutFeatures:
       profileData?.aboutFeatures?.length ? profileData.aboutFeatures : null,
   };
+}
+
+// --- Fase 6+: services, processSteps, caseStudies ---
+
+type DeliverableRaw = { text: string };
+
+export async function getServices(locale: Locale): Promise<Service[]> {
+  const raw = await client.fetch<Array<Omit<Service, "deliverables"> & { deliverables: DeliverableRaw[] | null }>>(
+    `*[_type == "service"] | order(order asc) {
+      "_id": _id,
+      "title": ${loc("title")},
+      "slug": slug.current,
+      icon,
+      "summary": ${loc("summary")},
+      "description": ${loc("description")},
+      "deliverables": deliverables[]{ "text": coalesce(@[$locale], @.es, @) },
+      priceRange,
+      "priceNote": ${loc("priceNote")},
+      "featured": coalesce(featured, false)
+    }`,
+    { locale }
+  );
+  return raw.map((s) => ({
+    ...s,
+    deliverables: (s.deliverables ?? []).map((d) => d.text),
+  }));
+}
+
+export async function getFeaturedServices(locale: Locale): Promise<Service[]> {
+  const services = await getServices(locale);
+  return services.filter((s) => s.featured);
+}
+
+export async function getProcessSteps(locale: Locale): Promise<ProcessStep[]> {
+  return client.fetch<ProcessStep[]>(
+    `*[_type == "processStep"] | order(order asc) {
+      "_id": _id,
+      "title": ${loc("title")},
+      "description": ${loc("description")},
+      icon,
+      order
+    }`,
+    { locale }
+  );
+}
+
+const caseStudySummaryProjection = `{
+  "_id": _id,
+  "title": ${loc("title")},
+  "slug": slug.current,
+  client,
+  "clientAnonymized": coalesce(clientAnonymized, false),
+  year,
+  "summary": ${loc("summary")},
+  cover,
+  "featured": coalesce(featured, false)
+}`;
+
+export async function getCaseStudies(locale: Locale): Promise<CaseStudySummary[]> {
+  return client.fetch<CaseStudySummary[]>(
+    `*[_type == "caseStudy"] | order(coalesce(order, 9999) asc, year desc) ${caseStudySummaryProjection}`,
+    { locale }
+  );
+}
+
+export async function getFeaturedCaseStudies(
+  locale: Locale,
+  limit = 3
+): Promise<CaseStudySummary[]> {
+  return client.fetch<CaseStudySummary[]>(
+    `*[_type == "caseStudy" && featured == true] | order(coalesce(order, 9999) asc, year desc) [0...$limit] ${caseStudySummaryProjection}`,
+    { locale, limit }
+  );
+}
+
+export async function getCaseStudyBySlug(
+  slug: string,
+  locale: Locale
+): Promise<CaseStudy | null> {
+  return client.fetch<CaseStudy | null>(
+    `*[_type == "caseStudy" && slug.current == $slug][0] {
+      "_id": _id,
+      "title": ${loc("title")},
+      "slug": slug.current,
+      client,
+      "clientAnonymized": coalesce(clientAnonymized, false),
+      year,
+      "summary": ${loc("summary")},
+      "problem": ${loc("problem")},
+      "solution": ${loc("solution")},
+      "outcome": ${loc("outcome")},
+      "metrics": metrics[]{
+        "label": ${loc("label")},
+        value
+      },
+      "stack": stack[]->{
+        "name": ${loc("name")}
+      },
+      cover,
+      images,
+      "body": coalesce(body[$locale], body.es, []),
+      "featured": coalesce(featured, false)
+    }`,
+    { slug, locale }
+  );
+}
+
+export async function getCaseStudySlugs(): Promise<string[]> {
+  return client.fetch<string[]>(
+    `*[_type == "caseStudy" && defined(slug.current)].slug.current`
+  );
 }

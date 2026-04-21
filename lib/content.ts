@@ -22,6 +22,68 @@ export type Project = {
 };
 export type FooterLink = { label: string; url: string };
 
+// --- Fase 6+: tipos Sanity sin fallback ---
+
+export type Service = {
+  _id: string;
+  title: string;
+  slug: string;
+  icon: string | null;
+  summary: string;
+  description: string | null;
+  deliverables: string[];
+  priceRange: string | null;
+  priceNote: string | null;
+  featured: boolean;
+};
+
+export type ProcessStep = {
+  _id: string;
+  title: string;
+  description: string;
+  icon: string | null;
+  order: number;
+};
+
+export type CaseStudyMetric = { label: string; value: string };
+
+export type SanityImage = {
+  _type: "image";
+  asset: { _ref: string; _type: "reference" };
+  hotspot?: { x: number; y: number; height: number; width: number };
+  alt?: string;
+  caption?: string;
+};
+
+// Portable Text block — tipado mínimo, se consume con @portabletext/react
+export type PortableTextBlock = {
+  _type: string;
+  _key: string;
+  [key: string]: unknown;
+};
+
+export type CaseStudySummary = {
+  _id: string;
+  title: string;
+  slug: string;
+  client: string | null;
+  clientAnonymized: boolean;
+  year: number | null;
+  summary: string;
+  cover: SanityImage | null;
+  featured: boolean;
+};
+
+export type CaseStudy = CaseStudySummary & {
+  problem: string | null;
+  solution: string | null;
+  outcome: string | null;
+  metrics: CaseStudyMetric[];
+  stack: { name: string }[];
+  images: SanityImage[];
+  body: PortableTextBlock[];
+};
+
 type Fallback = {
   aboutFeatures: Feature[];
   experience: ExperienceItem[];
