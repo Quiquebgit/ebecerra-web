@@ -1,7 +1,7 @@
 # Design tokens — modo pro
 
 Tokens de color del modo "profesional" (no-geek) de ebecerra.es.
-Coexiste con el modo geek mediante toggle (Fase 6 del roadmap).
+Se aplica en `apps/es` (dominio `ebecerra.es`). El modo geek vive en `apps/tech` (dominio `ebecerra.tech`) — cada dominio entra en su modo sin toggle (ver `docs/plan-migracion-nextjs-sanity.md`).
 
 ## Decisiones base
 

@@ -9,7 +9,7 @@
 | Mark | Fuente | Uso | Tamaño óptimo |
 |------|--------|-----|--------------|
 | **eB completo** | `public/brand/logo-black.svg` y variantes | Modo pro (`ebecerra.es` default), nav, footer, og:image, LinkedIn, email pro, facturas, documentos formales, casos de estudio | 48px+ |
-| **`<B>`** | `public/brand/logo-bracket-b-*.svg` | Modo geek (toggle activo), dominio `.tech`, GitHub, Twitter dev, badges técnicos | 32px+ |
+| **`<B>`** | `public/brand/logo-bracket-b-*.svg` | Modo geek (`apps/tech` / dominio `.tech`), GitHub, Twitter dev, badges técnicos | 32px+ |
 | **B sola** | `app/icon0.svg` (+ favicon.ico, icon1.png, apple-icon.png) | Favicon 16-32px en AMBOS modos | 16-32px |
 
 Los tres marks **comparten la misma B** (paths del eB oficial). No son marcas distintas — son **tres voces de la misma marca** según el contexto y el espacio disponible.
@@ -115,5 +115,5 @@ Reevaluado 2026-04-20: se exploró usar el `<B>` como favicon, pero a 16-32px lo
 - [ ] Elegir fuente del wordmark para el acompañamiento del eB (Geist / Inter / Söhne, peso Medium).
 - [ ] Crear OG image 1200×630 con `logo-scale-deep.svg` sobre warm white.
 - [ ] Actualizar `openGraph.images` y `twitter.images` en `app/layout.tsx` cuando haya OG image.
-- [ ] En Fase 6 (geek mode toggle), integrar `<B>` como mark visible en el nav cuando el modo geek esté activo.
+- [ ] En Fase 9 (`apps/tech`), integrar `<B>` como mark visible en el nav del dominio `.tech`.
 - [ ] Al publicar en `.tech`, usar el `<B>` como avatar/favicon de ese dominio.
