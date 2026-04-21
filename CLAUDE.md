@@ -14,7 +14,47 @@ Progreso de ejecución: [`docs/progress.md`](docs/progress.md).
 
 **Actual (legacy, mientras no se complete Fase 2 del roadmap):** React 19 + Vite 8 + JS vanilla + CSS co-located. Detalles en el skill `/legacy-vite-codebase`.
 
-**Destino:** Next.js 15 App Router + TypeScript + Tailwind v4 + Sanity v3 + next-intl + Resend.
+**Destino:** Next.js 16 App Router + TypeScript + Tailwind v4 + Sanity v5 + next-intl 4 + Resend.
+
+## Convenciones de i18n (Fase 4 cerrada, 2026-04-21)
+
+Sitio bilingüe **ES/EN** con `next-intl`. Detalles en el skill `/i18n-next-intl`.
+
+**Routing:**
+- ES sin prefijo en `/` (locale default).
+- EN con prefijo en `/en`.
+- `localePrefix: "as-needed"` definido en [`i18n/routing.ts`](i18n/routing.ts).
+- Proxy en [`proxy.ts`](proxy.ts) (Next 16 renombró `middleware` → `proxy`) excluye `api`, `studio`, `playground`, `_next`, `_vercel`, `piezas-game`, `brand`, `.well-known` y archivos con extensión.
+
+**Estructura `app/`:**
+- `app/(locale)/[locale]/` — root layout con html/body + `NextIntlClientProvider`. Página home aquí.
+- `app/(misc)/` — root layout con html/body `lang="es"` estático para rutas no-localizadas (`/studio`, `/playground/annotations`).
+- `app/api/revalidate/route.ts` — route handler (sin layout).
+- Favicons y `globals.css` en raíz de `app/`.
+- **No existe `app/layout.tsx` ni `app/page.tsx`** — múltiples root layouts vía route groups.
+
+**Textos UI:**
+- Todos los strings en [`messages/es.json`](messages/es.json) y [`messages/en.json`](messages/en.json).
+- Namespaces: `metadata`, `nav`, `hero`, `about`, `experience`, `skills`, `projects`, `contact`, `footer`.
+- Server components: `getTranslations("namespace")`. Client components: `useTranslations("namespace")`.
+- **Añadir un string nuevo:** añadirlo a AMBOS archivos ES y EN antes de usarlo. `next-intl` falla si falta una key.
+
+**Contenido Sanity:**
+- Tipos `localeString` y `localeText` en [`lib/sanity/schemas/locale.ts`](lib/sanity/schemas/locale.ts) (object con `es` required + `en` opcional).
+- Plugin `@sanity/language-filter` configurado en [`sanity.config.ts`](sanity.config.ts) — permite al editor filtrar por idioma en Studio.
+- Queries GROQ proyectan con `coalesce(field[$locale], field.es, field)` — fallback automático a ES si no hay traducción. Ver [`lib/sanity/queries.ts`](lib/sanity/queries.ts).
+- Fallback en [`lib/content.ts`](lib/content.ts) dualizado `{ es, en }` con `getFallback(locale)`.
+- **Añadir un campo traducible:** cambiar tipo a `localeString`/`localeText` en el schema → `npx sanity schema deploy` → migrar docs existentes (unset+set por vía MCP o similar).
+
+**Selector de idioma:** botón ES/EN en [`components/sections/Nav.tsx`](components/sections/Nav.tsx) usando `useRouter`/`usePathname` de [`i18n/navigation.ts`](i18n/navigation.ts). Cookie `NEXT_LOCALE` persiste la preferencia.
+
+**SEO bilingüe:**
+- `generateMetadata` dinámico por locale en `(locale)/[locale]/layout.tsx`.
+- `alternates.languages` → hreflang automático en HTML.
+- [`app/sitemap.ts`](app/sitemap.ts) lista ambas URLs con alternates.
+- [`app/robots.ts`](app/robots.ts) excluye `/studio`, `/api`, `/playground`.
+
+**Revalidación:** [`app/api/revalidate/route.ts`](app/api/revalidate/route.ts) revalida `/` y `/en` en cada hit del webhook de Sanity.
 
 ## Permisos y autonomía
 
@@ -52,6 +92,18 @@ Detalles (estructura, paleta propia, routing, reglas de edición): skill `/pieza
 - Modificar `@vercel/analytics` o `@vercel/speed-insights`.
 - Tocar routing de `/piezas-game/*` sin validar en preview (ver `/piezas-landing`).
 - Desviarse del stack destino definido en el roadmap sin consultarlo antes.
+
+## Deployment y webhooks
+
+**Revalidación ISR Sanity → web** (`/api/revalidate`):
+- Variable `SANITY_REVALIDATE_SECRET` debe existir con el MISMO valor en:
+  1. `.env.local` (dev) — ya creada 2026-04-21.
+  2. Vercel (Production + Preview + Development) — **pendiente hacerlo en Vercel UI**. El valor está en `.env.local` local; copiar desde allí.
+  3. Webhook de Sanity Studio en [manage.sanity.io](https://manage.sanity.io) → proyecto `gdtxcn4l` → API → Webhooks. URL destino: `https://ebecerra.es/api/revalidate?secret=<valor>` (y/o la URL de preview si se quiere revalidar en ramas).
+- Al llegar un POST válido, revalida `/` y `/en` (ver [`app/api/revalidate/route.ts`](app/api/revalidate/route.ts)).
+- Si se rota el secret, hay que actualizar los 3 sitios a la vez.
+
+Formato de instrucciones completo en [`.env.local.example`](.env.local.example).
 
 ## Configuración de correo - ebecerra.es
 

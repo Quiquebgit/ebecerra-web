@@ -1,13 +1,16 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { terminalLines, terminalCommands, type TerminalLine } from "@/lib/content";
+import { useTranslations } from "next-intl";
+
+type TerminalLine = { type: "cmd" | "out"; text: string };
 
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 }
 
 function TerminalHero() {
+  const t = useTranslations("hero.terminal");
   const [visibleLines, setVisibleLines] = useState<TerminalLine[]>([]);
   const [userLines, setUserLines] = useState<TerminalLine[]>([]);
   const [inputVal, setInputVal] = useState("");
@@ -15,19 +18,31 @@ function TerminalHero() {
   const inputRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
+  const introLines: { delay: number; line: TerminalLine }[] = [
+    { delay: 0, line: { type: "cmd", text: "whoami" } },
+    { delay: 400, line: { type: "out", text: t("lines.whoamiOut") } },
+    { delay: 1200, line: { type: "cmd", text: "cat role.txt" } },
+    { delay: 1600, line: { type: "out", text: t("lines.roleOut") } },
+    { delay: 2400, line: { type: "cmd", text: "./skills --top 3" } },
+    { delay: 2800, line: { type: "out", text: t("lines.skillsOut") } },
+    { delay: 3200, line: { type: "cmd", text: "echo $status" } },
+    { delay: 3600, line: { type: "out", text: t("lines.statusOut") } },
+  ];
+
   useEffect(() => {
     const timers: ReturnType<typeof setTimeout>[] = [];
-    terminalLines.forEach((line, i) => {
+    introLines.forEach(({ delay, line }, i) => {
       timers.push(
         setTimeout(() => {
           setVisibleLines((prev) => [...prev, line]);
-          if (i === terminalLines.length - 1) {
+          if (i === introLines.length - 1) {
             setTimeout(() => setIsWaiting(false), 400);
           }
-        }, line.delay)
+        }, delay)
       );
     });
     return () => timers.forEach(clearTimeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -41,23 +56,35 @@ function TerminalHero() {
     const cmd = inputVal.trim().toLowerCase();
     if (!cmd) return;
 
+    const commandMap: Record<string, string> = {
+      help: t("commands.help"),
+      whoami: t("commands.whoami"),
+      "cat role.txt": t("commands.role"),
+      "./skills --top": t("commands.skills"),
+      "echo $status": t("commands.status"),
+      pwd: t("commands.pwd"),
+      ls: t("commands.ls"),
+      exit: t("commands.exit"),
+      "git blame": t("commands.gitBlame"),
+    };
+
     let response: string;
-    if (terminalCommands[cmd]) {
-      response = terminalCommands[cmd]();
+    if (commandMap[cmd]) {
+      response = commandMap[cmd];
     } else if (cmd.startsWith("cd ")) {
-      response = "bash: cd: no puedes escapar de aquí 🔒";
+      response = t("cdBlocked");
     } else if (cmd.startsWith("sudo")) {
-      response = "este portfolio no ejecuta como root 🙅";
+      response = t("sudoBlocked");
     } else if (cmd.startsWith("rm")) {
-      response = "rm: operation not permitted (nice try) 😅";
+      response = t("rmBlocked");
     } else {
-      response = `comando no encontrado: ${cmd}. Escribe 'help' para ver los comandos.`;
+      response = t("notFound", { cmd });
     }
 
     setUserLines((prev) => [
       ...prev,
-      { delay: 0, type: "cmd", text: cmd },
-      { delay: 0, type: "out", text: response },
+      { type: "cmd", text: cmd },
+      { type: "out", text: response },
     ]);
     setInputVal("");
   }
@@ -70,7 +97,7 @@ function TerminalHero() {
         <span className="w-3 h-3 rounded-full bg-[#ff5f56]" />
         <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
         <span className="w-3 h-3 rounded-full bg-[#27c93f]" />
-        <span className="ml-3 text-[#555] text-xs">~/portfolio</span>
+        <span className="ml-3 text-[#555] text-xs">{t("title")}</span>
       </div>
       <div
         ref={contentRef}
@@ -100,7 +127,7 @@ function TerminalHero() {
               onChange={(e) => setInputVal(e.target.value)}
               onKeyDown={handleCommand}
               className="bg-transparent border-none text-[#e0e0e0] font-mono text-sm outline-none flex-1 ml-1"
-              placeholder="escribe un comando..."
+              placeholder={t("placeholder")}
               autoFocus
             />
           </div>
@@ -111,6 +138,8 @@ function TerminalHero() {
 }
 
 export default function Hero() {
+  const t = useTranslations("hero");
+
   return (
     <section
       id="inicio"
@@ -135,31 +164,30 @@ export default function Hero() {
           <div className="flex-1 min-w-[280px]">
             <div className="text-[#00ff88] font-mono text-[13px] tracking-[0.15em] mb-4 flex items-center gap-2">
               <span className="w-2 h-2 bg-[#00ff88] rounded-full animate-pulse-glow" />
-              DISPONIBLE
+              {t("available")}
             </div>
             <h1 className="text-[clamp(36px,6vw,72px)] font-bold leading-[1.05] tracking-tight text-white mb-5">
-              Enrique
+              {t("firstName")}
               <br />
               <span className="bg-gradient-to-r from-[#00ff88] to-[#00ccff] bg-clip-text text-transparent">
-                Becerra
+                {t("lastName")}
               </span>
             </h1>
             <p className="text-lg text-[#888] leading-relaxed max-w-[440px] mb-8">
-              Tech Architect Lead — construyo software que funciona, forma
-              equipos y perdura.
+              {t("tagline")}
             </p>
             <div className="flex gap-3 flex-wrap">
               <button
                 onClick={() => scrollTo("contacto")}
                 className="bg-transparent border border-[#00ff88] text-[#00ff88] px-7 py-3 rounded-md font-mono text-[13px] tracking-[0.05em] hover:bg-[#00ff88]/10 hover:shadow-[0_0_20px_rgba(0,255,136,0.2)] transition-all duration-200 cursor-pointer"
               >
-                → contactar
+                {t("ctaContact")}
               </button>
               <button
                 onClick={() => scrollTo("proyectos")}
                 className="bg-transparent border border-[#333] text-[#888] px-7 py-3 rounded-md font-mono text-[13px] tracking-[0.05em] hover:text-[#00ff88] hover:border-[#00ff88] hover:bg-[#00ff88]/10 transition-all duration-200 cursor-pointer"
               >
-                → ver proyectos
+                {t("ctaProjects")}
               </button>
             </div>
           </div>

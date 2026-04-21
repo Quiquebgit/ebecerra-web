@@ -9,11 +9,11 @@ export default defineType({
       name: "id",
       title: "ID (slug)",
       type: "slug",
-      options: { source: "title" },
+      options: { source: (doc) => (doc.title as { es?: string })?.es ?? "" },
     }),
     defineField({ name: "label", title: "Label (ej: mobile · puzzle)", type: "string" }),
-    defineField({ name: "title", title: "Título", type: "string" }),
-    defineField({ name: "description", title: "Descripción", type: "text" }),
+    defineField({ name: "title", title: "Título", type: "localeString" }),
+    defineField({ name: "description", title: "Descripción", type: "localeText" }),
     defineField({
       name: "tech",
       title: "Tecnologías",
@@ -25,7 +25,7 @@ export default defineType({
       title: "Estado (beta/fan/live)",
       type: "string",
     }),
-    defineField({ name: "statusText", title: "Texto de estado", type: "string" }),
+    defineField({ name: "statusText", title: "Texto de estado", type: "localeString" }),
     defineField({
       name: "links",
       title: "Links",
@@ -34,7 +34,7 @@ export default defineType({
         {
           type: "object",
           fields: [
-            { name: "text", type: "string", title: "Texto del link" },
+            { name: "text", type: "localeString", title: "Texto del link" },
             { name: "href", type: "string", title: "URL o ruta" },
             { name: "external", type: "boolean", title: "¿Externo (target=_blank)?" },
           ],
@@ -47,6 +47,6 @@ export default defineType({
     { title: "Orden", name: "orderAsc", by: [{ field: "order", direction: "asc" }] },
   ],
   preview: {
-    select: { title: "title", subtitle: "label" },
+    select: { title: "title.es", subtitle: "label" },
   },
 });

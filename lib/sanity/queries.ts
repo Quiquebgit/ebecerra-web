@@ -5,24 +5,68 @@ import type {
   Project,
   Feature,
 } from "@/lib/content";
+import type { Locale } from "@/i18n/routing";
 
-export async function getSiteData() {
+// coalesce(field[$locale], field.es, field) → soporta:
+//  1. { es, en } (nuevo formato localeString) con fallback a ES
+//  2. string plano (legacy, durante migración) — field no es objeto, field[$locale] y field.es son null, coalesce devuelve field tal cual.
+const loc = (field: string) =>
+  `coalesce(${field}[$locale], ${field}.es, ${field})`;
+
+export async function getSiteData(locale: Locale) {
+  const params = { locale };
+
   const [experienceItems, skillItems, techTagItems, projectItems, profileData] =
     await Promise.all([
       client.fetch<ExperienceItem[]>(
-        `*[_type == "experience"] | order(order asc) { company, role, period, tag, desc }`
+        `*[_type == "experience"] | order(order asc) {
+          company,
+          "role": ${loc("role")},
+          period,
+          tag,
+          "desc": ${loc("desc")}
+        }`,
+        params
       ),
       client.fetch<Skill[]>(
-        `*[_type == "skill"] | order(order asc) { name, level }`
+        `*[_type == "skill"] | order(order asc) {
+          "name": ${loc("name")},
+          level
+        }`,
+        params
       ),
       client.fetch<{ name: string }[]>(
-        `*[_type == "techTag"] | order(order asc) { name }`
+        `*[_type == "techTag"] | order(order asc) {
+          "name": ${loc("name")}
+        }`,
+        params
       ),
       client.fetch<(Omit<Project, "id"> & { id: { current: string } })[]>(
-        `*[_type == "project"] | order(order asc) { "id": id.current, label, title, description, tech, status, statusText, links }`
+        `*[_type == "project"] | order(order asc) {
+          "id": id.current,
+          label,
+          "title": ${loc("title")},
+          "description": ${loc("description")},
+          tech,
+          status,
+          "statusText": ${loc("statusText")},
+          "links": links[]{
+            "text": ${loc("text")},
+            href,
+            external
+          }
+        }`,
+        params
       ),
       client.fetch<{ aboutFeatures: Feature[] } | null>(
-        `*[_type == "profile"][0] { aboutFeatures }`
+        `*[_type == "profile"][0] {
+          "aboutFeatures": aboutFeatures[]{
+            icon,
+            "label": ${loc("label")},
+            "desc": ${loc("desc")}
+          }
+        }`,
+        params
       ),
     ]);
 

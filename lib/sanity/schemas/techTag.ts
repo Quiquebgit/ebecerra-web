@@ -5,13 +5,13 @@ export default defineType({
   title: "Tech Tag",
   type: "document",
   fields: [
-    defineField({ name: "name", title: "Nombre", type: "string" }),
+    defineField({ name: "name", title: "Nombre", type: "localeString" }),
     defineField({ name: "order", title: "Orden", type: "number" }),
   ],
   orderings: [
     { title: "Orden", name: "orderAsc", by: [{ field: "order", direction: "asc" }] },
   ],
   preview: {
-    select: { title: "name" },
+    select: { title: "name.es" },
   },
 });

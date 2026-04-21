@@ -5,7 +5,7 @@ export default defineType({
   title: "Skill",
   type: "document",
   fields: [
-    defineField({ name: "name", title: "Nombre", type: "string" }),
+    defineField({ name: "name", title: "Nombre", type: "localeString" }),
     defineField({
       name: "level",
       title: "Nivel (0–100)",
@@ -18,7 +18,7 @@ export default defineType({
     { title: "Orden", name: "orderAsc", by: [{ field: "order", direction: "asc" }] },
   ],
   preview: {
-    select: { title: "name", subtitle: "level" },
+    select: { title: "name.es", subtitle: "level" },
     prepare({ title, subtitle }) {
       return { title, subtitle: `${subtitle}%` };
     },

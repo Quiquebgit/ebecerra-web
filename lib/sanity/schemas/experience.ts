@@ -6,20 +6,20 @@ export default defineType({
   type: "document",
   fields: [
     defineField({ name: "company", title: "Empresa", type: "string" }),
-    defineField({ name: "role", title: "Cargo", type: "string" }),
+    defineField({ name: "role", title: "Cargo", type: "localeString" }),
     defineField({ name: "period", title: "Periodo", type: "string" }),
     defineField({
       name: "tag",
       title: 'Etiqueta (ej: "actual")',
       type: "string",
     }),
-    defineField({ name: "desc", title: "Descripción", type: "text" }),
+    defineField({ name: "desc", title: "Descripción", type: "localeText" }),
     defineField({ name: "order", title: "Orden", type: "number" }),
   ],
   orderings: [
     { title: "Orden", name: "orderAsc", by: [{ field: "order", direction: "asc" }] },
   ],
   preview: {
-    select: { title: "role", subtitle: "company" },
+    select: { title: "role.es", subtitle: "company" },
   },
 });

@@ -14,11 +14,11 @@ export default defineType({
           type: "object",
           fields: [
             { name: "icon", type: "string", title: "Icono (emoji)" },
-            { name: "label", type: "string", title: "Etiqueta" },
-            { name: "desc", type: "string", title: "Descripción" },
+            { name: "label", type: "localeString", title: "Etiqueta" },
+            { name: "desc", type: "localeString", title: "Descripción" },
           ],
           preview: {
-            select: { title: "label", subtitle: "icon" },
+            select: { title: "label.es", subtitle: "icon" },
           },
         },
       ],

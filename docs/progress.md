@@ -49,13 +49,13 @@ Plan de referencia: [`plan-migracion-nextjs-sanity.md`](plan-migracion-nextjs-sa
 
 ## Fase 4 — i18n ES/EN (6–8h)
 
-- [ ] Configurar `next-intl` con routing `/es` y `/en`
-- [ ] Migrar textos de UI a `messages/es.json` y `messages/en.json`
-- [ ] Convertir campos Sanity a `localeString`/`localeText`
-- [ ] Traducir contenido base al inglés
-- [ ] Middleware de detección de idioma + selector en Nav
-- [ ] `hreflang` + `sitemap.ts` bilingüe
-- [ ] Verificar: `/es` y `/en` renderizan contenidos distintos
+- [x] Configurar `next-intl` con routing `/` (ES, sin prefijo) y `/en`
+- [x] Migrar textos de UI a `messages/es.json` y `messages/en.json`
+- [x] Convertir campos Sanity a `localeString`/`localeText` + plugin `@sanity/language-filter`
+- [x] Traducir contenido base al inglés (UI + 33 docs Sanity)
+- [x] Proxy (Next 16) con `localePrefix: "as-needed"` + selector ES/EN en Nav
+- [x] `hreflang` + `sitemap.ts` + `robots.ts` bilingües
+- [x] Verificar: `/` y `/en` renderizan contenidos distintos ✓ (lang correcto, Sanity sirve cada idioma)
 
 ## Fase 5 — Secciones comerciales nuevas (10–14h)
 
@@ -116,3 +116,16 @@ Plan de referencia: [`plan-migracion-nextjs-sanity.md`](plan-migracion-nextjs-sa
 2026-04-20 — Kit de anotaciones resuelto con librería [`rough-notation`](https://roughnotation.com/) 0.5.1 en vez de SVG artesanal. 7 tipos soportados (underline, circle, box, highlight, strike-through, crossed-off, bracket). Componente wrapper en [`app/playground/annotations/Annotation.tsx`](../app/playground/annotations/Annotation.tsx), playground en `/playground/annotations`. Integración en la web real se pospone a Fase 5+ (rediseño con tokens pro). Decisiones y reglas de uso en [`illustrations/brief.md`](illustrations/brief.md). 4 demos artesanales descartados en `illustrations/_scrapped/`.
 2026-04-20 — Sistema de marca ampliado a 3 marks según contexto (no según tamaño): **eB completo** para modo pro (`ebecerra.es`, LinkedIn, og:image, nav, facturas, casos de estudio); **`<B>`** para modo geek/tech (toggle geek mode activo, dominio `.tech`, GitHub, Twitter dev, badges técnicos) — fuente DM Sans 900 para los brackets, B reutilizada del eB original; **B sola** para favicon ≤32px en ambos modos. La dualidad pro/geek que ya estaba planeada en Fase 6 ahora tiene símbolo propio. El `<B>` justifica el dominio `.tech` comprado. Exploración en [`logo-exploration/bracket-b-final.html`](logo-exploration/bracket-b-final.html).
 2026-04-20 — `<B>` vectorizado y kit cerrado: `public/brand/logo-bracket-b-{green,black,white}.svg`. Brackets generados con `fontkit` extrayendo glifos de DM Sans 900 (latin-900-normal.woff2 de @fontsource), B compartida con el eB. SVG editado en Illustrator por Enrique (paths unificados con Pathfinder Unite). `docs/brand-logo.md` y `docs/logo-exploration/brand-manual.html` actualizados con el sistema de 3 marks. Favicon confirmado como B sola (ni eB ni `<B>` aguantan a 16-32px). Exploraciones descartadas (Bowlby One, tornados, filigranas) en `docs/logo-exploration/_scrapped/`.
+2026-04-21 — **Fase 4 cerrada**: i18n ES/EN con `next-intl` 4.9.1 + `@sanity/language-filter` 5.0.1. Decisiones clave:
+- **Routing**: `localePrefix: "as-needed"` (ES en `/` sin prefijo, EN en `/en`). Preserva URLs indexadas.
+- **Estructura app/**: dos root layouts vía route groups — `(locale)/[locale]/` con html/body + `NextIntlClientProvider` para páginas localizadas; `(misc)/` con html/body `lang="es"` estático para `/studio` y `/playground/annotations`. `/api/revalidate` queda en `app/api/` sin layout. Se eliminaron `app/layout.tsx` y `app/page.tsx` raíz.
+- **Next 16**: `middleware.ts` deprecado → renombrado a `proxy.ts`. Configuración idéntica.
+- **Sanity**: tipos custom `localeString`/`localeText` en `lib/sanity/schemas/locale.ts` (object con fields `es` requerido + `en` opcional). Plugin `@sanity/language-filter` con `filterField` que chequea `enclosingType.name.startsWith("locale")` para ocultar el otro idioma en Studio. Alternativa descartada: `@sanity/document-internationalization` (multiplica docs, overkill para 33 items).
+- **Queries GROQ**: proyección con triple coalesce `coalesce(field[$locale], field.es, field)` — sirve tanto para formato nuevo `{es,en}` como legacy string plano, útil durante la transición.
+- **Migración datos**: 33 docs (6 experience + 12 skill + 12 techTag + 2 project + 1 profile) migrados vía MCP de Sanity (`https://mcp.sanity.io`, auth OAuth). Gotcha: `patch_document_from_json` rechaza con 500 "Internal Server Error" si intentas `set` un objeto sobre un campo que contiene un string plano; workaround = dos calls separadas (unset primero, luego set). Otro gotcha: múltiples ops sobre el mismo path de array en una sola call → "Conflicting target.include parameters"; solución = un feature/ítem por call.
+- **Fallback `lib/content.ts`**: dualizado a `{ es, en }` con helper `getFallback(locale)`. Tipos planos (el coalesce aplana).
+- **Selector de idioma**: botón ES/EN en Nav usando `useRouter`/`usePathname` de `i18n/navigation.ts` (wrapper `createNavigation(routing)`), dentro de `startTransition` para evitar bloqueo UI.
+- **Metadata**: `generateMetadata` con `getTranslations({locale, namespace: "metadata"})`. `alternates.languages` genera hreflang automáticos (Next emite `hrefLang` en JSX, no `hreflang` literal).
+- **Sitemap + robots**: `app/sitemap.ts` emite 2 URLs con alternates por locale; `app/robots.ts` excluye `/studio`, `/api`, `/playground`.
+- **Revalidación**: `/api/revalidate` ahora revalida `/` y `/en`.
+- **Verificación**: `npm run build` ✓, curl a `/` y `/en` → `<html lang>` correcto, contenido ES/EN distinto servido desde Sanity, hreflang presente, sitemap y robots OK, `/studio` `/playground` `/piezas-game/` siguen accesibles fuera del proxy.

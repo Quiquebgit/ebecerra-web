@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import type { Project } from "@/lib/content";
 
 interface ProjectsProps {
@@ -30,14 +31,16 @@ const statusClasses: Record<string, string> = {
 };
 
 export default function Projects({ items }: ProjectsProps) {
+  const t = useTranslations("projects");
+
   return (
     <section id="proyectos" className="py-[100px] px-[clamp(20px,5vw,80px)]">
       <div className="max-w-[1100px] mx-auto">
         <span className="text-[#00ff88] font-mono text-xs tracking-[0.15em] uppercase block mb-3">
-          // 04. proyectos
+          {t("eyebrow")}
         </span>
         <h2 className="text-[clamp(28px,4vw,40px)] font-bold text-white tracking-tight mb-12">
-          Proyectos propios
+          {t("title")}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {items.map((p) => (

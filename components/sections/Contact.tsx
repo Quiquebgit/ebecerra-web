@@ -1,15 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function Contact() {
+  const t = useTranslations("contact");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState("");
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">(
+    "idle"
+  );
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -20,7 +24,7 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitMessage("");
+    setSubmitStatus("idle");
 
     try {
       const response = await fetch("https://formspree.io/f/mbdzjaqn", {
@@ -29,13 +33,13 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        setSubmitMessage("Mensaje enviado correctamente. ¡Gracias!");
+        setSubmitStatus("success");
         setFormData({ name: "", email: "", message: "" });
       } else {
-        setSubmitMessage("Error al enviar el mensaje. Inténtalo de nuevo.");
+        setSubmitStatus("error");
       }
     } catch {
-      setSubmitMessage("Error al enviar el mensaje. Inténtalo de nuevo.");
+      setSubmitStatus("error");
     }
 
     setIsSubmitting(false);
@@ -48,14 +52,13 @@ export default function Contact() {
     <section id="contacto" className="py-[100px] px-[clamp(20px,5vw,80px)]">
       <div className="max-w-[600px] mx-auto text-center">
         <span className="text-[#00ff88] font-mono text-xs tracking-[0.15em] uppercase block mb-3">
-          // 05. contacto
+          {t("eyebrow")}
         </span>
         <h2 className="text-[clamp(28px,4vw,40px)] font-bold text-white tracking-tight mb-12">
-          Hablemos 💌
+          {t("title")}
         </h2>
         <p className="text-[#666] text-[15px] mb-12 leading-relaxed">
-          ¿Tienes un proyecto interesante, una idea o simplemente quieres
-          conectar? Escríbeme.
+          {t("description")}
         </p>
         <form
           className="flex flex-col gap-4 text-left mb-12"
@@ -63,7 +66,7 @@ export default function Contact() {
         >
           <input
             className={inputClass}
-            placeholder="Tu nombre"
+            placeholder={t("form.name")}
             type="text"
             name="name"
             value={formData.name}
@@ -72,7 +75,7 @@ export default function Contact() {
           />
           <input
             className={inputClass}
-            placeholder="tu@email.com"
+            placeholder={t("form.email")}
             type="email"
             name="email"
             value={formData.email}
@@ -81,7 +84,7 @@ export default function Contact() {
           />
           <textarea
             className={`${inputClass} resize-y`}
-            placeholder="Cuéntame..."
+            placeholder={t("form.message")}
             rows={5}
             name="message"
             value={formData.message}
@@ -93,17 +96,15 @@ export default function Contact() {
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Enviando..." : "$ send_message →"}
+            {isSubmitting ? t("form.sending") : t("form.submit")}
           </button>
-          {submitMessage && (
+          {submitStatus !== "idle" && (
             <p
               className={`text-sm mt-1 ${
-                submitMessage.includes("correctamente")
-                  ? "text-[#00ff88]"
-                  : "text-[#ff4444]"
+                submitStatus === "success" ? "text-[#00ff88]" : "text-[#ff4444]"
               }`}
             >
-              {submitMessage}
+              {submitStatus === "success" ? t("form.success") : t("form.error")}
             </p>
           )}
         </form>
