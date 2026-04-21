@@ -85,5 +85,18 @@
     "copyright": "© {year} ebecerra.es — hecho con ❤️ y con un poco de 🔍 y 🧪",
     "online": "online",
     "version": "v2.0.0"
+  },
+  "errors": {
+    "generic": {
+      "title": "Algo ha fallado",
+      "description": "Ha habido un error inesperado. Ya estamos mirándolo.",
+      "retry": "Reintentar",
+      "home": "Volver al inicio"
+    },
+    "notFound": {
+      "title": "Página no encontrada",
+      "description": "Esta URL no existe o ya no está disponible.",
+      "home": "Volver al inicio"
+    }
   }
 }
