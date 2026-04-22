@@ -17,7 +17,7 @@ function SectionFrame({
     <section
       id="casos"
       style={{
-        padding: "clamp(56px, 7vw, 100px) clamp(20px, 4vw, 56px)",
+        padding: "clamp(40px, 5vw, 72px) clamp(20px, 4vw, 56px)",
         background: "var(--surface-subtle)",
         borderBottom: "1px solid var(--border)",
       }}

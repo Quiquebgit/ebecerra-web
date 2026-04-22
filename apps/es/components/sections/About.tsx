@@ -20,7 +20,7 @@ export default async function About({ features }: Props) {
     <section
       id="sobre-mi"
       style={{
-        padding: "clamp(56px, 7vw, 100px) clamp(20px, 4vw, 56px)",
+        padding: "clamp(40px, 5vw, 72px) clamp(20px, 4vw, 56px)",
         borderBottom: "1px solid var(--border)",
       }}
     >

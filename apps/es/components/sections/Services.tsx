@@ -12,7 +12,7 @@ export default async function Services({ services }: Props) {
     <section
       id="servicios"
       style={{
-        padding: "clamp(56px, 7vw, 100px) clamp(20px, 4vw, 56px)",
+        padding: "clamp(40px, 5vw, 72px) clamp(20px, 4vw, 56px)",
         background: "var(--surface-subtle)",
         borderBottom: "1px solid var(--border)",
       }}
@@ -46,7 +46,7 @@ export default async function Services({ services }: Props) {
         </h2>
         <p
           className="lead"
-          style={{ maxWidth: 620, margin: "0 0 48px", color: "var(--text-secondary)" }}
+          style={{ maxWidth: 620, margin: "0 0 32px", color: "var(--text-secondary)" }}
         >
           {t("lead")}
         </p>
@@ -61,6 +61,7 @@ export default async function Services({ services }: Props) {
           {services.map((service, index) => (
             <article
               key={service._id}
+              className="service-card"
               style={{
                 background: "var(--surface)",
                 border: "1px solid var(--border)",
@@ -181,7 +182,15 @@ export default async function Services({ services }: Props) {
 
       <style>{`
         .services-grid { grid-template-columns: 1fr; }
-        @media (min-width: 900px) {
+        .service-card {
+          transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
+        }
+        .service-card:hover {
+          transform: translateY(-2px);
+          border-color: var(--cta);
+          box-shadow: var(--sh-2);
+        }
+        @media (min-width: 1024px) {
           .services-grid { grid-template-columns: repeat(3, 1fr); }
         }
       `}</style>

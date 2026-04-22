@@ -9,10 +9,13 @@ export default async function Hero() {
     <section
       id="inicio"
       style={{
-        padding: "clamp(48px, 7vw, 96px) clamp(20px, 4vw, 56px) clamp(48px, 6vw, 80px)",
+        padding: "clamp(32px, 5vw, 64px) clamp(20px, 4vw, 56px) clamp(32px, 4.5vw, 56px)",
         borderBottom: "1px solid var(--border)",
         position: "relative",
         overflow: "hidden",
+        backgroundImage:
+          "radial-gradient(circle at 1px 1px, rgba(12,10,9,0.05) 1px, transparent 0)",
+        backgroundSize: "24px 24px",
       }}
     >
       <div
@@ -21,8 +24,9 @@ export default async function Hero() {
           maxWidth: 1280,
           margin: "0 auto",
           display: "grid",
-          gap: "clamp(32px, 6vw, 64px)",
+          gap: "clamp(24px, 4vw, 48px)",
           alignItems: "center",
+          position: "relative",
         }}
       >
         <div>
@@ -36,17 +40,17 @@ export default async function Hero() {
               color: "var(--cta)",
               letterSpacing: "0.15em",
               textTransform: "uppercase",
-              marginBottom: 28,
+              marginBottom: 20,
               fontWeight: 500,
             }}
           >
             <span
+              className="hero-kicker-dot"
               style={{
                 width: 6,
                 height: 6,
                 borderRadius: "50%",
                 background: "var(--cta)",
-                boxShadow: "0 0 0 4px rgba(4,120,87,.15)",
               }}
             />
             {t("kicker").replace(/^\/\/\s*/, "")}
@@ -56,7 +60,7 @@ export default async function Hero() {
               fontSize: "clamp(44px, 6.2vw, 80px)",
               lineHeight: 1.03,
               letterSpacing: "-0.028em",
-              margin: "0 0 28px",
+              margin: "0 0 20px",
               textWrap: "balance",
             }}
           >
@@ -70,7 +74,7 @@ export default async function Hero() {
             className="lead"
             style={{
               maxWidth: 560,
-              margin: "0 0 36px",
+              margin: "0 0 28px",
               color: "var(--text-secondary)",
             }}
           >
@@ -113,8 +117,8 @@ export default async function Hero() {
 
           <div
             style={{
-              marginTop: 40,
-              paddingTop: 24,
+              marginTop: 32,
+              paddingTop: 20,
               borderTop: "1px solid var(--border)",
               display: "flex",
               gap: 24,
@@ -153,13 +157,18 @@ export default async function Hero() {
       <style>{`
         .hero-grid { grid-template-columns: 1fr; }
         .hero-monogram-img {
-          width: clamp(140px, 26vw, 200px);
-          opacity: 0.9;
+          width: clamp(90px, 14vw, 130px);
+          opacity: 0.85;
           margin: 0 auto;
         }
-        @media (min-width: 900px) {
+        @keyframes heroKickerPulse {
+          0%, 100% { box-shadow: 0 0 0 4px rgba(4,120,87,.15); }
+          50%      { box-shadow: 0 0 0 8px rgba(4,120,87,.05); }
+        }
+        .hero-kicker-dot { animation: heroKickerPulse 2.4s ease-in-out infinite; }
+        @media (min-width: 1024px) {
           .hero-grid { grid-template-columns: 1.3fr 1fr; }
-          .hero-monogram-img { width: min(440px, 100%); opacity: 1; }
+          .hero-monogram-img { width: min(380px, 100%); opacity: 1; }
         }
       `}</style>
     </section>
