@@ -206,22 +206,11 @@ export default async function Footer() {
           <span>{t("copyright", { year })}</span>
           <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
             <a
-              href="/aviso-legal"
-              style={{ color: "#78716c", textDecoration: "none" }}
-            >
-              {t("legalTerms")}
-            </a>
-            <a
               href="/privacidad"
               style={{ color: "#78716c", textDecoration: "none" }}
+              className="footer-link"
             >
               {t("legalPrivacy")}
-            </a>
-            <a
-              href="/cookies"
-              style={{ color: "#78716c", textDecoration: "none" }}
-            >
-              {t("legalCookies")}
             </a>
           </div>
         </div>
