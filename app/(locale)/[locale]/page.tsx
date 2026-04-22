@@ -1,12 +1,17 @@
 import Nav from "@/components/sections/Nav";
 import Hero from "@/components/sections/Hero";
+import Services from "@/components/sections/Services";
+import Case from "@/components/sections/Case";
 import About from "@/components/sections/About";
-import Experience from "@/components/sections/Experience";
-import Skills from "@/components/sections/Skills";
-import Projects from "@/components/sections/Projects";
+import Process from "@/components/sections/Process";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
-import { getSiteData } from "@/lib/sanity/queries";
+import {
+  getSiteData,
+  getFeaturedServices,
+  getProcessSteps,
+  getFeaturedCaseStudies,
+} from "@/lib/sanity/queries";
 import { getFallback } from "@/lib/content";
 import { setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
@@ -21,23 +26,30 @@ export default async function Home({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const sanity = await getSiteData(locale).catch(() => null);
+  const [sanity, sanityServices, sanitySteps, sanityCases] = await Promise.all([
+    getSiteData(locale).catch(() => null),
+    getFeaturedServices(locale).catch(() => []),
+    getProcessSteps(locale).catch(() => []),
+    getFeaturedCaseStudies(locale).catch(() => []),
+  ]);
   const fallback = getFallback(locale);
 
-  const experienceItems = sanity?.experience ?? fallback.experience;
-  const skillItems = sanity?.skills ?? fallback.skills;
-  const tagItems = sanity?.tags ?? fallback.tags;
-  const projectItems = sanity?.projects ?? fallback.projects;
   const featureItems = sanity?.aboutFeatures ?? fallback.aboutFeatures;
+  const services = sanityServices.length > 0 ? sanityServices : fallback.services;
+  const processSteps =
+    sanitySteps.length > 0 ? sanitySteps : fallback.processSteps;
+  const featuredCase = sanityCases[0]
+    ? { ...sanityCases[0], metrics: [] }
+    : fallback.featuredCase;
 
   return (
     <main>
       <Nav />
       <Hero />
+      <Services services={services} />
+      <Case caseStudy={featuredCase} />
       <About features={featureItems} />
-      <Experience items={experienceItems} />
-      <Skills skills={skillItems} tags={tagItems} />
-      <Projects items={projectItems} />
+      <Process steps={processSteps} />
       <Contact />
       <Footer links={fallback.footerLinks} />
     </main>

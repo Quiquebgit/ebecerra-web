@@ -7,11 +7,12 @@
     "twitterDescription": "Tech Architect Lead. Websites built with architectural rigor."
   },
   "nav": {
-    "about": "about",
-    "experience": "experience",
-    "skills": "skills",
-    "projects": "projects",
-    "contact": "contact",
+    "services": "Services",
+    "cases": "Cases",
+    "about": "About",
+    "process": "Process",
+    "contact": "Contact",
+    "ctaTalk": "Let's talk",
     "menu": "Menu",
     "language": "Language"
   },
@@ -55,17 +56,20 @@
     "bio2": "I like to understand how things work under the hood. I enjoy both building solid solutions and explaining and teaching them to others. If something can be done better, curiosity kicks in until I figure out how.",
     "bio3": "Outside of work: geek, chronically curious, and someone who also knows there's life beyond the keyboard."
   },
-  "experience": {
-    "eyebrow": "// 02. experience",
-    "title": "Career path 🚀"
+  "services": {
+    "kicker": "// 01. Services",
+    "title": "What I build for you",
+    "lead": "Three clear ways to work together, with scope and indicative pricing from the first conversation.",
+    "priceFrom": "from"
   },
-  "skills": {
-    "eyebrow": "// 03. skills",
-    "title": "Tech stack 💡"
+  "case": {
+    "kicker": "// Featured case",
+    "readCase": "Read the full case"
   },
-  "projects": {
-    "eyebrow": "// 04. projects",
-    "title": "Personal projects"
+  "process": {
+    "kicker": "// 02. How we work together",
+    "title": "From idea to live site in 4 steps",
+    "lead": "No surprises, no endless consulting. A short, clear path from first call to delivery."
   },
   "contact": {
     "eyebrow": "// 05. contact",

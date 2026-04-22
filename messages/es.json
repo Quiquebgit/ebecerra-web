@@ -7,11 +7,12 @@
     "twitterDescription": "Tech Architect Lead. Webs construidas con criterio arquitectónico."
   },
   "nav": {
-    "about": "sobre mí",
-    "experience": "experiencia",
-    "skills": "skills",
-    "projects": "proyectos",
-    "contact": "contacto",
+    "services": "Servicios",
+    "cases": "Casos",
+    "about": "Sobre mí",
+    "process": "Proceso",
+    "contact": "Contacto",
+    "ctaTalk": "Hablemos",
     "menu": "Menú",
     "language": "Idioma"
   },
@@ -55,17 +56,20 @@
     "bio2": "Me gusta entender cómo funcionan las cosas por dentro. Disfruto tanto construyendo soluciones sólidas como explicándolas y formando a otros. Si algo puede hacerse mejor, me pica la curiosidad hasta descubrir cómo.",
     "bio3": "Fuera del trabajo: geek, curioso crónico, y alguien que también sabe que hay vida más allá del teclado."
   },
-  "experience": {
-    "eyebrow": "// 02. experiencia",
-    "title": "Trayectoria 🚀"
+  "services": {
+    "kicker": "// 01. Servicios",
+    "title": "Lo que construyo para ti",
+    "lead": "Tres formas de trabajar juntos, con alcance y precio orientativo claros desde la primera conversación.",
+    "priceFrom": "desde"
   },
-  "skills": {
-    "eyebrow": "// 03. skills",
-    "title": "Stack técnico 💡"
+  "case": {
+    "kicker": "// Caso destacado",
+    "readCase": "Leer el caso completo"
   },
-  "projects": {
-    "eyebrow": "// 04. proyectos",
-    "title": "Proyectos propios"
+  "process": {
+    "kicker": "// 02. Cómo trabajamos juntos",
+    "title": "De idea a sitio vivo en 4 pasos",
+    "lead": "Sin sorpresas ni consultoría interminable. Un camino corto y claro desde la primera llamada hasta la entrega."
   },
   "contact": {
     "eyebrow": "// 05. contacto",

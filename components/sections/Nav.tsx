@@ -6,10 +6,10 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 
 const NAV_IDS = [
+  { id: "servicios", key: "services" },
+  { id: "casos", key: "cases" },
   { id: "sobre-mí", key: "about" },
-  { id: "experiencia", key: "experience" },
-  { id: "skills", key: "skills" },
-  { id: "proyectos", key: "projects" },
+  { id: "proceso", key: "process" },
   { id: "contacto", key: "contact" },
 ] as const;
 

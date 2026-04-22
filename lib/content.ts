@@ -91,6 +91,9 @@ type Fallback = {
   tags: string[];
   projects: Project[];
   footerLinks: FooterLink[];
+  services: Service[];
+  processSteps: ProcessStep[];
+  featuredCase: (CaseStudySummary & { metrics: CaseStudyMetric[] }) | null;
 };
 
 const es: Fallback = {
@@ -221,6 +224,82 @@ const es: Fallback = {
     },
     { label: "Email", url: "mailto:quique.ebecerra@gmail.com" },
   ],
+  services: [
+    {
+      _id: "fallback-service-1",
+      title: "Web profesional desde cero",
+      slug: "web-profesional",
+      icon: null,
+      summary:
+        "Tu presencia digital con stack moderno pensado para que dure años, no modas.",
+      description: null,
+      deliverables: [],
+      priceRange: "2.500€",
+      priceNote: null,
+      featured: true,
+    },
+    {
+      _id: "fallback-service-2",
+      title: "Migración a stack moderno",
+      slug: "migracion",
+      icon: null,
+      summary:
+        "De WordPress/Joomla legacy a Next.js + CMS headless. Sin perder SEO ni contenido.",
+      description: null,
+      deliverables: [],
+      priceRange: "3.500€",
+      priceNote: null,
+      featured: true,
+    },
+    {
+      _id: "fallback-service-3",
+      title: "Auditoría técnica",
+      slug: "auditoria",
+      icon: null,
+      summary:
+        "Revisión de rendimiento, SEO técnico, accesibilidad y arquitectura. Te entrego un informe accionable.",
+      description: null,
+      deliverables: [],
+      priceRange: "800€",
+      priceNote: null,
+      featured: true,
+    },
+  ],
+  processSteps: [
+    {
+      _id: "fallback-step-1",
+      title: "Conversación",
+      description:
+        "Me llamas, charlamos 30 min, entiendo qué necesitas.",
+      icon: null,
+      order: 1,
+    },
+    {
+      _id: "fallback-step-2",
+      title: "Propuesta",
+      description:
+        "Te mando alcance, tiempos y presupuesto cerrado. Sin sorpresas.",
+      icon: null,
+      order: 2,
+    },
+    {
+      _id: "fallback-step-3",
+      title: "Construcción",
+      description:
+        "Diseño y desarrollo con avances semanales. Tú decides, yo ejecuto.",
+      icon: null,
+      order: 3,
+    },
+    {
+      _id: "fallback-step-4",
+      title: "Entrega",
+      description:
+        "Te entrego la web funcionando + 3 meses de soporte incluidos.",
+      icon: null,
+      order: 4,
+    },
+  ],
+  featuredCase: null,
 };
 
 const en: Fallback = {
@@ -351,6 +430,81 @@ const en: Fallback = {
     },
     { label: "Email", url: "mailto:quique.ebecerra@gmail.com" },
   ],
+  services: [
+    {
+      _id: "fallback-service-1",
+      title: "Professional website from scratch",
+      slug: "web-profesional",
+      icon: null,
+      summary:
+        "Your digital presence with a modern stack built to last for years, not trends.",
+      description: null,
+      deliverables: [],
+      priceRange: "€2,500",
+      priceNote: null,
+      featured: true,
+    },
+    {
+      _id: "fallback-service-2",
+      title: "Migration to a modern stack",
+      slug: "migracion",
+      icon: null,
+      summary:
+        "From legacy WordPress/Joomla to Next.js + headless CMS. No SEO or content loss.",
+      description: null,
+      deliverables: [],
+      priceRange: "€3,500",
+      priceNote: null,
+      featured: true,
+    },
+    {
+      _id: "fallback-service-3",
+      title: "Technical audit",
+      slug: "auditoria",
+      icon: null,
+      summary:
+        "Review of performance, technical SEO, accessibility and architecture. You get an actionable report.",
+      description: null,
+      deliverables: [],
+      priceRange: "€800",
+      priceNote: null,
+      featured: true,
+    },
+  ],
+  processSteps: [
+    {
+      _id: "fallback-step-1",
+      title: "Conversation",
+      description: "You call me, we chat for 30 min, I understand what you need.",
+      icon: null,
+      order: 1,
+    },
+    {
+      _id: "fallback-step-2",
+      title: "Proposal",
+      description:
+        "I send you scope, timing and a closed budget. No surprises.",
+      icon: null,
+      order: 2,
+    },
+    {
+      _id: "fallback-step-3",
+      title: "Build",
+      description:
+        "Design and development with weekly progress. You decide, I execute.",
+      icon: null,
+      order: 3,
+    },
+    {
+      _id: "fallback-step-4",
+      title: "Delivery",
+      description:
+        "I deliver the website live + 3 months of support included.",
+      icon: null,
+      order: 4,
+    },
+  ],
+  featuredCase: null,
 };
 
 export function getFallback(locale: Locale): Fallback {
