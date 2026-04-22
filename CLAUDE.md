@@ -4,16 +4,22 @@
 
 Portfolio personal de Enrique Becerra, Tech Architect Lead en VASS y especialista en Magnolia CMS.
 
-**Estado actual (2026-04-22):** rama `migracion-nextjs` es ya un **monorepo npm workspaces + Turborepo** con dos apps sobre un único Sanity compartido:
+**Estado actual (2026-04-22, post-Fase E):** rama `migracion-nextjs` es ya un **monorepo npm workspaces + Turborepo** con dos apps sobre un único Sanity compartido:
 
-- **[`apps/es`](apps/es/)** → `ebecerra.es` — modo pro, escaparate comercial para captar clientes de desarrollo web (autónomos y PYMEs). Scaffold con tokens pro listos; secciones comerciales pendientes (Fase C).
-- **[`apps/tech`](apps/tech/)** → `ebecerra.tech` — modo geek, identidad técnica para comunidad, reclutadores y contactos LinkedIn. Next.js completo con la estética geek CV-style (8 secciones: Nav · Hero · About · Experience · Skills · Projects · Contact · Footer), idéntico al que teníamos pre-monorepo.
+- **[`apps/es`](apps/es/)** → `ebecerra.es` — modo pro, escaparate comercial para captar clientes de desarrollo web (autónomos y PYMEs). **Home renderizada al 100%**: 8 secciones comerciales (Nav verde con logo blanco · Hero con monograma scale-deep + rough-notation · 3 Services con precios y deliverables · Case con placeholder limpio · About con stats inline + features · Process timeline horizontal/vertical · Contact con form Resend funcional · Footer stone-900 warm). Sanity wireado con fallback seguro. `/api/contact` con Resend listo (pendiente verificar dominio).
+- **[`apps/tech`](apps/tech/)** → `ebecerra.tech` — modo geek, identidad técnica para comunidad, reclutadores y contactos LinkedIn. Next.js completo con la estética geek CV-style (8 secciones: Nav · Hero · About · Experience · Skills · Projects · Contact · Footer), idéntico al que teníamos pre-split.
 
-La rama `main` sigue desplegando el SPA React 19 + Vite original en `ebecerra.es` — producción cambia al monorepo cuando apps/es esté completa (Fase 7).
+La rama `main` sigue desplegando el SPA React 19 + Vite original en `ebecerra.es` — producción cambia al monorepo cuando se haga el cutover.
 
 El "toggle geek mode" del plan original se sustituye por dominio: cada URL entra en su modo por defecto.
 
-**Archivo histórico:** tags `archive/nextjs-geek-pure` (estado Next.js pre-split, single-app) y `archive/migracion-nextjs-mixed` (estado con Fase B de mix geek+pro) permiten rollback si hace falta.
+**Archivo histórico:** tags `archive/nextjs-geek-pure` (estado Next.js pre-split, single-app, commit `ba17925`) y `archive/migracion-nextjs-mixed` (estado con Fase B de mix geek+pro, commit `3763044`) permiten rollback si hace falta.
+
+**Pendiente para producción** (no bloqueante en dev):
+- Copiar `apps/tech/.env.local` → `apps/es/.env.local` (mismo `SANITY_REVALIDATE_SECRET`).
+- Verificar dominio `ebecerra.es` en Resend, generar `RESEND_API_KEY`, setear `CONTACT_TO_EMAIL` (+ opcional `CONTACT_FROM_EMAIL`).
+- Crear segundo proyecto Vercel apuntando a `apps/es` (Root Directory) con sus env vars.
+- Cutover de DNS cuando se quiera publicar.
 
 Plan completo y roadmap: [`docs/plan-migracion-nextjs-sanity.md`](docs/plan-migracion-nextjs-sanity.md).
 Progreso de ejecución: [`docs/progress.md`](docs/progress.md).
@@ -22,7 +28,7 @@ Progreso de ejecución: [`docs/progress.md`](docs/progress.md).
 
 **Monorepo (`migracion-nextjs`):**
 - **Root:** npm workspaces + Turborepo 2.x. `packageManager: "npm@10.4.0"`.
-- **apps/es** y **apps/tech:** Next.js 16 + TypeScript + Tailwind v4 + next-intl 4. apps/tech además tiene Sanity v5 integrado con queries CV-style; apps/es tendrá queries pro en Fase D.
+- **apps/es** y **apps/tech:** Next.js 16 + TypeScript + Tailwind v4 + next-intl 4. apps/tech tiene Sanity v5 integrado con queries CV-style. apps/es tiene Sanity v5 integrado con queries comerciales (`getFeaturedServices`, `getProcessSteps`, `getFeaturedCaseForHome`, `getProfileFeatures`) + Resend en `/api/contact`.
 - **packages/sanity-schemas:** `@ebecerra/sanity-schemas` — tipos y schemas compartidos (experience, skill, techTag, project, profile, service, processStep, caseStudy, locale).
 - **packages/sanity-client:** `@ebecerra/sanity-client` — cliente Sanity + queries GROQ + tipos TS compartidos.
 - **packages/tokens:** `pro.css` y `geek.css` como CSS con custom properties (ver sección "Design tokens").
