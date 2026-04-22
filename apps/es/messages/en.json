@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "title": "Enrique Becerra — Web development for freelancers and SMBs",
+    "titleTemplate": "%s · eBecerra",
+    "description": "Tech Architect Lead specialized in Next.js, Sanity CMS and modern web architectures. I help freelancers and small businesses build a professional digital presence.",
+    "ogDescription": "Tech Architect Lead. Websites built with architectural rigor for freelancers and SMBs.",
+    "twitterDescription": "Tech Architect Lead. Websites built with architectural rigor."
+  },
+  "nav": {
+    "services": "Services",
+    "cases": "Cases",
+    "about": "About",
+    "process": "Process",
+    "contact": "Contact",
+    "ctaTalk": "Let's talk",
+    "menu": "Menu",
+    "language": "Language"
+  },
+  "scaffold": {
+    "title": "ebecerra.es",
+    "subtitle": "Commercial showcase under construction",
+    "note": "The pro design is being implemented in phases. Check back soon."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "title": "Enrique Becerra — Desarrollo web para autónomos y PYMEs",
+    "titleTemplate": "%s · eBecerra",
+    "description": "Tech Architect Lead especializado en Next.js, Sanity CMS y arquitecturas web modernas. Ayudo a autónomos y pequeñas empresas a tener una presencia digital profesional.",
+    "ogDescription": "Tech Architect Lead. Webs construidas con criterio arquitectónico para autónomos y PYMEs.",
+    "twitterDescription": "Tech Architect Lead. Webs construidas con criterio arquitectónico."
+  },
+  "nav": {
+    "services": "Servicios",
+    "cases": "Casos",
+    "about": "Sobre mí",
+    "process": "Proceso",
+    "contact": "Contacto",
+    "ctaTalk": "Hablemos",
+    "menu": "Menú",
+    "language": "Idioma"
+  },
+  "scaffold": {
+    "title": "ebecerra.es",
+    "subtitle": "Escaparate comercial en construcción",
+    "note": "El diseño pro se está implementando en fases. Vuelve pronto."
+  }
+}

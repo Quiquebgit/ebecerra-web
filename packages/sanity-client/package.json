@@ -1,0 +1,13 @@
+{
+  "name": "@ebecerra/sanity-client",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "dependencies": {
+    "next-sanity": "^12.3.0"
+  }
+}
