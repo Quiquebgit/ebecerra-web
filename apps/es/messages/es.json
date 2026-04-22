@@ -14,11 +14,81 @@
     "contact": "Contacto",
     "ctaTalk": "Hablemos",
     "menu": "Menú",
-    "language": "Idioma"
+    "menuOpen": "Abrir menú",
+    "menuClose": "Cerrar menú",
+    "language": "Cambiar idioma",
+    "langEs": "Español",
+    "langEn": "English"
   },
-  "scaffold": {
-    "title": "ebecerra.es",
-    "subtitle": "Escaparate comercial en construcción",
-    "note": "El diseño pro se está implementando en fases. Vuelve pronto."
+  "hero": {
+    "kicker": "// Disponible para freelance · Q3 2026",
+    "titleBefore": "Construyo webs con",
+    "titleHighlight": "criterio arquitectónico",
+    "titleAfter": "para autónomos y PYMEs.",
+    "lead": "Sin plantillas, sin agencias que no devuelven el teléfono. Un arquitecto web pensando en tu negocio.",
+    "ctaPrimary": "Solicitar presupuesto",
+    "ctaSecondary": "ver servicios",
+    "metaYears": "8 años · tech architect",
+    "metaCompany": "@ VASS · Magnolia CMS",
+    "metaLocation": "Madrid · España"
+  },
+  "services": {
+    "kicker": "// 01. Servicios",
+    "title": "Lo que construyo para ti",
+    "lead": "Tres formas de trabajar juntos, con alcance y precio orientativo claros desde la primera conversación.",
+    "priceFrom": "desde",
+    "viewMore": "ver detalles"
+  },
+  "case": {
+    "kicker": "// Caso destacado",
+    "readCase": "leer el caso completo",
+    "placeholderTitle": "Aún no hay casos publicados",
+    "placeholderBody": "Los casos de estudio llegarán cuando se conecte Sanity. Mientras tanto, mira los servicios o escríbeme para hablar de tu proyecto."
+  },
+  "about": {
+    "kicker": "// Sobre mí",
+    "title": "Un poco sobre quién construye",
+    "bio1": "Soy Enrique Becerra. Tech Architect Lead en VASS, especialista en Magnolia CMS y ecosistema Java con 8 años de experiencia.",
+    "bio2": "Trabajo freelance fuera del horario corporativo con autónomos y PYMEs que quieren hacer las cosas bien a la primera. Coordino el gremio VassNolia en VASS University.",
+    "viewProfile": "ver perfil completo"
+  },
+  "process": {
+    "kicker": "// 02. Cómo trabajamos juntos",
+    "title": "De idea a sitio vivo en 4 pasos",
+    "lead": "Sin sorpresas ni consultoría interminable. Un camino corto y claro desde la primera llamada hasta la entrega."
+  },
+  "contact": {
+    "kicker": "// Contacto",
+    "title": "Hablemos de tu proyecto",
+    "lead": "Cuéntame qué necesitas y te respondo en 24h laborables con una primera idea del alcance.",
+    "formName": "Nombre",
+    "formNamePlaceholder": "Cómo te llamas",
+    "formEmail": "Email",
+    "formEmailPlaceholder": "tu@correo.com",
+    "formMessage": "Mensaje",
+    "formMessagePlaceholder": "Cuéntame brevemente qué necesitas",
+    "formSubmit": "Enviar mensaje",
+    "formSending": "Enviando…",
+    "formSuccess": "Mensaje enviado. Te respondo en 24h laborables.",
+    "formError": "Error al enviar. Prueba escribiéndome a contacto@ebecerra.es.",
+    "infoEmail": "Email",
+    "infoLinkedin": "LinkedIn",
+    "infoGithub": "GitHub",
+    "infoLocation": "Ubicación",
+    "infoResponse": "Respuesta",
+    "infoResponseValue": "24 h laborables"
+  },
+  "footer": {
+    "tagline": "Tech Architect Lead que construye software que funciona, forma equipos y perdura. Freelance para autónomos y PYMEs en España.",
+    "availability": "disponible Q3 2026",
+    "colNavTitle": "navegación",
+    "colSocialTitle": "social",
+    "colCrossTitle": "cruzado",
+    "legalTerms": "aviso legal",
+    "legalPrivacy": "privacidad",
+    "legalCookies": "cookies",
+    "copyright": "© {year} Enrique Becerra · Madrid",
+    "ebecerraTech": "ebecerra.tech ↗",
+    "piezasGame": "piezas · game ↗"
   }
 }

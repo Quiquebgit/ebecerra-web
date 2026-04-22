@@ -14,11 +14,81 @@
     "contact": "Contact",
     "ctaTalk": "Let's talk",
     "menu": "Menu",
-    "language": "Language"
+    "menuOpen": "Open menu",
+    "menuClose": "Close menu",
+    "language": "Change language",
+    "langEs": "Español",
+    "langEn": "English"
   },
-  "scaffold": {
-    "title": "ebecerra.es",
-    "subtitle": "Commercial showcase under construction",
-    "note": "The pro design is being implemented in phases. Check back soon."
+  "hero": {
+    "kicker": "// Available for freelance · Q3 2026",
+    "titleBefore": "I build websites with",
+    "titleHighlight": "architectural rigor",
+    "titleAfter": "for freelancers and SMBs.",
+    "lead": "No templates, no agencies that don't return your calls. A web architect thinking about your business.",
+    "ctaPrimary": "Request a quote",
+    "ctaSecondary": "view services",
+    "metaYears": "8 years · tech architect",
+    "metaCompany": "@ VASS · Magnolia CMS",
+    "metaLocation": "Madrid · Spain"
+  },
+  "services": {
+    "kicker": "// 01. Services",
+    "title": "What I build for you",
+    "lead": "Three clear ways to work together, with scope and indicative pricing from the first conversation.",
+    "priceFrom": "from",
+    "viewMore": "view details"
+  },
+  "case": {
+    "kicker": "// Featured case",
+    "readCase": "read the full case",
+    "placeholderTitle": "No case studies published yet",
+    "placeholderBody": "Case studies will arrive once Sanity is connected. Meanwhile, check the services or reach out to discuss your project."
+  },
+  "about": {
+    "kicker": "// About",
+    "title": "A bit about who's building",
+    "bio1": "I'm Enrique Becerra. Tech Architect Lead at VASS, specialized in Magnolia CMS and the Java ecosystem with 8 years of experience.",
+    "bio2": "I work freelance outside corporate hours with freelancers and SMBs who want things done right the first time. I coordinate the VassNolia guild at VASS University.",
+    "viewProfile": "view full profile"
+  },
+  "process": {
+    "kicker": "// 02. How we work together",
+    "title": "From idea to live site in 4 steps",
+    "lead": "No surprises, no endless consulting. A short, clear path from first call to delivery."
+  },
+  "contact": {
+    "kicker": "// Contact",
+    "title": "Let's talk about your project",
+    "lead": "Tell me what you need and I'll reply within 24 business hours with a first take on scope.",
+    "formName": "Name",
+    "formNamePlaceholder": "What's your name",
+    "formEmail": "Email",
+    "formEmailPlaceholder": "you@email.com",
+    "formMessage": "Message",
+    "formMessagePlaceholder": "Tell me briefly what you need",
+    "formSubmit": "Send message",
+    "formSending": "Sending…",
+    "formSuccess": "Message sent. I'll reply within 24 business hours.",
+    "formError": "Failed to send. Try emailing me at contacto@ebecerra.es instead.",
+    "infoEmail": "Email",
+    "infoLinkedin": "LinkedIn",
+    "infoGithub": "GitHub",
+    "infoLocation": "Location",
+    "infoResponse": "Response",
+    "infoResponseValue": "24 business hours"
+  },
+  "footer": {
+    "tagline": "Tech Architect Lead who builds software that works, trains teams and lasts. Freelance for freelancers and SMBs in Spain.",
+    "availability": "available Q3 2026",
+    "colNavTitle": "navigation",
+    "colSocialTitle": "social",
+    "colCrossTitle": "cross-linked",
+    "legalTerms": "legal notice",
+    "legalPrivacy": "privacy",
+    "legalCookies": "cookies",
+    "copyright": "© {year} Enrique Becerra · Madrid",
+    "ebecerraTech": "ebecerra.tech ↗",
+    "piezasGame": "piezas · game ↗"
   }
 }
