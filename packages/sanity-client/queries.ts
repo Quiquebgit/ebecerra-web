@@ -8,6 +8,7 @@ import type {
   ProcessStep,
   CaseStudy,
   CaseStudySummary,
+  CaseStudyMetric,
   Locale,
 } from "./types";
 
@@ -159,6 +160,58 @@ export async function getFeaturedCaseStudies(
     `*[_type == "caseStudy" && featured == true] | order(coalesce(order, 9999) asc, year desc) [0...$limit] ${caseStudySummaryProjection}`,
     { locale, limit }
   );
+}
+
+/**
+ * Caso destacado para la home con métricas incluidas. Devuelve el
+ * primer caso marcado como featured (por orden) o `null` si no hay
+ * ninguno publicado. La home muestra un placeholder cuando es null.
+ */
+export async function getFeaturedCaseForHome(
+  locale: Locale
+): Promise<(CaseStudySummary & { metrics: CaseStudyMetric[] }) | null> {
+  const result = await client.fetch<
+    (CaseStudySummary & { metrics: CaseStudyMetric[] }) | null
+  >(
+    `*[_type == "caseStudy" && featured == true] | order(coalesce(order, 9999) asc, year desc) [0] {
+      "_id": _id,
+      "title": ${loc("title")},
+      "slug": slug.current,
+      client,
+      "clientAnonymized": coalesce(clientAnonymized, false),
+      year,
+      "summary": ${loc("summary")},
+      cover,
+      "featured": coalesce(featured, false),
+      "metrics": metrics[]{
+        "label": ${loc("label")},
+        value
+      }
+    }`,
+    { locale }
+  );
+  return result;
+}
+
+/**
+ * Features "Sobre mí" desde el singleton `profile`.
+ * Devuelve `null` si no hay documento de perfil publicado — la home
+ * entonces usa el fallback local.
+ */
+export async function getProfileFeatures(
+  locale: Locale
+): Promise<Feature[] | null> {
+  const profile = await client.fetch<{ aboutFeatures: Feature[] } | null>(
+    `*[_type == "profile"][0] {
+      "aboutFeatures": aboutFeatures[]{
+        icon,
+        "label": ${loc("label")},
+        "desc": ${loc("desc")}
+      }
+    }`,
+    { locale }
+  );
+  return profile?.aboutFeatures?.length ? profile.aboutFeatures : null;
 }
 
 export async function getCaseStudyBySlug(
