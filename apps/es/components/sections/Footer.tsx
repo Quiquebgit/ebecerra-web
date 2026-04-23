@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import LogoMark from "@/components/LogoMark";
+import type { SiteSettingsFooter } from "@ebecerra/sanity-client";
 import styles from "./Footer.module.css";
 
 const NAV_COL = [
@@ -40,13 +41,20 @@ function FooterLink({
   );
 }
 
-export default function Footer() {
+type Props = {
+  footerData?: Pick<SiteSettingsFooter, "tagline" | "availability"> | null;
+};
+
+export default function Footer({ footerData }: Props) {
   const t = useTranslations("footer");
   const tn = useTranslations("nav");
   const pathname = usePathname();
   const isHome = pathname === "/";
   const anchor = (id: string) => (isHome ? `#${id}` : `/#${id}`);
   const year = new Date().getFullYear();
+
+  const tagline = footerData?.tagline ?? t("tagline");
+  const availability = footerData?.availability ?? t("availability");
 
   return (
     <footer className={styles.footer}>
@@ -56,10 +64,10 @@ export default function Footer() {
             <div className={styles.logoWrapper}>
               <LogoMark variant="negative" height={32} />
             </div>
-            <p className={styles.tagline}>{t("tagline")}</p>
+            <p className={styles.tagline}>{tagline}</p>
             <div className={styles.availabilityRow}>
               <span className={styles.availabilityDot} />
-              {t("availability")}
+              {availability}
             </div>
           </div>
 

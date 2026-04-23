@@ -32,12 +32,12 @@
 
 ### A3 — Secciones de home
 
-- [ ] Services title/lead/audit strip desde `serviceSectionMeta`
-- [ ] Process title/lead desde `processSectionMeta`
-- [ ] Cases title/lead desde `casesSectionMeta`
-- [ ] About bio + stats desde `profile` extendido
-- [ ] Contact section header desde `contactSectionMeta`
-- [ ] Footer tagline + availability desde `siteSettings`
+- [x] Services title/lead/audit strip desde `serviceSectionMeta`
+- [x] Process title/lead desde `processSectionMeta`
+- [x] Cases title/lead desde `casesSectionMeta`
+- [x] About bio + stats desde `profile` extendido
+- [x] Contact section header desde `contactSectionMeta`
+- [x] Footer tagline + availability desde `siteSettings`
 
 ### A4 — FAQ y legales
 

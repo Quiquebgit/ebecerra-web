@@ -2,17 +2,22 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import type { ProfileContact } from "@ebecerra/sanity-client";
+import type { ProfileContact, SectionMeta } from "@ebecerra/sanity-client";
 import styles from "./Contact.module.css";
 
 type Status = "idle" | "sending" | "success" | "error";
 
 type Props = {
   contactData?: ProfileContact | null;
+  sectionMeta?: SectionMeta | null;
 };
 
-export default function Contact({ contactData }: Props) {
+export default function Contact({ contactData, sectionMeta }: Props) {
   const t = useTranslations("contact");
+
+  const sectionKicker = sectionMeta?.kicker ?? t("kicker");
+  const sectionTitle = sectionMeta?.title ?? t("title");
+  const sectionLead = sectionMeta?.lead ?? t("lead");
   const [status, setStatus] = useState<Status>("idle");
   const [form, setForm] = useState({ name: "", email: "", message: "", website: "" });
 
@@ -63,15 +68,15 @@ export default function Contact({ contactData }: Props) {
         <div className={styles.kicker}>
           //{" "}
           <span className={styles.kickerAccent}>04.</span>{" "}
-          {t("kicker").replace(/^\/\/\s*/i, "")}
+          {sectionKicker.replace(/^\/\/\s*/i, "")}
         </div>
 
         <div className={styles.split}>
           <div>
             <h2 id="contact-heading" className={styles.heading}>
-              {t("title")}
+              {sectionTitle}
             </h2>
-            <p className={styles.lead}>{t("lead")}</p>
+            <p className={styles.lead}>{sectionLead}</p>
 
             <ul className={styles.infoList}>
               {INFO.map((item) => (

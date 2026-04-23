@@ -1,15 +1,21 @@
 import { getTranslations } from "next-intl/server";
 import type { CaseCard } from "@/lib/content";
+import type { SectionMeta } from "@ebecerra/sanity-client";
 import styles from "./Case.module.css";
 
 type Props = {
   cases: CaseCard[];
+  sectionMeta?: SectionMeta | null;
 };
 
-export default async function Case({ cases }: Props) {
+export default async function Case({ cases, sectionMeta }: Props) {
   const t = await getTranslations("cases");
 
   if (cases.length === 0) return null;
+
+  const kicker = sectionMeta?.kicker ?? t("kicker");
+  const title = sectionMeta?.title ?? t("title");
+  const lead = sectionMeta?.lead ?? t("lead");
 
   return (
     <section
@@ -18,11 +24,11 @@ export default async function Case({ cases }: Props) {
       className={styles.section}
     >
       <div className={styles.inner}>
-        <div className={styles.kicker}>{t("kicker")}</div>
+        <div className={styles.kicker}>{kicker}</div>
         <h2 id="cases-heading" className={styles.heading}>
-          {t("title")}
+          {title}
         </h2>
-        <p className={`lead ${styles.lead}`}>{t("lead")}</p>
+        <p className={`lead ${styles.lead}`}>{lead}</p>
 
         <div className={styles.grid}>
           {cases.map((c) => (

@@ -11,6 +11,8 @@ import type {
   CaseStudyMetric,
   HeroSection,
   SiteSettingsMeta,
+  SiteSettingsFooter,
+  SiteSettingsFull,
   ProfileContact,
   Locale,
   SectionMeta,
@@ -138,6 +140,20 @@ export async function getSiteSettings(locale: Locale): Promise<SiteSettingsMeta 
   );
   if (!raw) return null;
   return { ...raw, keywords: (raw.keywords ?? []).map((k) => k.v).filter(Boolean) };
+}
+
+export async function getSiteSettingsFooter(locale: Locale): Promise<SiteSettingsFooter | null> {
+  type Raw = Omit<SiteSettingsFooter, "socialLinks"> & { socialLinks: { name: string; url: string; external: boolean }[] | null };
+  const raw = await client.fetch<Raw | null>(
+    `*[_type == "siteSettings"][0].footer {
+      "tagline": ${loc("tagline")},
+      "availability": ${loc("availability")},
+      "socialLinks": socialLinks[]{ name, url, "external": coalesce(external, true) }
+    }`,
+    { locale }
+  );
+  if (!raw) return null;
+  return { ...raw, socialLinks: raw.socialLinks ?? [] };
 }
 
 export async function getProfileContact(locale: Locale): Promise<ProfileContact | null> {
@@ -438,4 +454,68 @@ export async function getProfile(locale: Locale): Promise<ProfileFull | null> {
       { locale }
     )
     .catch(() => null);
+}
+
+export const DEFAULT_SITE_SETTINGS: SiteSettingsFull = {
+  metadata: {
+    title: "Enrique Becerra — Desarrollo web freelance para autónomos y PYMEs",
+    titleTemplate: "%s · eBecerra",
+    description:
+      "Webs a medida para autónomos y PYMEs. Web profesional desde 900 €, web editable con CMS desde 1.500 €, rescate de webs antiguas y mantenimiento mensual.",
+    ogDescription: null,
+    twitterDescription: null,
+    keywords: [],
+  },
+  footer: {
+    tagline: null,
+    availability: null,
+    socialLinks: [],
+  },
+};
+
+export async function getSiteSettingsFull(
+  locale: Locale
+): Promise<SiteSettingsFull> {
+  type RawMeta = Omit<SiteSettingsMeta, "keywords"> & {
+    keywords: { v: string }[] | null;
+  };
+  type Raw = {
+    metadata: RawMeta;
+    footer: SiteSettingsFooter | null;
+  };
+
+  const raw = await client
+    .fetch<Raw | null>(
+      `*[_type == "siteSettings"][0] {
+        "metadata": metadata {
+          "title": ${loc("title")},
+          titleTemplate,
+          "description": ${loc("description")},
+          "ogDescription": ${loc("ogDescription")},
+          "twitterDescription": ${loc("twitterDescription")},
+          "keywords": keywords[]{ "v": coalesce(@[$locale], @.es, @) }
+        },
+        "footer": footer {
+          "tagline": ${loc("tagline")},
+          "availability": ${loc("availability")},
+          "socialLinks": socialLinks[]{ name, url, external }
+        }
+      }`,
+      { locale }
+    )
+    .catch(() => null);
+
+  if (!raw) return DEFAULT_SITE_SETTINGS;
+
+  return {
+    metadata: {
+      ...raw.metadata,
+      keywords: (raw.metadata.keywords ?? []).map((k) => k.v).filter(Boolean),
+    },
+    footer: {
+      tagline: raw.footer?.tagline ?? null,
+      availability: raw.footer?.availability ?? null,
+      socialLinks: raw.footer?.socialLinks ?? [],
+    },
+  };
 }

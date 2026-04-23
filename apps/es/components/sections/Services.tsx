@@ -1,13 +1,19 @@
 import { getTranslations } from "next-intl/server";
-import type { Service } from "@ebecerra/sanity-client";
+import type { Service, ServiceSectionMeta } from "@ebecerra/sanity-client";
 import styles from "./Services.module.css";
 
 type Props = {
   services: Service[];
+  sectionMeta?: ServiceSectionMeta | null;
 };
 
-export default async function Services({ services }: Props) {
+export default async function Services({ services, sectionMeta }: Props) {
   const t = await getTranslations("services");
+
+  const title = sectionMeta?.title ?? t("title");
+  const lead = sectionMeta?.lead ?? t("lead");
+  const auditKicker = sectionMeta?.auditStrip?.kicker ?? t("auditKicker");
+  const auditBody = sectionMeta?.auditStrip?.body ?? t("auditBody");
 
   return (
     <section
@@ -22,10 +28,10 @@ export default async function Services({ services }: Props) {
           {t("kicker").replace(/^\/\/\s*01\.\s*/i, "")}
         </div>
         <h2 id="services-heading" className={styles.heading}>
-          {t("title")}
+          {title}
         </h2>
         <p className={`lead ${styles.lead}`}>
-          {t("lead")}
+          {lead}
         </p>
 
         <div className={styles.grid}>
@@ -72,9 +78,9 @@ export default async function Services({ services }: Props) {
           aria-labelledby="services-audit-heading"
         >
           <div className={styles.auditBody}>
-            <div className={styles.auditKicker}>// {t("auditKicker")}</div>
+            <div className={styles.auditKicker}>// {auditKicker}</div>
             <p id="services-audit-heading" className={styles.auditText}>
-              {t("auditBody")}
+              {auditBody}
             </p>
           </div>
           <a href="#contacto" className={styles.auditCta}>

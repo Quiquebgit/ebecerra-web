@@ -1,21 +1,26 @@
 import { getTranslations } from "next-intl/server";
-import type { Feature } from "@ebecerra/sanity-client";
+import type { Feature, ProfileFull } from "@ebecerra/sanity-client";
 import styles from "./About.module.css";
 
 type Stat = { value: string; label: string };
 
 type Props = {
   features: Feature[];
+  profile?: ProfileFull | null;
 };
 
-export default async function About({ features }: Props) {
+export default async function About({ features, profile }: Props) {
   const t = await getTranslations("about");
 
-  const stats: Stat[] = [
-    { value: "8+", label: t("statYears") },
-    { value: "13", label: t("statProjects") },
-    { value: "6", label: t("statPublicSector") },
-  ];
+  const bio1 = profile?.bio1 ?? t("bio1");
+  const bio2 = profile?.bio2 ?? t("bio2");
+  const stats: Stat[] = profile?.stats?.length
+    ? profile.stats
+    : [
+        { value: "8+", label: t("statYears") },
+        { value: "13", label: t("statProjects") },
+        { value: "6", label: t("statPublicSector") },
+      ];
 
   return (
     <section
@@ -35,8 +40,8 @@ export default async function About({ features }: Props) {
 
         <div className={styles.split}>
           <div className={styles.bio}>
-            <p className={styles.bioPara}>{t("bio1")}</p>
-            <p className={styles.bioParaLast}>{t("bio2")}</p>
+            <p className={styles.bioPara}>{bio1}</p>
+            <p className={styles.bioParaLast}>{bio2}</p>
 
             <div
               className={styles.stats}

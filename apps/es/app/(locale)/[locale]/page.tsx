@@ -7,6 +7,10 @@ import {
   getProfileFeatures,
   getHeroSection,
   getProfileContact,
+  getProfile,
+  getServiceSectionMeta,
+  getSectionMeta,
+  getSiteSettingsFooter,
 } from "@ebecerra/sanity-client";
 import Nav from "@/components/sections/Nav";
 import Hero from "@/components/sections/Hero";
@@ -28,18 +32,34 @@ export default async function Home({
   setRequestLocale(locale);
   const fallback = getFallback(locale);
 
-  const [heroData, services, processSteps, profileFeatures, contactData] = await Promise.all([
+  const [
+    heroData,
+    services,
+    processSteps,
+    profileFeatures,
+    contactData,
+    profileData,
+    servicesMeta,
+    processMeta,
+    casesMeta,
+    contactMeta,
+    footerData,
+  ] = await Promise.all([
     getHeroSection(locale).catch(() => null),
     getFeaturedServices(locale).catch(() => []),
     getProcessSteps(locale).catch(() => []),
     getProfileFeatures(locale).catch(() => null),
     getProfileContact(locale).catch(() => null),
+    getProfile(locale).catch(() => null),
+    getServiceSectionMeta(locale).catch(() => null),
+    getSectionMeta("processSectionMeta", locale).catch(() => null),
+    getSectionMeta("casesSectionMeta", locale).catch(() => null),
+    getSectionMeta("contactSectionMeta", locale).catch(() => null),
+    getSiteSettingsFooter(locale).catch(() => null),
   ]);
 
-  const resolvedServices =
-    services.length > 0 ? services : fallback.services;
-  const resolvedProcess =
-    processSteps.length > 0 ? processSteps : fallback.processSteps;
+  const resolvedServices = services.length > 0 ? services : fallback.services;
+  const resolvedProcess = processSteps.length > 0 ? processSteps : fallback.processSteps;
   const resolvedFeatures = profileFeatures ?? fallback.aboutFeatures;
 
   return (
@@ -47,13 +67,13 @@ export default async function Home({
       <Nav />
       <main id="main">
         <Hero sanityData={heroData} />
-        <Services services={resolvedServices} />
-        <About features={resolvedFeatures} />
-        <Case cases={fallback.cases} />
-        <Process steps={resolvedProcess} />
-        <Contact contactData={contactData} />
+        <Services services={resolvedServices} sectionMeta={servicesMeta} />
+        <About features={resolvedFeatures} profile={profileData} />
+        <Case cases={fallback.cases} sectionMeta={casesMeta} />
+        <Process steps={resolvedProcess} sectionMeta={processMeta} />
+        <Contact contactData={contactData} sectionMeta={contactMeta} />
       </main>
-      <Footer />
+      <Footer footerData={footerData} />
     </>
   );
 }

@@ -147,6 +147,12 @@ export type LegalPageData = {
   updatedAt: string | null;
 };
 
+export type SiteSettingsFooter = {
+  tagline: string | null;
+  availability: string | null;
+  socialLinks: { name: string; url: string; external: boolean }[];
+};
+
 export type ProfileStat = { value: string; label: string };
 
 export type ProfileFull = {
@@ -157,4 +163,9 @@ export type ProfileFull = {
   stats: ProfileStat[];
   aboutFeatures: Feature[] | null;
   contact: ProfileContact | null;
+};
+
+export type SiteSettingsFull = {
+  metadata: SiteSettingsMeta;
+  footer: SiteSettingsFooter;
 };

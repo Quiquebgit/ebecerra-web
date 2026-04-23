@@ -1,18 +1,21 @@
 import { getTranslations } from "next-intl/server";
-import type { ProcessStep } from "@ebecerra/sanity-client";
+import type { ProcessStep, SectionMeta } from "@ebecerra/sanity-client";
 import styles from "./Process.module.css";
 
 type Props = {
   steps: ProcessStep[];
+  sectionMeta?: SectionMeta | null;
 };
 
 function StepCircle({ number }: { number: string }) {
   return <div className={styles.stepCircle}>{number}</div>;
 }
 
-export default async function Process({ steps }: Props) {
+export default async function Process({ steps, sectionMeta }: Props) {
   const t = await getTranslations("process");
 
+  const title = sectionMeta?.title ?? t("title");
+  const lead = sectionMeta?.lead ?? t("lead");
   const ordered = [...steps].sort((a, b) => a.order - b.order);
 
   return (
@@ -28,9 +31,9 @@ export default async function Process({ steps }: Props) {
           {t("kicker").replace(/^\/\/\s*02\.\s*/i, "")}
         </div>
         <h2 id="process-heading" className={styles.heading}>
-          {t("title")}
+          {title}
         </h2>
-        <p className={`lead ${styles.lead}`}>{t("lead")}</p>
+        <p className={`lead ${styles.lead}`}>{lead}</p>
 
         {/* Desktop: horizontal with connector */}
         <div className={styles.desktopLayout}>
