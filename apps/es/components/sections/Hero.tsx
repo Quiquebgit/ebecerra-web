@@ -130,9 +130,11 @@ export default async function Hero() {
               letterSpacing: "0.04em",
             }}
           >
-            <span>{t("metaYears")}</span>
+            <span>{t("metaExperience")}</span>
             <span aria-hidden="true">·</span>
-            <span>{t("metaCompany")}</span>
+            <span>{t("metaResponse")}</span>
+            <span aria-hidden="true">·</span>
+            <span>{t("metaQuality")}</span>
             <span aria-hidden="true">·</span>
             <span>{t("metaLocation")}</span>
           </div>
