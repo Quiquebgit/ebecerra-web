@@ -2,9 +2,9 @@
   "metadata": {
     "title": "Enrique Becerra — Desarrollo web para autónomos y PYMEs",
     "titleTemplate": "%s · eBecerra",
-    "description": "Tech Architect Lead con más de 8 años de experiencia en Magnolia CMS, Java y Spring. Ayudo a autónomos y pequeñas empresas a tener una presencia digital profesional que su equipo pueda mantener.",
-    "ogDescription": "Tech Architect Lead con experiencia enterprise aplicada a PYME. Webs construidas con criterio arquitectónico.",
-    "twitterDescription": "Tech Architect Lead. Webs construidas con criterio arquitectónico."
+    "description": "Webs a medida para clínicas, despachos, autónomos y PYMEs. Sin plantillas ni humo. Rápidas, accesibles y pensadas para que tu equipo las mantenga solo.",
+    "ogDescription": "Webs a medida para clínicas, despachos, autónomos y PYMEs. Sin plantillas genéricas ni agencias. Rápidas, accesibles y fáciles de mantener.",
+    "twitterDescription": "Webs a medida para clínicas, despachos y pequeños negocios. Sin plantillas ni humo."
   },
   "a11y": {
     "skipToContent": "Saltar al contenido principal"
@@ -92,7 +92,7 @@
     "infoResponseValue": "24 h laborables"
   },
   "footer": {
-    "tagline": "Tech Architect Lead con experiencia enterprise aplicada a PYME. Webs que tu equipo mantiene solo, integradas con tus herramientas y que siguen funcionando cuando crezcas.",
+    "tagline": "Webs a medida para negocios que no se conforman con una plantilla. Rápidas, accesibles, fáciles de mantener y pensadas para que tu equipo opere sin depender de nadie.",
     "availability": "disponible para que trabajemos juntos",
     "colNavTitle": "navegación",
     "colSocialTitle": "social",

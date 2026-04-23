@@ -2,9 +2,9 @@
   "metadata": {
     "title": "Enrique Becerra — Web development for freelancers and SMBs",
     "titleTemplate": "%s · eBecerra",
-    "description": "Tech Architect Lead with 8+ years of experience in Magnolia CMS, Java and Spring. I help freelancers and small businesses build a professional digital presence their team can maintain.",
-    "ogDescription": "Tech Architect Lead bringing enterprise experience to SMB scale. Websites built with architectural rigor.",
-    "twitterDescription": "Tech Architect Lead. Websites built with architectural rigor."
+    "description": "Custom websites for clinics, law firms, freelancers and SMBs. No templates, no fluff. Fast, accessible and built so your team can run them solo.",
+    "ogDescription": "Custom websites for clinics, law firms, freelancers and SMBs. No generic templates, no agencies. Fast, accessible and easy to maintain.",
+    "twitterDescription": "Custom websites for clinics, law firms and small businesses. No templates, no fluff."
   },
   "a11y": {
     "skipToContent": "Skip to main content"
@@ -92,7 +92,7 @@
     "infoResponseValue": "24 business hours"
   },
   "footer": {
-    "tagline": "Tech Architect Lead bringing enterprise experience to SMB scale. Websites your team can maintain, integrated with your tools, that keep working as you grow.",
+    "tagline": "Custom websites for businesses that won't settle for a template. Fast, accessible, easy to maintain and built so your team can run them without depending on anyone.",
     "availability": "available to work together",
     "colNavTitle": "navigation",
     "colSocialTitle": "social",

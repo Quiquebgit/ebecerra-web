@@ -53,7 +53,7 @@ const es: Fallback = {
         "formación al equipo editorial",
       ],
       priceRange: "1.500 €",
-      priceNote: "Rango orientativo. Cubierto por Kit Digital (hasta 2.000 €).",
+      priceNote: "Rango orientativo. Presupuesto cerrado tras una primera conversación.",
       featured: true,
     },
     {
@@ -71,7 +71,7 @@ const es: Fallback = {
         "periodo de coexistencia y auditoría post-migración",
       ],
       priceRange: "2.500 €",
-      priceNote: "Rango orientativo. Kit Digital aporta hasta 2.000 €.",
+      priceNote: "Rango orientativo. Presupuesto cerrado tras auditoría previa.",
       featured: true,
     },
     {
@@ -224,7 +224,7 @@ const en: Fallback = {
         "editorial team training",
       ],
       priceRange: "€1,500",
-      priceNote: "Starting estimate. Covered by Spain's Kit Digital grant (up to €2,000).",
+      priceNote: "Starting estimate. Fixed quote after a 30-min call.",
       featured: true,
     },
     {
@@ -242,7 +242,7 @@ const en: Fallback = {
         "coexistence window and post-migration audit",
       ],
       priceRange: "€2,500",
-      priceNote: "Starting estimate. Kit Digital contributes up to €2,000.",
+      priceNote: "Starting estimate. Fixed quote after an upfront audit.",
       featured: true,
     },
     {

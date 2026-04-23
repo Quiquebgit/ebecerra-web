@@ -50,31 +50,21 @@ export async function generateMetadata({
     keywords:
       locale === "es"
         ? [
-            "desarrollo web",
-            "freelance",
-            "Magnolia CMS",
-            "Java",
-            "Spring",
+            "desarrollo web a medida",
             "autónomos",
             "PYMEs",
             "Madrid",
-            "tech architect",
-            "web profesional",
-            "migración web",
+            "web para clínica",
+            "web para despacho",
             "Enrique Becerra",
           ]
         : [
-            "web development",
-            "freelance",
-            "Magnolia CMS",
-            "Java",
-            "Spring",
+            "custom web development",
             "freelancers",
             "SMBs",
             "Madrid",
-            "tech architect",
-            "professional website",
-            "web migration",
+            "website for clinics",
+            "website for law firms",
             "Enrique Becerra",
           ],
     alternates: {
