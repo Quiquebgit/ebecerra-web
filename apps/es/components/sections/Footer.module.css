@@ -1,0 +1,134 @@
+/* Footer.module.css */
+.footer {
+  background: var(--ink);
+  color: #a8a29e;
+  padding: 64px clamp(20px, 4vw, 56px) 40px;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #292524;
+}
+
+.logoWrapper {
+  margin-bottom: 16px;
+}
+
+.tagline {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0 0 16px;
+  color: #a8a29e;
+  max-width: 320px;
+}
+
+.availabilityRow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #78716c;
+  letter-spacing: 0.04em;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.availabilityDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.colTitle {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #57534e;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.link {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: #d6d3d1;
+  text-decoration: none;
+  transition: color 150ms var(--ease);
+}
+
+.link:hover {
+  color: #fafaf9;
+}
+
+.linkAccent {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: #34d399;
+  text-decoration: none;
+  transition: color 150ms var(--ease);
+}
+
+.linkAccent:hover {
+  color: #6ee7b7;
+}
+
+/* Bottom bar */
+.bottom {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid #292524;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: #78716c;
+  letter-spacing: 0.04em;
+}
+
+.legalLinks {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.legalLink {
+  color: #78716c;
+  text-decoration: none;
+  transition: color 150ms var(--ease);
+}
+
+.legalLink:hover {
+  color: #fafaf9;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+  }
+
+  .bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

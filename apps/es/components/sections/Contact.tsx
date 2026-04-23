@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import clsx from "clsx";
+import styles from "./Contact.module.css";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -50,118 +52,36 @@ export default function Contact() {
     }
   };
 
-  const inputStyle: React.CSSProperties = {
-    fontFamily: "var(--font-sans)",
-    fontSize: 15,
-    background: "var(--surface)",
-    color: "var(--text)",
-    border: "1px solid var(--border-strong)",
-    borderRadius: 6,
-    padding: "13px 14px",
-    outline: "none",
-    width: "100%",
-  };
-
-  const labelStyle: React.CSSProperties = {
-    fontFamily: "var(--font-mono)",
-    fontSize: 11,
-    color: "var(--text-muted)",
-    letterSpacing: "0.1em",
-    textTransform: "uppercase",
-    fontWeight: 500,
-    marginBottom: -8,
-    display: "block",
-  };
-
   return (
     <section
       id="contacto"
       aria-labelledby="contact-heading"
-      style={{
-        padding: "clamp(40px, 5vw, 72px) clamp(20px, 4vw, 56px)",
-        background: "var(--surface-subtle)",
-      }}
+      className={styles.section}
     >
-      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-        <div
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: 12,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: "var(--text-muted)",
-            marginBottom: 14,
-            fontWeight: 500,
-          }}
-        >
+      <div className={styles.inner}>
+        <div className={styles.kicker}>
           //{" "}
-          <span style={{ color: "var(--cta)" }}>04.</span>{" "}
+          <span className={styles.kickerAccent}>04.</span>{" "}
           {t("kicker").replace(/^\/\/\s*/i, "")}
         </div>
 
-        <div
-          className="contact-split"
-          style={{
-            display: "grid",
-            gap: "clamp(32px, 6vw, 80px)",
-            alignItems: "start",
-          }}
-        >
+        <div className={styles.split}>
           <div>
-            <h2
-              id="contact-heading"
-              style={{
-                fontSize: "clamp(32px, 4.2vw, 56px)",
-                lineHeight: 1.1,
-                letterSpacing: "-0.025em",
-                margin: "0 0 20px",
-              }}
-            >
+            <h2 id="contact-heading" className={styles.heading}>
               {t("title")}
             </h2>
-            <p
-              style={{
-                fontSize: 18,
-                lineHeight: 1.7,
-                color: "var(--text-secondary)",
-                margin: "0 0 32px",
-                maxWidth: 420,
-              }}
-            >
-              {t("lead")}
-            </p>
+            <p className={styles.lead}>{t("lead")}</p>
 
-            <ul
-              style={{
-                listStyle: "none",
-                padding: 0,
-                margin: 0,
-                display: "flex",
-                flexDirection: "column",
-                gap: 14,
-                fontFamily: "var(--font-mono)",
-                fontSize: 13,
-                color: "var(--text-secondary)",
-              }}
-            >
+            <ul className={styles.infoList}>
               {INFO.map((item) => (
-                <li
-                  key={item.labelKey}
-                  style={{ display: "flex", gap: 12, alignItems: "baseline" }}
-                >
-                  <span style={{ color: "var(--text-muted)", width: 80 }}>
-                    {t(item.labelKey)}
-                  </span>
+                <li key={item.labelKey} className={styles.infoItem}>
+                  <span className={styles.infoItemLabel}>{t(item.labelKey)}</span>
                   {item.href ? (
                     <a
                       href={item.href}
                       target={item.external ? "_blank" : undefined}
                       rel={item.external ? "noopener noreferrer" : undefined}
-                      style={{
-                        color: "var(--text)",
-                        textDecoration: "underline",
-                        textDecorationColor: "var(--border-strong)",
-                      }}
+                      className={styles.infoLink}
                     >
                       {item.value}
                     </a>
@@ -170,21 +90,10 @@ export default function Contact() {
                   )}
                 </li>
               ))}
-              <li style={{ display: "flex", gap: 12, alignItems: "baseline" }}>
-                <span style={{ color: "var(--text-muted)", width: 80 }}>
-                  {t("infoResponse")}
-                </span>
-                <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span
-                    style={{
-                      width: 6,
-                      height: 6,
-                      borderRadius: "50%",
-                      background: "var(--cta)",
-                      boxShadow: "0 0 0 3px rgba(4,120,87,.15)",
-                    }}
-                    aria-hidden="true"
-                  />
+              <li className={styles.infoItem}>
+                <span className={styles.infoItemLabel}>{t("infoResponse")}</span>
+                <span className={styles.responseStatus}>
+                  <span className={styles.statusDot} aria-hidden="true" />
                   {t("infoResponseValue")}
                 </span>
               </li>
@@ -195,16 +104,9 @@ export default function Contact() {
             onSubmit={onSubmit}
             noValidate
             aria-describedby="contact-status"
-            style={{
-              display: "grid",
-              gap: 14,
-              background: "var(--surface)",
-              border: "1px solid var(--border)",
-              borderRadius: 10,
-              padding: "clamp(22px, 3vw, 36px) clamp(22px, 3vw, 32px)",
-            }}
+            className={styles.form}
           >
-            <label style={labelStyle} htmlFor="contact-name">
+            <label className={styles.label} htmlFor="contact-name">
               {t("formName")}
             </label>
             <input
@@ -214,12 +116,12 @@ export default function Contact() {
               placeholder={t("formNamePlaceholder")}
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              style={inputStyle}
+              className={styles.input}
               autoComplete="name"
               aria-invalid={status === "error" ? true : undefined}
             />
 
-            <label style={labelStyle} htmlFor="contact-email">
+            <label className={styles.label} htmlFor="contact-email">
               {t("formEmail")}
             </label>
             <input
@@ -229,12 +131,12 @@ export default function Contact() {
               placeholder={t("formEmailPlaceholder")}
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              style={inputStyle}
+              className={styles.input}
               autoComplete="email"
               aria-invalid={status === "error" ? true : undefined}
             />
 
-            <label style={labelStyle} htmlFor="contact-message">
+            <label className={styles.label} htmlFor="contact-message">
               {t("formMessage")}
             </label>
             <textarea
@@ -245,24 +147,11 @@ export default function Contact() {
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
               aria-invalid={status === "error" ? true : undefined}
-              style={{
-                ...inputStyle,
-                resize: "vertical",
-                fontFamily: "var(--font-sans)",
-              }}
+              className={styles.textarea}
             />
 
             {/* Honeypot anti-bot: invisible para humanos, visible para scrapers. */}
-            <label
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                left: "-9999px",
-                width: 1,
-                height: 1,
-                overflow: "hidden",
-              }}
-            >
+            <label aria-hidden="true" className={styles.honeypot}>
               Website (no rellenar)
               <input
                 type="text"
@@ -274,32 +163,19 @@ export default function Contact() {
               />
             </label>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                gap: 16,
-                marginTop: 8,
-                flexWrap: "wrap",
-              }}
-            >
+            <div className={styles.formActions}>
               <span
                 id="contact-status"
                 role="status"
                 aria-live="polite"
                 aria-atomic="true"
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 11,
-                  color:
-                    status === "error"
-                      ? "#b91c1c"
-                      : status === "success"
-                        ? "var(--cta)"
-                        : "var(--text-muted)",
-                  letterSpacing: "0.04em",
-                }}
+                className={
+                  status === "error"
+                    ? styles.formStatusError
+                    : status === "success"
+                      ? styles.formStatusSuccess
+                      : styles.formStatus
+                }
               >
                 {status === "success"
                   ? t("formSuccess")
@@ -310,19 +186,11 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                style={{
-                  background:
-                    status === "success" ? "var(--text)" : "var(--cta)",
-                  color: "var(--text-on-accent)",
-                  border: `1.5px solid ${status === "success" ? "var(--text)" : "var(--cta)"}`,
-                  fontFamily: "var(--font-sans)",
-                  fontSize: 15,
-                  fontWeight: 500,
-                  padding: "12px 22px",
-                  borderRadius: 6,
-                  cursor: status === "sending" ? "wait" : "pointer",
-                  opacity: status === "sending" ? 0.7 : 1,
-                }}
+                className={clsx(
+                  styles.submitBtn,
+                  status === "success" && styles.submitBtnSuccess,
+                  status === "sending" && styles.submitBtnSending,
+                )}
               >
                 {status === "success"
                   ? `✓ ${t("formSuccess").split(".")[0]}`
@@ -334,13 +202,6 @@ export default function Contact() {
           </form>
         </div>
       </div>
-
-      <style>{`
-        .contact-split { grid-template-columns: 1fr; }
-        @media (min-width: 900px) {
-          .contact-split { grid-template-columns: 1fr 1.2fr; }
-        }
-      `}</style>
     </section>
   );
 }

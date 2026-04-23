@@ -1,0 +1,202 @@
+/* Contact.module.css */
+.section {
+  padding: clamp(40px, 5vw, 72px) clamp(20px, 4vw, 56px);
+  background: var(--surface-subtle);
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+.kickerAccent {
+  color: var(--cta);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(32px, 6vw, 80px);
+  align-items: start;
+}
+
+.heading {
+  font-size: clamp(32px, 4.2vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin: 0 0 20px;
+}
+
+.lead {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0 0 32px;
+  max-width: 420px;
+}
+
+.infoList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.infoItem {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.infoItemLabel {
+  color: var(--text-muted);
+  width: 80px;
+}
+
+.infoLink {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+}
+
+.responseStatus {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cta);
+  box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.15);
+}
+
+/* Form */
+.form {
+  display: grid;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: clamp(22px, 3vw, 36px) clamp(22px, 3vw, 32px);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: -8px;
+  display: block;
+}
+
+.input {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-md);
+  padding: 13px 14px;
+  outline: none;
+  width: 100%;
+}
+
+.textarea {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-md);
+  padding: 13px 14px;
+  outline: none;
+  width: 100%;
+  resize: vertical;
+}
+
+/* Honeypot — invisible para humanos, visible para scrapers */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.formActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.formStatus {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.formStatusSuccess {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cta);
+  letter-spacing: 0.04em;
+}
+
+.formStatusError {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--error);
+  letter-spacing: 0.04em;
+}
+
+.submitBtn {
+  background: var(--cta);
+  color: var(--text-on-accent);
+  border: 1.5px solid var(--cta);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 22px;
+  border-radius: var(--r-md);
+  cursor: pointer;
+}
+
+.submitBtnSuccess {
+  background: var(--text);
+  border-color: var(--text);
+}
+
+.submitBtnSending {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+@media (min-width: 900px) {
+  .split {
+    grid-template-columns: 1fr 1.2fr;
+  }
+}

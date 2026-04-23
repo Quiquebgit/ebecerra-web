@@ -1,3 +1,5 @@
+import styles from "./LogoMark.module.css";
+
 type Variant =
   | "primary"
   | "accent"
@@ -28,17 +30,14 @@ export default function LogoMark({
   className,
   alt = "eBecerra",
 }: Props) {
+  const heightValue = typeof height === "number" ? `${height}px` : height;
   return (
     <img
       src={SRC[variant]}
       alt={alt}
       height={typeof height === "number" ? height : undefined}
-      className={className}
-      style={{
-        height: typeof height === "number" ? `${height}px` : height,
-        width: "auto",
-        display: "block",
-      }}
+      className={className ? `${styles.logoMark} ${className}` : styles.logoMark}
+      style={{ height: heightValue }}
     />
   );
 }
