@@ -5,7 +5,6 @@ import { useTranslations, useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import LogoMark from "@/components/LogoMark";
-import clsx from "clsx";
 import styles from "./Nav.module.css";
 
 const NAV_ITEMS = [
@@ -108,10 +107,7 @@ function LangSwitch({ align = "right" }: { align?: "left" | "right" }) {
       {open && (
         <div
           role="menu"
-          className={clsx(
-            styles.langDropdown,
-            align === "right" ? styles.langDropdownRight : styles.langDropdownLeft,
-          )}
+          className={`${styles.langDropdown} ${align === "right" ? styles.langDropdownRight : styles.langDropdownLeft}`}
         >
           {(["es", "en"] as const).map((code) => {
             const active = code === locale;
@@ -120,7 +116,7 @@ function LangSwitch({ align = "right" }: { align?: "left" | "right" }) {
                 key={code}
                 role="menuitem"
                 onClick={() => pick(code)}
-                className={clsx(styles.langOption, active && styles.langOptionActive)}
+                className={`${styles.langOption}${active ? ` ${styles.langOptionActive}` : ""}`}
               >
                 <span>{t(code === "es" ? "langEs" : "langEn")}</span>
                 {active && <CheckIcon />}

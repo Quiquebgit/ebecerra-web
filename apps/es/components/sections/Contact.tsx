@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import clsx from "clsx";
 import styles from "./Contact.module.css";
 
 type Status = "idle" | "sending" | "success" | "error";
@@ -186,11 +185,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className={clsx(
-                  styles.submitBtn,
-                  status === "success" && styles.submitBtnSuccess,
-                  status === "sending" && styles.submitBtnSending,
-                )}
+                className={`${styles.submitBtn}${status === "success" ? ` ${styles.submitBtnSuccess}` : ""}${status === "sending" ? ` ${styles.submitBtnSending}` : ""}`}
               >
                 {status === "success"
                   ? `✓ ${t("formSuccess").split(".")[0]}`
