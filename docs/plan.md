@@ -50,7 +50,7 @@
 ### A5 — Structured Data dinámico
 
 - [x] JSON-LD (Person, Organization, WebSite, Service) alimentado desde `siteSettings`
-- [ ] Verificar con Google Rich Results Test (pendiente en preview)
+- [x] Verificar con Google Rich Results Test — OK (2026-04-23): detecta "Empresas locales" y "Organización", ambos válidos con warnings no críticos. Warnings: falta `telephone` en Organización, y `postalCode`/`streetAddress` en PostalAddress. Omitidos intencionalmente (freelance sin dirección pública). Revisar si se añaden en el futuro.
 - [x] Extraer `Service` schema del JSON-LD desde docs `service` publicados
 
 **Riesgo principal:** Sanity down → cada sección debe degradar al fallback local de `messages/*.json` sin romper la home.
@@ -87,8 +87,8 @@ Orden recomendado: empezar por los grandes (Hero, Services) para validar la conv
 
 Ítems que quedaban sueltos antes de archivar el plan original.
 
-- [ ] `error.tsx` + `not-found.tsx` en `apps/es` con copy pro (solo existe `global-error.tsx`)
-- [ ] OG images dinámicas con `@vercel/og` (ni `api/og` ni `opengraph-image.tsx`)
+- [x] `error.tsx` + `not-found.tsx` en `apps/es` con copy pro (`app/(locale)/[locale]/error.tsx` + `app/not-found.tsx` con CSS Modules co-located)
+- [x] OG image dinámica con `next/og` (`app/opengraph-image.tsx`, runtime edge, 1200×630)
 - [ ] Auditoría Lighthouse ≥ 90 en Perf/A11y/Best/SEO contra `ebecerra.es` prod
 - [ ] Verificar CORS Sanity con dominios prod
 - [ ] Verificar webhook de Sanity revalidando `/` y `/en` tras publish real
