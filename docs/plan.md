@@ -90,7 +90,7 @@ Orden recomendado: empezar por los grandes (Hero, Services) para validar la conv
 - [x] `error.tsx` + `not-found.tsx` en `apps/es` con copy pro (`app/(locale)/[locale]/error.tsx` + `app/not-found.tsx` con CSS Modules co-located)
 - [x] OG image dinámica con `next/og` (`app/opengraph-image.tsx`, runtime edge, 1200×630)
 - [ ] Auditoría Lighthouse ≥ 90 en Perf/A11y/Best/SEO contra `ebecerra.es` prod
-- [ ] Verificar CORS Sanity con dominios prod
+- [x] Verificar CORS Sanity con dominios prod (ebecerra.es, www.ebecerra.es, localhost:3000, https://localhost:3000 — todos Allowed)
 - [ ] Verificar webhook de Sanity revalidando `/` y `/en` tras publish real
 
 ---
