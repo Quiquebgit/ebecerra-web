@@ -98,8 +98,19 @@
     "colSocialTitle": "social",
     "colCrossTitle": "ebecerra ecosystem",
     "legalPrivacy": "privacy",
+    "legalFaq": "faq",
     "copyright": "© {year} Enrique Becerra · Madrid",
     "ebecerraTech": "ebecerra.tech ↗",
     "piezasGame": "piezas · game ↗"
+  },
+  "faq": {
+    "metaTitle": "Frequently asked questions",
+    "metaDescription": "Timelines, payment terms, design revisions, maintenance, Kit Digital, NDAs and hosting. The questions freelancers and SMBs ask me before starting a web project.",
+    "kicker": "// FAQ",
+    "title": "Frequently asked questions",
+    "lead": "What people usually ask before we start. If your question isn't here, drop me a line and I reply within 24 business hours.",
+    "contactTitle": "Still have doubts?",
+    "contactLead": "Tell me your case and I'll give you a first idea of scope, no strings attached.",
+    "contactCta": "Write to me"
   }
 }

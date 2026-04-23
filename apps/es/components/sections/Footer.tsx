@@ -212,6 +212,13 @@ export default function Footer() {
           <span>{t("copyright", { year })}</span>
           <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
             <a
+              href="/faq"
+              style={{ color: "#78716c", textDecoration: "none" }}
+              className="footer-link"
+            >
+              {t("legalFaq")}
+            </a>
+            <a
               href="/privacidad"
               style={{ color: "#78716c", textDecoration: "none" }}
               className="footer-link"

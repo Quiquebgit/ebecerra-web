@@ -98,8 +98,19 @@
     "colSocialTitle": "social",
     "colCrossTitle": "ecosistema ebecerra",
     "legalPrivacy": "privacidad",
+    "legalFaq": "preguntas frecuentes",
     "copyright": "© {year} Enrique Becerra · Madrid",
     "ebecerraTech": "ebecerra.tech ↗",
     "piezasGame": "piezas · game ↗"
+  },
+  "faq": {
+    "metaTitle": "Preguntas frecuentes",
+    "metaDescription": "Plazos, formas de pago, revisiones de diseño, mantenimiento, Kit Digital, NDA y hosting. Lo que suelen preguntarme autónomos y PYMEs antes de arrancar un proyecto web.",
+    "kicker": "// FAQ",
+    "title": "Preguntas frecuentes",
+    "lead": "Lo que suelen preguntarme antes de arrancar. Si lo tuyo no está aquí, escríbeme y te respondo en 24 h laborables.",
+    "contactTitle": "¿Sigues con dudas?",
+    "contactLead": "Cuéntame tu caso y te doy una primera idea del alcance sin compromiso.",
+    "contactCta": "Escribirme"
   }
 }
