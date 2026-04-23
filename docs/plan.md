@@ -14,13 +14,14 @@
 
 ### A1 — Schemas base
 
-- [ ] `heroSection` singleton: kicker, title (con markup `[circle]`), lead, ctaPrimary, ctaSecondary, trustBadges[]
-- [ ] `siteSettings` singleton: metadata (title, descriptions, OG, Twitter, keywords), footerTagline, availability, email, linkedinUrl, location, responseTime, socialLinks[]
-- [ ] `serviceSectionMeta`, `processSectionMeta`, `casesSectionMeta`, `contactSectionMeta` singletons (kicker, title, lead + auditStrip en services)
-- [ ] Extender `profile` con `bio1`, `bio2`, `stats[]` (label, value)
-- [ ] `faqPage` singleton (metaTitle, metaDescription, title, lead, contactSectionTitle, contactSectionLead) + `faqItem` colección (question, answer, order, category)
-- [ ] `legalPage` colección: slug, title, metaDescription, content (localePortableText)
-- [ ] Deploy: `npx sanity schema deploy` desde Studio embebido
+- [x] `heroSection` singleton: kicker, title (con markup `[circle]`), lead, ctaPrimary, ctaSecondary, trustBadges[]
+- [x] `siteSettings` singleton: metadata (title, descriptions, OG, Twitter, keywords[localeString]), footer (tagline, availability, socialLinks[]). Contacto vive en `profile.contact`.
+- [x] `serviceSectionMeta`, `processSectionMeta`, `casesSectionMeta`, `contactSectionMeta` singletons (kicker, title, lead + auditStrip en services)
+- [x] Extender `profile` con `name`, `jobTitle`, `bio1`, `bio2`, `stats[]` (value, label), `contact` (email, linkedinUrl, location, responseTime)
+- [x] `faqPage` singleton (metaTitle, metaDescription, title, lead, contactSectionTitle, contactSectionLead, contactCta) + `faqItem` colección (question, answer, order, category)
+- [x] `legalPage` colección: slug, title, metaDescription, content (localePortableText), updatedAt
+- [x] Studio: `customStructure` con `documentId` fijo por singleton + `document.actions` filter bloqueando create/delete/duplicate/unpublish + `newDocumentOptions` filter en creationContext global
+- [x] Deploy: `npx sanity schema deploy` desde Studio embebido (20 types deployados en workspace `ebecerra-web`)
 
 ### A2 — Quick wins (ROI alto)
 
