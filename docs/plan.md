@@ -103,7 +103,7 @@ Orden recomendado: empezar por los grandes (Hero, Services) para validar la conv
 - [x] CORS Sanity con los 4 dominios
 - [x] Webhook adicional Sanity → `https://ebecerra.tech/api/revalidate/` (con trailing slash)
 - [x] SSL verificado
-- [ ] Easter eggs del SPA original reactivados en Hero (terminal)
+- [x] Easter eggs del SPA original reactivados en Hero (terminal) — TerminalHero ya portada en apps/tech con comandos interactivos
 - [ ] Comunicación pública (LinkedIn tech)
 
 ---
