@@ -1,0 +1,165 @@
+/* Process.module.css */
+.section {
+  padding: clamp(40px, 5vw, 72px) clamp(20px, 4vw, 56px);
+  border-bottom: 1px solid var(--border);
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+.kickerAccent {
+  color: var(--cta);
+}
+
+.heading {
+  font-size: clamp(32px, 4.2vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin: 0 0 16px;
+  max-width: 760px;
+}
+
+.lead {
+  max-width: 620px;
+  margin: 0 0 48px;
+  color: var(--text-secondary);
+}
+
+/* Desktop layout */
+.desktopLayout {
+  display: none;
+  position: relative;
+}
+
+.connector {
+  position: absolute;
+  top: 11px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 1px;
+  background: var(--border-strong);
+  z-index: 0;
+}
+
+.desktopGrid {
+  display: grid;
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile layout */
+.mobileLayout {
+  display: block;
+  position: relative;
+  padding-left: 32px;
+}
+
+.mobileTimeline {
+  position: absolute;
+  left: 11px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--border-strong);
+}
+
+.mobileStep {
+  position: relative;
+  padding-bottom: 36px;
+}
+
+.mobileStepLast {
+  position: relative;
+  padding-bottom: 0;
+}
+
+.mobileStepCircle {
+  position: absolute;
+  left: -28px;
+  top: 4px;
+}
+
+/* Shared step content */
+.step {
+  /* container for desktop step */
+}
+
+.stepCircleWrapper {
+  margin-bottom: 24px;
+}
+
+.stepHeading {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  transition: color 180ms var(--ease);
+}
+
+.stepHeadingMobile {
+  margin: 0 0 8px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  transition: color 180ms var(--ease);
+}
+
+.stepDesc {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.stepDescMobile {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.step:hover .stepHeading,
+.mobileStep:hover .stepHeadingMobile,
+.mobileStepLast:hover .stepHeadingMobile {
+  color: var(--cta);
+}
+
+/* StepCircle subcomponent */
+.stepCircle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--cta);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--cta);
+}
+
+@media (min-width: 900px) {
+  .desktopLayout {
+    display: block;
+  }
+
+  .mobileLayout {
+    display: none;
+  }
+}

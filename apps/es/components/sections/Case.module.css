@@ -1,0 +1,168 @@
+/* Case.module.css */
+.section {
+  padding: clamp(40px, 5vw, 72px) clamp(20px, 4vw, 56px);
+  background: var(--surface-subtle);
+  border-bottom: 1px solid var(--border);
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+.heading {
+  font-size: clamp(32px, 4.2vw, 56px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin: 0 0 16px;
+  max-width: 760px;
+}
+
+.lead {
+  max-width: 720px;
+  margin: 0 0 40px;
+  color: var(--text-secondary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: clamp(24px, 3.5vw, 32px) clamp(22px, 3vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--cta);
+  box-shadow: var(--sh-2);
+}
+
+.cardSector {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--cta);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+/* Metrics chips */
+.metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 4px;
+}
+
+.metricChip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--surface-subtle);
+  border: 1px solid var(--border);
+  padding: 3px 9px;
+  border-radius: var(--r-sm);
+  letter-spacing: 0.02em;
+}
+
+.metricLabel {
+  color: var(--text-muted);
+}
+
+.metricValue {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Translates-to footer */
+.translatesFooter {
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.translatesLabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--cta);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Block subcomponent */
+.blockLabel {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.blockLabelAccent {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--cta);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.blockText {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+.blockTextAccent {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--text);
+  line-height: 1.65;
+  font-weight: 500;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
+}
