@@ -60,12 +60,9 @@
 
 **Objetivo:** eliminar `style={{...}}` de los componentes.
 
-### B1 — Decisión de estrategia (bloqueante)
+**Decisión (2026-04-23):** **CSS Modules co-located.** Cada componente con su `*.module.css` en la misma carpeta. Consumen tokens de `packages/tokens/*.css` vía `var(--…)`. Tailwind v4 sigue presente pero no se usa para composición. Convenciones en el skill `/css-conventions`.
 
-- [ ] Elegir: **CSS modules** (`.module.css` co-located con cada componente) vs **Tailwind utilities** (usar `bg-cta text-text-secondary` ya mapeadas en `globals.css` vía `@theme inline`)
-- [ ] Establecer convenciones: dónde va, naming, breakpoints
-
-### B2 — Refactor por componente
+### B1 — Refactor por componente
 
 Orden recomendado: empezar por los grandes (Hero, Services) para validar la convención antes de propagarla.
 
@@ -128,7 +125,6 @@ Nada bloqueante. Ir sacando si emerge necesidad.
 
 ## Decisiones abiertas
 
-- **Estrategia CSS para Fase B** — modules vs Tailwind utilities (bloqueo B1).
 - **Kickers y números de sección** (`// 01. Servicios`) — ¿Sanity o messages? Tendencia: messages (UI chrome numerada).
 - **Revalidate window por contenido** — singletons estables: `revalidate: 86400` (24h). FAQ/contenido editorial: `revalidate: 1800` (30min). Confirmar en A2.
 - **Metadata dinámica vs estática** — `generateMetadata` async contra Sanity añade una query por request (ISR mitiga). Aceptable.

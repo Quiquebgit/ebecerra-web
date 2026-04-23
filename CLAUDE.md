@@ -1,235 +1,152 @@
 # CLAUDE.md — ebecerra-web
 
-## Contexto del proyecto
+## Contexto
 
 Portfolio personal de Enrique Becerra, Tech Architect Lead en VASS y especialista en Magnolia CMS.
 
-**Estado actual (2026-04-23, post-cutover):** `main` es el **monorepo npm workspaces + Turborepo** con dos apps sobre un único Sanity compartido, **ya en producción**:
+**Estado (2026-04-23, post-cutover):** `main` es el **monorepo** en producción con dos apps sobre un único Sanity compartido:
 
-- **[`apps/es`](apps/es/)** → `ebecerra.es` — modo pro, escaparate comercial para captar clientes de desarrollo web (autónomos y PYMEs). Home renderizada al 100% con 8 secciones. **Servicios (2026-04-23):** 4 cards en grid 2x2 — Web profesional (900 €), Web editable (1.500 €), Rescate (2.500 €), Mantenimiento (60 €/mes). Auditoría eliminada del catálogo de pago. Sanity wireado para services/process/profile con fallback seguro; cases hoy se sirven del fallback estático. `/api/contact` con Resend funcional.
-- **[`apps/tech`](apps/tech/)** → `ebecerra.tech` — modo geek, identidad técnica para comunidad, reclutadores y contactos LinkedIn. Next.js completo con la estética geek CV-style (8 secciones: Nav · Hero · About · Experience · Skills · Projects · Contact · Footer). Nav con monograma bracket-B neón (`logo-bracket-b-neon.svg`) + `eBecerra.tech` tipográfico; menú colapsa a hamburguesa por debajo de `lg`. Terminal del Hero con input siempre visible y placeholder parpadeante hasta foco. Form de contacto portado de Formspree a Resend (`/api/contact` con idempotency + honeypot, paridad con `apps/es`).
+- **[`apps/es`](apps/es/)** → `ebecerra.es` — modo pro, escaparate comercial para autónomos/PYMEs. Home con 8 secciones. 4 servicios en grid 2x2 (Web profesional 900 €, Web editable 1.500 €, Rescate 2.500 €, Mantenimiento 60 €/mes). Sanity wired para services/process/profile; cases desde fallback estático. Form de contacto con Resend.
+- **[`apps/tech`](apps/tech/)** → `ebecerra.tech` — modo geek. Next.js CV-style (8 secciones). Pendiente cutover DNS (plan Fase D).
 
-El "toggle geek mode" del plan original se sustituye por dominio: cada URL entra en su modo por defecto.
+El "toggle geek mode" original se sustituyó por dominio: cada URL entra en su modo por defecto.
 
-**Código legacy del SPA React 19 + Vite archivado en [`_legacy/`](_legacy/)** — solo consultable. Detalles en el skill `/legacy-vite-codebase`.
+Código legacy del SPA React 19 + Vite archivado en [`_legacy/`](_legacy/). Tags `archive/nextjs-geek-pure` y `archive/migracion-nextjs-mixed` permiten rollback.
 
-**Archivo histórico:** tags `archive/nextjs-geek-pure` (estado Next.js pre-split, single-app, commit `ba17925`) y `archive/migracion-nextjs-mixed` (estado con Fase B de mix geek+pro, commit `3763044`) permiten rollback si hace falta.
+**Planificación:**
+- Plan activo con checkboxes: [`docs/plan.md`](docs/plan.md).
+- Log de decisiones y sesiones: [`docs/progress.md`](docs/progress.md).
+- Plan y progreso originales (Fases 0–9, ya cerradas): [`docs/archive/`](docs/archive/).
 
-Plan activo con checkboxes: [`docs/plan.md`](docs/plan.md).
-Log de decisiones y sesiones: [`docs/progress.md`](docs/progress.md).
-Plan y progreso originales (Fases 0–9 de la migración, ya cerradas): [`docs/archive/`](docs/archive/).
+---
 
 ## Stack
 
-**Monorepo (rama `main`, en producción):**
-- **Root:** npm workspaces + Turborepo 2.x. `packageManager: "npm@10.4.0"`.
-- **apps/es** y **apps/tech:** Next.js 16 + TypeScript + Tailwind v4 + next-intl 4. **Ambas** con Sanity v5 + Resend en `/api/contact` (idempotency + honeypot). apps/tech expone queries CV-style; apps/es expone queries comerciales (`getFeaturedServices`, `getProcessSteps`, `getFeaturedCaseForHome`, `getProfileFeatures`).
-- **packages/sanity-schemas:** `@ebecerra/sanity-schemas` — tipos y schemas compartidos (experience, skill, techTag, project, profile, service, processStep, caseStudy, locale).
-- **packages/sanity-client:** `@ebecerra/sanity-client` — cliente Sanity + queries GROQ + tipos TS compartidos.
-- **packages/tokens:** `pro.css` y `geek.css` como CSS con custom properties (ver sección "Design tokens").
+- **Monorepo:** npm workspaces + Turborepo 2.x. `packageManager: "npm@10.4.0"`.
+- **apps/es y apps/tech:** Next.js 16 + TypeScript + Tailwind v4 + next-intl 4 + Sanity v5 + Resend.
+- **packages/sanity-schemas:** `@ebecerra/sanity-schemas` — schemas y tipos compartidos (experience, skill, techTag, project, profile, service, processStep, caseStudy, locale).
+- **packages/sanity-client:** `@ebecerra/sanity-client` — cliente + queries GROQ + tipos TS.
+- **packages/tokens:** `pro.css` (apps/es) y `geek.css` (apps/tech).
+- **Sanity `gdtxcn4l` / dataset `production`** — único, compartido. Studio embebido en `apps/es/app/(misc)/studio/[[...tool]]`.
 
-**Sanity project `gdtxcn4l`, dataset `production`** — único, compartido por ambas apps. Studio embebido en `apps/es/app/(misc)/studio/[[...tool]]`.
+---
 
-**Legacy archivado en [`_legacy/`](_legacy/):** React 19 + Vite 8 + JS vanilla + CSS co-located. Solo consultable. Detalles en el skill `/legacy-vite-codebase`.
-
-**Destino:** mismo monorepo con packages adicionales (`ui`, `utils` cuando se necesiten), migración opcional de npm → pnpm workspaces, dos proyectos Vercel con `turbo-ignore` como Ignored Build Step apuntando al mismo repo con Root Directory distinto (`apps/es` en producción, `apps/tech` pendiente de cutover DNS).
-
-## Comandos monorepo
-
-Desde la raíz del repo:
+## Comandos
 
 | Comando | Qué hace |
 |---|---|
-| `npm install` | Instala dependencias de todos los workspaces (apps + packages). Enlaza packages como symlinks en `node_modules/@ebecerra/*`. |
-| `npm run dev:es` | Arranca dev server de `apps/es` (pro). |
-| `npm run dev:tech` | Arranca dev server de `apps/tech` (geek). |
-| `npm run build` | Turborepo orquesta builds paralelos de ambas apps + sus packages. |
-| `npm run lint` | Lint de todos los workspaces via Turborepo. |
-| `npm run typecheck` | Typecheck de todos los workspaces via Turborepo. |
+| `npm install` | Instala workspaces + linkea `@ebecerra/*`. |
+| `npm run dev:es` | Dev de `apps/es` (pro). |
+| `npm run dev:tech` | Dev de `apps/tech` (geek). |
+| `npm run build` | Turborepo orquesta builds paralelos. |
+| `npm run lint` / `typecheck` | Todos los workspaces. |
 
-Desde dentro de una app específica: `npm run dev`, `npm run build`, etc. (scripts estándar de Next.js).
+**Dependencias:**
+- Específica de una app → `npm install <pkg> -w @ebecerra/es` (o `@ebecerra/tech`).
+- De workspace → `"@ebecerra/sanity-client": "*"` en el `package.json` del consumidor.
 
-**Reglas al añadir dependencias:**
-- Si es específica de una app → `npm install <pkg> -w @ebecerra/es` (o `@ebecerra/tech`).
-- Si es compartida (tipo `zod`, `clsx`) → decidir si va en cada app o se extrae a un package.
-- Dependencias de workspace: `"@ebecerra/sanity-client": "*"` en el `package.json` del consumidor.
+---
 
-## Convenciones de i18n (Fase 4 cerrada 2026-04-21, split monorepo 2026-04-22)
+## Políticas de trabajo
 
-Sitio bilingüe **ES/EN** con `next-intl`. **Mismas convenciones en ambas apps** (`apps/es` y `apps/tech`) — los paths de ejemplo usan `apps/tech/...` como canonical, `apps/es` tiene la misma estructura. Detalles en el skill `/i18n-next-intl`.
+Estas son las reglas que aplican a todo cambio en el proyecto. Ante duda, seguirlas por defecto.
 
-**Routing:**
-- ES sin prefijo en `/` (locale default).
-- EN con prefijo en `/en`.
-- `localePrefix: "as-needed"` definido en [`apps/tech/i18n/routing.ts`](apps/tech/i18n/routing.ts) y [`apps/es/i18n/routing.ts`](apps/es/i18n/routing.ts).
-- Proxy en [`apps/tech/proxy.ts`](apps/tech/proxy.ts) (Next 16 renombró `middleware` → `proxy`) excluye `api`, `studio`, `playground`, `_next`, `_vercel`, `piezas-game`, `brand`, `.well-known` y archivos con extensión.
+### 1. Contenido nuevo siempre en Sanity
 
-**Estructura `app/`:**
-- `app/(locale)/[locale]/` — root layout con html/body + `NextIntlClientProvider`. Página home aquí.
-- `app/(misc)/` — root layout con html/body `lang="es"` estático para rutas no-localizadas (`/studio`, `/playground/annotations`).
-- `app/api/revalidate/route.ts` — route handler (sin layout).
-- Favicons y `globals.css` en raíz de `app/`.
-- **No existe `app/layout.tsx` ni `app/page.tsx`** — múltiples root layouts vía route groups.
+Si es copy editorial (títulos, leads, bios, FAQ, info de contacto, metadata, trust badges…), **nace en Sanity** — schema + doc publicado + query con fallback. Nunca solo en `messages/*.json` o hardcoded. El fallback es red de seguridad, no fuente primaria.
 
-**Textos UI:**
-- Todos los strings en `apps/<app>/messages/es.json` y `apps/<app>/messages/en.json`.
-- Namespaces dependen del app (cada una tiene sus propias secciones).
-- Server components: `getTranslations("namespace")`. Client components: `useTranslations("namespace")`.
-- **Añadir un string nuevo:** añadirlo a AMBOS archivos ES y EN del app correspondiente antes de usarlo. `next-intl` falla si falta una key.
+UI chrome (labels de formulario, placeholders, estados "Enviando…", aria-labels, separadores, copyright) se queda en `messages/*.json`. Ante duda: ¿el editor querría cambiarlo sin redeploy? Sí → Sanity.
 
-**Contenido Sanity (packages compartidos):**
-- Tipos `localeString` y `localeText` en [`packages/sanity-schemas/schemas/locale.ts`](packages/sanity-schemas/schemas/locale.ts) (object con `es` required + `en` opcional).
-- Plugin `@sanity/language-filter` configurado en `apps/<app>/sanity.config.ts` — permite al editor filtrar por idioma en Studio.
-- Queries GROQ proyectan con `coalesce(field[$locale], field.es, field)` — fallback automático a ES si no hay traducción. Ver [`packages/sanity-client/queries.ts`](packages/sanity-client/queries.ts).
-- Fallback en `apps/<app>/lib/content.ts` con `getFallback(locale)` — cada app tiene su propio contenido fallback (tech es CV-style, es será commercial).
-- **Añadir un campo traducible:** cambiar tipo a `localeString`/`localeText` en el schema del package → `npx sanity schema deploy` → migrar docs existentes (unset+set por vía MCP o similar).
-- **Ambas apps importan** `@ebecerra/sanity-schemas` y `@ebecerra/sanity-client` — una sola fuente de verdad para schemas y queries.
+Flujo operativo: skill `/sanity-content-flow`.
 
-**Selector de idioma:** botón ES/EN en `apps/<app>/components/sections/Nav.tsx` usando `useRouter`/`usePathname` de `apps/<app>/i18n/navigation.ts`. Cookie `NEXT_LOCALE` persiste la preferencia.
+### 2. Listas como arrays, no campos nombrados
 
-**SEO bilingüe:**
-- `generateMetadata` dinámico por locale en `(locale)/[locale]/layout.tsx` de cada app.
-- `alternates.languages` → hreflang automático en HTML.
-- `apps/<app>/app/sitemap.ts` lista ambas URLs con alternates.
-- `apps/<app>/app/robots.ts` excluye `/studio`, `/api`, `/playground`.
+Si hay N items de la misma forma (trust badges, stats, social links, FAQ items, steps), **un campo `array` en el schema y un `.map()` en React.** Nunca `metaExperience` / `metaResponse` / `metaQuality` paralelos — es deuda que se paga al añadir/reordenar.
 
-**Revalidación:** `apps/<app>/app/api/revalidate/route.ts` revalida `/` y `/en` en cada hit del webhook de Sanity.
+### 3. CSS fuera del JSX
+
+No `style={{…}}`. Todo estilo de composición va a un **`*.module.css` co-located** con el componente. Tokens vía `var(--…)` desde `packages/tokens/*.css`. Tailwind v4 disponible pero **no para composición**.
+
+Convenciones: skill `/css-conventions`.
+
+### 4. Bilingüe desde el día uno
+
+Todo string nuevo se escribe **ES + EN en el mismo commit**. En Sanity: `localeString`/`localeText` con ambos campos. En `messages/*.json`: añadir la key a `es.json` y `en.json` antes de usarla (next-intl falla si falta una).
+
+### 5. Fallback obligatorio en queries Sanity
+
+Cada query en `page.tsx` lleva `.catch(() => fallback)`. La home no se cae si Sanity falla o está vacío.
+
+### 6. Verdad del contenido
+
+En `apps/es` (web comercial bajo nombre real): precios, stacks, cifras, clientes **reales o nada**. Fuente: [`docs/archive/cv-pro.md`](docs/archive/cv-pro.md) anonimizado. Clientes siempre anonimizados (sector + tipo de solución, nunca el nombre). Nunca inventar datos concretos.
+
+---
 
 ## Permisos y autonomía
 
-Autorización completa para:
-- Crear, modificar y eliminar archivos en el proyecto.
-- Instalar y desinstalar dependencias (`npm install`, `npm uninstall`).
-- Hacer commits y push sin pedir confirmación previa (ver skill `/git-workflow`).
+- Crear, modificar y eliminar archivos del proyecto.
+- Instalar y desinstalar dependencias.
+- Hacer commits y push sin confirmar (skill `/git-workflow`).
 - Refactorizar dentro del alcance de la tarea.
 
-## Identidad visual
-
-**Logo y paleta cerrados (2026-04-19).**
-
-- **Paleta modo pro:** stone warm neutrals + verde bosque `#047857` como único acento. Documentación en [`docs/design-tokens-pro.md`](docs/design-tokens-pro.md); CSS consumible desde código en [`packages/tokens/pro.css`](packages/tokens/pro.css). Se usa en `apps/es`.
-- **Paleta modo geek (existente):** fondo `#080808`, verde neón `#00ff88`, azul `#00ccff`. CSS consumible en [`packages/tokens/geek.css`](packages/tokens/geek.css) con variables prefijadas `--geek-*` para coexistir con pro sin colisión. Base para `apps/tech`.
-- **Logo:** monograma eB en 4 piezas con swoosh. Kit completo en `apps/<app>/public/brand/` (duplicado en ambas apps para que cada Next.js sirva los assets desde su propio `public/`).
-- **Monograma `<B>` (bracket-B):** variante alternativa compacta usada en el Nav del modo geek. Cuatro fills disponibles en `apps/tech/public/brand/`: `logo-bracket-b-neon.svg` (`#00ff88`, usado en el Nav), `logo-bracket-b-green.svg` (`#047857`, pro), `logo-bracket-b-white.svg` y `logo-bracket-b-black.svg`. Fuente editable del path en [`docs/logo-exploration/logo-bracket-b-draft.svg`](docs/logo-exploration/logo-bracket-b-draft.svg).
-- **Favicon:** en `apps/<app>/app/icon0.svg` (+ `.ico`, PNGs en `apps/<app>/app/` y `apps/<app>/public/brand/`). `apps/tech/app/icon0.svg` usa el `<B>` completo con brackets en `#00ff88`; `apps/es` conserva la B sin brackets en verde bosque.
-- **Backup app icons** (eB completo sobre verde) en [`docs/logo-exploration/app-icons-eB-backup/`](docs/logo-exploration/app-icons-eB-backup/) para cuando se empaquete como app móvil.
-
-**Docs de referencia obligatoria antes de tocar marca:**
-- [`docs/brand-logo.md`](docs/brand-logo.md) — reglas de uso, kit, pendientes.
-- [`docs/logo-exploration/brand-manual.html`](docs/logo-exploration/brand-manual.html) — manual visual consultable.
-
-## Design tokens — estructura y handoff
-
-**`packages/tokens/`** es la fuente de verdad CSS para ambas identidades.
-
-| Archivo | Identidad | Consumo |
-|---|---|---|
-| [`packages/tokens/pro.css`](packages/tokens/pro.css) | modo pro (`.es`) | variables sin prefijo: `--cta`, `--bg`, `--text`, `--fs-h1`, `--s-5`, etc. |
-| [`packages/tokens/geek.css`](packages/tokens/geek.css) | modo geek (`.tech`) | variables con prefijo `--geek-*` |
-
-**Integración por app:**
-- **apps/es** → [`apps/es/app/globals.css`](apps/es/app/globals.css) importa `pro.css` (`@import "../../../packages/tokens/pro.css"`) y re-expone los tokens como utilities de Tailwind v4 vía bloque `@theme inline` (`--color-cta`, `--color-bg`, `--color-text-muted`, etc.). Permite usar clases `bg-cta`, `text-text-secondary`, `border-border-strong`, etc.
-- **apps/tech** → [`apps/tech/app/globals.css`](apps/tech/app/globals.css) mantiene su paleta geek inline (valores literales `#080808`, `#00ff88`, etc.) tal cual estaba antes del split. No consume `packages/tokens/geek.css` aún — se integrará en Fase 5+ cuando se homogeneice con la estructura pro.
-
-**Handoff de Claude Design:** [`docs/design-handoff-2026-04-22/`](docs/design-handoff-2026-04-22/) contiene el bundle exportado desde [claude.ai/design](https://claude.ai/design) tras la sesión de diseño del modo pro (home completa con las 8 secciones comerciales). Incluye:
-- `project/index.html` — home como HTML/CSS/JS standalone (2178 líneas) con todos los tokens y la estructura final.
-- `chats/chat1.md` — transcript de la conversación con Claude Design.
-- `README.md` — instrucciones para agentes que implementan el diseño.
-
-**Al implementar nuevos componentes pro** consulta primero `docs/design-handoff-2026-04-22/project/index.html` para ver el diseño de referencia validado. Es fuente de verdad visual por encima de cualquier otro mockup.
-
-**rough-notation** ya está instalado (`rough-notation@0.5.1`, vanilla JS). Se usa para anotaciones hand-drawn en verde sobre palabras clave (hero, métricas, "8 años"). En React se envuelve con un pequeño hook cuando se implemente el Hero.
-
-## Landing de Piezas — aislada
-
-[`apps/es/public/piezas-game/`](apps/es/public/piezas-game/) es una **landing HTML estática independiente** servida en `ebecerra.es/piezas-game/` (dominio pro). Tráfico activo desde Play Store — **tocar con cuidado**. Solo existe en `apps/es` porque es tráfico comercial que debe vivir en el dominio `.es`.
-
-Detalles (estructura, paleta propia, routing, reglas de edición): skill `/piezas-landing`.
+---
 
 ## Lo que NO hacer sin preguntar
 
 - Cambiar la estructura de carpetas raíz del workspace.
-- Instalar librerías de UI grandes (MUI, Chakra, etc.) sin justificación.
+- Instalar librerías de UI grandes (MUI, Chakra, etc.).
 - Refactorizar secciones no relacionadas con la tarea en curso.
 - Modificar `@vercel/analytics` o `@vercel/speed-insights`.
-- Tocar routing de `/piezas-game/*` sin validar en preview (ver `/piezas-landing`).
-- Desviarse del stack destino definido en el roadmap sin consultarlo antes.
+- Tocar routing de `/piezas-game/*` sin validar en preview (skill `/piezas-landing`).
+- Desviarse del plan activo sin consultarlo.
+- Cambiar el kit de marca (logos, favicons, paleta) — decisión cerrada.
 
-## Deployment y webhooks
+---
 
-**Revalidación ISR Sanity → web** (`/api/revalidate`) — configurado 2026-04-21. El mismo valor de `SANITY_REVALIDATE_SECRET` vive en:
-  1. `apps/<app>/.env.local` (dev) — cada app tiene su propio fichero.
-  2. Vercel (Production + Preview + Development) en ambos proyectos (ebecerra-es y ebecerra-tech).
-  3. Webhook de Sanity Studio en [manage.sanity.io](https://manage.sanity.io) → proyecto `gdtxcn4l` → API → Webhooks, como `?secret=<valor>` en la URL `https://ebecerra.es/api/revalidate` (y opcionalmente también apuntando a `ebecerra.tech` cuando se deploye).
-- Al llegar un POST válido, revalida `/` y `/en` (ver `apps/<app>/app/api/revalidate/route.ts`).
-- Si se rota el secret, hay que actualizarlo en los 3 sitios a la vez (y ambas apps si ambas tienen webhook).
+## Configuración de correo — ebecerra.es
 
-Formato de instrucciones completo en `apps/<app>/.env.local.example`.
+- **Cuenta principal:** `e.becerra@ebecerra.es` — real, IMAP en Gmail.
+- **Aliases en DonDominio** (redirigen a la principal): `contacto@`, `info@`, `legal@`.
+- **Notas:** DNS en Vercel (no DonDominio). MX pendiente de configurar. `no-reply@` no existe, solo se usa como remitente.
 
-## Configuración de correo - ebecerra.es
+---
 
-**Cuenta principal:**
-- `e.becerra@ebecerra.es` — cuenta real, gestionada vía IMAP en Gmail.
+## Skills
 
-**Aliases configurados en DonDominio** (todos redirigen a la cuenta principal):
-- `contacto@ebecerra.es` — contacto general y formulario del portfolio.
-- `info@ebecerra.es` — consultas formales.
-- `legal@ebecerra.es` — avisos legales y privacidad.
+Invocar con `/nombre`. Organizadas por cuándo usarlas.
 
-**Notas:**
-- DNS gestionados desde Vercel, no desde DonDominio.
-- Registro MX pendiente de configurar en Vercel para activar el correo.
-- `no-reply@ebecerra.es` no existe como alias, se usa solo como remitente en envíos automáticos de apps.
+### Específicas de este proyecto
 
-## Skills disponibles
+| Skill | Cuándo |
+|---|---|
+| `/git-workflow` | Commits y push (workaround heredoc, convenciones). |
+| `/sanity-content-flow` | Crear/editar/publicar contenido en Sanity, modificar schemas, patchear vía MCP. |
+| `/css-conventions` | Escribir o portar estilos. CSS Modules co-located. |
+| `/design-tokens` | Paleta, tokens CSS, rough-notation, handoff de Claude Design. |
+| `/brand-identity` | Logos, favicons, OG images, kit de marca. |
+| `/deployment-sanity-webhook` | Vercel, dominios, env vars, webhooks Sanity, CORS. |
+| `/i18n-next-intl` | Añadir strings traducibles, routing por locale, metadata bilingüe. |
+| `/piezas-landing` | Editar `public/piezas-game/` o su routing. |
+| `/legacy-vite-codebase` | Consultar convenciones del SPA archivado en `_legacy/`. |
 
-Invocar con `/nombre-del-skill`. Todas instaladas en `.claude/skills/`.
-
-### Skills propias del proyecto
-
-| Skill | Cuándo usarla |
-|-------|---------------|
-| `/git-workflow` | Al hacer commits o push (workaround heredoc, convenciones de mensajes) |
-| `/piezas-landing` | Al editar `public/piezas-game/` o el routing `/piezas-game/*` |
-| `/legacy-vite-codebase` | Al consultar convenciones de la Vite legacy en `main` (o al portar detalles al modo geek de `apps/tech`) |
-| `/i18n-next-intl` | Al añadir strings traducibles, crear páginas nuevas, modificar schemas Sanity bilingües o tocar routing por locale |
-
-### Skills genéricas heredadas
+### Genéricas de uso habitual
 
 | Skill | Uso |
-|-------|-----|
-| `/adapt` | Ajustes de responsive design |
-| `/animate` | Microinteracciones y transiciones |
-| `/audit` | Accesibilidad y rendimiento (Lighthouse) |
-| `/simplify` | Revisar código cambiado por calidad y reuso |
-| `/commit` | Crear commits con formato correcto |
+|---|---|
+| `/simplify` | Revisar código cambiado por calidad y reuso. |
+| `/next-best-practices` | Código Next.js App Router (RSC, Server Actions, routing). |
+| `/next-cache-components` | Caching, ISR, revalidación. |
+| `/vercel-react-best-practices` | Patrones React 19 (Suspense, hooks, transiciones). |
+| `/sanity-best-practices` | Schemas, GROQ, TypeGen, Presentation. |
+| `/content-modeling-best-practices` | Referenciar vs embeber, naming, i18n en Sanity. |
+| `/seo-aeo-best-practices` | Metadata, schema.org, AEO. |
+| `/seo-audit` | Auditoría SEO on-page. |
+| `/resend` | Email transaccional (gotchas de idempotency, templates). |
+| `/deploy-to-vercel` | Deploy, env vars, dominios en Vercel. |
+| `/typescript-advanced-types` | Genéricos, utility types, inferencia. |
+| `/frontend-design` | Diseño de componentes o layouts. |
+| `/web-design-guidelines` | Revisar UI contra guidelines de accesibilidad y UX. |
+| `/content-strategy` | Planificar copy de servicios, casos, CTAs. |
 
-### Skills para la migración a Next.js + Sanity
-
-**Qué skill usar según la tarea:**
-
-| Tarea | Skill |
-|-------|-------|
-| Diseñar o revisar layout, jerarquía visual y spacing de una sección | `/frontend-design` |
-| Auditar UI/UX y coherencia visual de páginas completas | `/web-design-guidelines` |
-| Generar paleta dual profesional/geek y tokens CSS | `/theme-factory` |
-| Crear mockups rápidos o bocetos visuales antes de implementar | `/canvas-design` |
-| Montar design system con Tailwind (tokens, utilidades, variantes) | `/tailwind-design-system` |
-| Instalar, componer o personalizar componentes shadcn/ui | `/shadcn` |
-| Escribir o revisar código Next.js App Router (RSC, Server Actions, routing) | `/next-best-practices` |
-| Configurar caching, ISR, revalidación y streaming en Next.js | `/next-cache-components` |
-| Aplicar patrones React 19 (Suspense, hooks nuevos, transiciones) | `/vercel-react-best-practices` |
-| Tipar genéricos avanzados, utility types e inferencia en TS | `/typescript-advanced-types` |
-| Diseñar schemas Sanity (tipos, referencias, validaciones, GROQ) | `/sanity-best-practices` |
-| Modelar contenido: referenciar vs embeber, naming, i18n en Sanity | `/content-modeling-best-practices` |
-| Optimizar contenido Sanity para SEO y AI Engine Optimization | `/seo-aeo-best-practices` |
-| Auditar SEO on-page (metadata, hreflang, schema.org, Core Web Vitals) | `/seo-audit` |
-| Redactar copy de servicios, casos de estudio y CTAs de conversión | `/content-strategy` |
-| Integrar envío de emails transaccionales (formulario de contacto) | `/resend` |
-| Configurar deploys, preview URLs, env vars y dominios en Vercel | `/deploy-to-vercel` |
-
-**Reglas de uso:**
-- Antes de empezar una fase del roadmap, revisar qué skills aplican.
-- Si una tarea toca varias áreas, invocar en orden de dependencia (ej: `/theme-factory` → `/tailwind-design-system` → `/frontend-design`).
-- Las skills de Sanity son críticas en Fase 3.
-- Añadir más skills: `npx skills add <owner/repo@skill> -y` dentro del proyecto.
+Añadir más skills: `npx skills add <owner/repo@skill> -y` dentro del proyecto.
