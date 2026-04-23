@@ -44,8 +44,7 @@ export async function POST(request: NextRequest) {
       revalidatePath(`/en/${slug}`, "page");
       revalidated.push(`/${slug}`, `/en/${slug}`);
     } else {
-      revalidatePath("/", "page");
-      revalidatePath("/en", "page");
+      revalidatePath("/", "layout");
       revalidated.push("/", "/en");
     }
 
