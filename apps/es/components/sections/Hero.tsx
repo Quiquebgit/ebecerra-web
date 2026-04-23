@@ -1,10 +1,26 @@
+import { Fragment } from "react";
 import { getTranslations } from "next-intl/server";
 import AnnotatedText from "@/components/AnnotatedText";
 import LogoMark from "@/components/LogoMark";
+import type { HeroSection } from "@ebecerra/sanity-client";
 import styles from "./Hero.module.css";
 
-export default async function Hero() {
+type Props = {
+  sanityData?: HeroSection | null;
+};
+
+export default async function Hero({ sanityData }: Props) {
   const t = await getTranslations("hero");
+
+  const kicker = sanityData?.kicker ?? t("kicker");
+  const title = sanityData?.title ?? t("title");
+  const lead = sanityData?.lead ?? t("lead");
+  const ctaPrimary = sanityData?.ctaPrimary ?? t("ctaPrimary");
+  const ctaSecondary = sanityData?.ctaSecondary ?? t("ctaSecondary");
+  const trustBadges =
+    sanityData?.trustBadges?.length
+      ? sanityData.trustBadges
+      : [t("metaExperience"), t("metaResponse"), t("metaQuality"), t("metaLocation")];
 
   return (
     <section
@@ -17,35 +33,34 @@ export default async function Hero() {
           <div className={styles.kicker}>
             <span className={styles.kickerDot} />
             <span className={styles.kickerText}>
-              {t("kicker").replace(/^\/\/\s*/, "")}
+              {kicker.replace(/^\/\/\s*/, "")}
             </span>
           </div>
           <h1
             id="hero-heading"
             className={styles.heading}
           >
-            <AnnotatedText text={t("title")} />
+            <AnnotatedText text={title} />
           </h1>
           <p className={`lead ${styles.lead}`}>
-            {t("lead")}
+            {lead}
           </p>
           <div className={styles.ctas}>
             <a href="#contacto" className={styles.ctaPrimary}>
-              → {t("ctaPrimary")}
+              → {ctaPrimary}
             </a>
             <a href="#servicios" className={styles.ctaSecondary}>
-              {t("ctaSecondary")}
+              {ctaSecondary}
             </a>
           </div>
 
           <div className={styles.metaStrip}>
-            <span>{t("metaExperience")}</span>
-            <span aria-hidden="true">·</span>
-            <span>{t("metaResponse")}</span>
-            <span aria-hidden="true">·</span>
-            <span>{t("metaQuality")}</span>
-            <span aria-hidden="true">·</span>
-            <span>{t("metaLocation")}</span>
+            {trustBadges.map((badge, i) => (
+              <Fragment key={i}>
+                {i > 0 && <span aria-hidden="true">·</span>}
+                <span>{badge}</span>
+              </Fragment>
+            ))}
           </div>
         </div>
 

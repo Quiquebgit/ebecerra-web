@@ -5,6 +5,8 @@ import {
   getFeaturedServices,
   getProcessSteps,
   getProfileFeatures,
+  getHeroSection,
+  getProfileContact,
 } from "@ebecerra/sanity-client";
 import Nav from "@/components/sections/Nav";
 import Hero from "@/components/sections/Hero";
@@ -26,12 +28,12 @@ export default async function Home({
   setRequestLocale(locale);
   const fallback = getFallback(locale);
 
-  // Sanity en paralelo con fallback seguro: cualquier error de red o
-  // esquema no rompe la home — simplemente se usa el contenido local.
-  const [services, processSteps, profileFeatures] = await Promise.all([
+  const [heroData, services, processSteps, profileFeatures, contactData] = await Promise.all([
+    getHeroSection(locale).catch(() => null),
     getFeaturedServices(locale).catch(() => []),
     getProcessSteps(locale).catch(() => []),
     getProfileFeatures(locale).catch(() => null),
+    getProfileContact(locale).catch(() => null),
   ]);
 
   const resolvedServices =
@@ -44,12 +46,12 @@ export default async function Home({
     <>
       <Nav />
       <main id="main">
-        <Hero />
+        <Hero sanityData={heroData} />
         <Services services={resolvedServices} />
         <About features={resolvedFeatures} />
         <Case cases={fallback.cases} />
         <Process steps={resolvedProcess} />
-        <Contact />
+        <Contact contactData={contactData} />
       </main>
       <Footer />
     </>

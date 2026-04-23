@@ -75,6 +75,31 @@ export type CaseStudySummary = {
   featured: boolean;
 };
 
+export type HeroSection = {
+  kicker: string | null;
+  title: string | null;
+  lead: string | null;
+  ctaPrimary: string | null;
+  ctaSecondary: string | null;
+  trustBadges: string[];
+};
+
+export type SiteSettingsMeta = {
+  title: string | null;
+  titleTemplate: string | null;
+  description: string | null;
+  ogDescription: string | null;
+  twitterDescription: string | null;
+  keywords: string[];
+};
+
+export type ProfileContact = {
+  email: string | null;
+  linkedinUrl: string | null;
+  location: string | null;
+  responseTime: string | null;
+};
+
 export type CaseStudy = CaseStudySummary & {
   problem: string | null;
   solution: string | null;

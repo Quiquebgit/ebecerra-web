@@ -25,10 +25,10 @@
 
 ### A2 — Quick wins (ROI alto)
 
-- [ ] Queries en `packages/sanity-client/queries.ts` con fallback seguro por query (`.catch(() => null)`)
-- [ ] Hero lee de `heroSection`
-- [ ] Metadata OG desde `siteSettings.metadata` en `generateMetadata`
-- [ ] Contact info (email, LinkedIn, location, SLA) desde `siteSettings`
+- [x] Queries en `packages/sanity-client/queries.ts` con fallback seguro por query (`.catch(() => null)`)
+- [x] Hero lee de `heroSection`
+- [x] Metadata OG desde `siteSettings.metadata` en `generateMetadata`
+- [x] Contact info (email, LinkedIn, location, SLA) desde `profile.contact`
 
 ### A3 — Secciones de home
 
@@ -67,18 +67,19 @@
 
 Orden recomendado: empezar por los grandes (Hero, Services) para validar la convención antes de propagarla.
 
-- [ ] `Nav.tsx`
-- [ ] `Hero.tsx`
-- [ ] `Services.tsx` (incluye audit strip)
-- [ ] `Case.tsx`
-- [ ] `About.tsx`
-- [ ] `Process.tsx`
-- [ ] `Contact.tsx`
-- [ ] `Footer.tsx`
+- [x] `Nav.tsx`
+- [x] `Hero.tsx`
+- [x] `Services.tsx` (incluye audit strip)
+- [x] `Case.tsx`
+- [x] `About.tsx`
+- [x] `Process.tsx`
+- [x] `Contact.tsx`
+- [x] `Footer.tsx`
+- [x] `LogoMark.tsx` (width/display al module; height sigue inline — valor generado por prop)
 - [ ] FAQ components (cuando los haya)
 - [ ] Legal page components (cuando se migren a Sanity)
 
-**Orden con Fase A:** B va después de A. Ambas tocan los mismos archivos de componentes; secuencial evita reescribir dos veces.
+**Orden con Fase A:** B va después de A en teoría (para no tocar los mismos archivos dos veces). En la práctica la separación CSS/datos es limpia: B solo toca estilos; A toca props y queries en `page.tsx`. No hubo conflicto haciéndolas en paralelo — nota obsoleta.
 
 ---
 

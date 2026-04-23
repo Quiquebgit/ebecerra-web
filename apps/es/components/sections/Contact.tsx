@@ -2,34 +2,36 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import type { ProfileContact } from "@ebecerra/sanity-client";
 import styles from "./Contact.module.css";
 
 type Status = "idle" | "sending" | "success" | "error";
 
-const INFO: {
-  labelKey: "infoEmail" | "infoLinkedin" | "infoLocation";
-  value: string;
-  href?: string;
-  external?: boolean;
-}[] = [
-  {
-    labelKey: "infoEmail",
-    value: "contacto@ebecerra.es",
-    href: "mailto:contacto@ebecerra.es",
-  },
-  {
-    labelKey: "infoLinkedin",
-    value: "/in/enriquebecerra",
-    href: "https://www.linkedin.com/in/enrique-becerra-garcia/",
-    external: true,
-  },
-  { labelKey: "infoLocation", value: "Madrid · España · remoto" },
-];
+type Props = {
+  contactData?: ProfileContact | null;
+};
 
-export default function Contact() {
+export default function Contact({ contactData }: Props) {
   const t = useTranslations("contact");
   const [status, setStatus] = useState<Status>("idle");
   const [form, setForm] = useState({ name: "", email: "", message: "", website: "" });
+
+  const email = contactData?.email ?? "contacto@ebecerra.es";
+  const linkedinUrl = contactData?.linkedinUrl ?? "https://www.linkedin.com/in/enrique-becerra-garcia/";
+  const location = contactData?.location ?? "Madrid · España · remoto";
+  const responseTime = contactData?.responseTime ?? t("infoResponseValue");
+
+  type InfoItem = {
+    labelKey: "infoEmail" | "infoLinkedin" | "infoLocation";
+    value: string;
+    href?: string;
+    external?: boolean;
+  };
+  const INFO: InfoItem[] = [
+    { labelKey: "infoEmail", value: email, href: `mailto:${email}` },
+    { labelKey: "infoLinkedin", value: "/in/enriquebecerra", href: linkedinUrl, external: true },
+    { labelKey: "infoLocation", value: location },
+  ];
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,7 +95,7 @@ export default function Contact() {
                 <span className={styles.infoItemLabel}>{t("infoResponse")}</span>
                 <span className={styles.responseStatus}>
                   <span className={styles.statusDot} aria-hidden="true" />
-                  {t("infoResponseValue")}
+                  {responseTime}
                 </span>
               </li>
             </ul>
@@ -180,7 +182,7 @@ export default function Contact() {
                   ? t("formSuccess")
                   : status === "error"
                     ? t("formError")
-                    : `→ ${t("infoResponseValue")}`}
+                    : `→ ${responseTime}`}
               </span>
               <button
                 type="submit"

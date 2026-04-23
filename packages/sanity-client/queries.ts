@@ -9,6 +9,9 @@ import type {
   CaseStudy,
   CaseStudySummary,
   CaseStudyMetric,
+  HeroSection,
+  SiteSettingsMeta,
+  ProfileContact,
   Locale,
 } from "./types";
 
@@ -93,6 +96,54 @@ export async function getSiteData(locale: Locale) {
     aboutFeatures:
       profileData?.aboutFeatures?.length ? profileData.aboutFeatures : null,
   };
+}
+
+// --- Fase A2: heroSection, siteSettings, profileContact ---
+
+export async function getHeroSection(locale: Locale): Promise<HeroSection | null> {
+  type Raw = Omit<HeroSection, "trustBadges"> & { trustBadges: { v: string }[] | null };
+  const raw = await client.fetch<Raw | null>(
+    `*[_type == "heroSection"][0] {
+      "kicker": ${loc("kicker")},
+      "title": ${loc("title")},
+      "lead": ${loc("lead")},
+      "ctaPrimary": ${loc("ctaPrimary")},
+      "ctaSecondary": ${loc("ctaSecondary")},
+      "trustBadges": trustBadges[]{ "v": coalesce(@[$locale], @.es, @) }
+    }`,
+    { locale }
+  );
+  if (!raw) return null;
+  return { ...raw, trustBadges: (raw.trustBadges ?? []).map((b) => b.v).filter(Boolean) };
+}
+
+export async function getSiteSettings(locale: Locale): Promise<SiteSettingsMeta | null> {
+  type Raw = Omit<SiteSettingsMeta, "keywords"> & { keywords: { v: string }[] | null };
+  const raw = await client.fetch<Raw | null>(
+    `*[_type == "siteSettings"][0].metadata {
+      "title": ${loc("title")},
+      titleTemplate,
+      "description": ${loc("description")},
+      "ogDescription": ${loc("ogDescription")},
+      "twitterDescription": ${loc("twitterDescription")},
+      "keywords": keywords[]{ "v": coalesce(@[$locale], @.es, @) }
+    }`,
+    { locale }
+  );
+  if (!raw) return null;
+  return { ...raw, keywords: (raw.keywords ?? []).map((k) => k.v).filter(Boolean) };
+}
+
+export async function getProfileContact(locale: Locale): Promise<ProfileContact | null> {
+  return client.fetch<ProfileContact | null>(
+    `*[_type == "profile"][0].contact {
+      email,
+      linkedinUrl,
+      "location": ${loc("location")},
+      "responseTime": ${loc("responseTime")}
+    }`,
+    { locale }
+  );
 }
 
 // --- Fase 6+: services, processSteps, caseStudies ---

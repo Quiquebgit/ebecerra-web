@@ -7,6 +7,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import StructuredData from "@/components/StructuredData";
+import { getSiteSettings } from "@ebecerra/sanity-client";
 import type { Locale } from "@/i18n/routing";
 import "../../globals.css";
 
@@ -30,25 +31,24 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "metadata" });
+  const [t, sanityMeta] = await Promise.all([
+    getTranslations({ locale, namespace: "metadata" }),
+    getSiteSettings(locale).catch(() => null),
+  ]);
 
   const baseUrl = "https://ebecerra.es";
   const canonical = locale === routing.defaultLocale ? baseUrl : `${baseUrl}/${locale}`;
   const ogImage = `${baseUrl}/brand/web-app-manifest-512x512.png`;
 
-  return {
-    metadataBase: new URL(baseUrl),
-    title: {
-      default: t("title"),
-      template: t("titleTemplate"),
-    },
-    description: t("description"),
-    applicationName: "eBecerra",
-    authors: [{ name: "Enrique Becerra", url: baseUrl }],
-    creator: "Enrique Becerra",
-    publisher: "Enrique Becerra",
-    keywords:
-      locale === "es"
+  const title = sanityMeta?.title ?? t("title");
+  const titleTemplate = sanityMeta?.titleTemplate ?? t("titleTemplate");
+  const description = sanityMeta?.description ?? t("description");
+  const ogDescription = sanityMeta?.ogDescription ?? t("ogDescription");
+  const twitterDescription = sanityMeta?.twitterDescription ?? t("twitterDescription");
+  const keywords =
+    sanityMeta?.keywords?.length
+      ? sanityMeta.keywords
+      : locale === "es"
         ? [
             "desarrollo web a medida",
             "autónomos",
@@ -66,7 +66,20 @@ export async function generateMetadata({
             "website for clinics",
             "website for law firms",
             "Enrique Becerra",
-          ],
+          ];
+
+  return {
+    metadataBase: new URL(baseUrl),
+    title: {
+      default: title,
+      template: titleTemplate,
+    },
+    description,
+    applicationName: "eBecerra",
+    authors: [{ name: "Enrique Becerra", url: baseUrl }],
+    creator: "Enrique Becerra",
+    publisher: "Enrique Becerra",
+    keywords,
     alternates: {
       canonical,
       languages: {
@@ -81,8 +94,8 @@ export async function generateMetadata({
       alternateLocale: locale === "es" ? ["en_US"] : ["es_ES"],
       url: canonical,
       siteName: "eBecerra",
-      title: t("title"),
-      description: t("ogDescription"),
+      title,
+      description: ogDescription,
       images: [
         {
           url: ogImage,
@@ -94,8 +107,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: t("title"),
-      description: t("twitterDescription"),
+      title,
+      description: twitterDescription,
       images: [ogImage],
     },
     robots: {
