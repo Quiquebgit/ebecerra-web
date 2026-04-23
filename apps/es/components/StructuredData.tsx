@@ -59,8 +59,8 @@ export default function StructuredData({ locale }: Props) {
     image: `${SITE_URL}/brand/web-app-manifest-512x512.png`,
     description:
       locale === "es"
-        ? "Webs a medida para clínicas, despachos, autónomos y PYMEs: webs rápidas con CMS profesional, migraciones sin perder SEO, integraciones con tus herramientas y auditoría técnica."
-        : "Custom websites for clinics, law firms, freelancers and SMBs: fast sites with a professional CMS, migrations without SEO loss, integrations with your tools and technical audits.",
+        ? "Webs a medida para clínicas, despachos, autónomos y PYMEs: webs profesionales de presencia, webs editables con CMS, rescate de webs antiguas sin perder SEO y mantenimiento mensual."
+        : "Custom websites for clinics, law firms, freelancers and SMBs: professional presence sites, editable CMS-powered sites, rescue of legacy sites without SEO loss, and monthly maintenance.",
     founder: { "@id": PERSON_URL },
     areaServed: [
       { "@type": "Country", name: "Spain" },

@@ -4,29 +4,27 @@
 
 Portfolio personal de Enrique Becerra, Tech Architect Lead en VASS y especialista en Magnolia CMS.
 
-**Estado actual (2026-04-22, post-Fase E):** rama `migracion-nextjs` es ya un **monorepo npm workspaces + Turborepo** con dos apps sobre un único Sanity compartido:
+**Estado actual (2026-04-23, post-cutover):** `main` es el **monorepo npm workspaces + Turborepo** con dos apps sobre un único Sanity compartido, **ya en producción**:
 
-- **[`apps/es`](apps/es/)** → `ebecerra.es` — modo pro, escaparate comercial para captar clientes de desarrollo web (autónomos y PYMEs). **Home renderizada al 100%**: 8 secciones comerciales (Nav verde con logo blanco · Hero con monograma scale-deep + markup `[circle]...[/circle]` vía `AnnotatedText` · 3 Services con precios orientativos reales (1.500 € / 2.500 € / 500 €) y `priceNote` (render bajo `priceRange`) con framing Kit Digital (hasta 2.000 €) · 3 Casos anonimizados en grid (contexto/solución/resultado + "traducible a tu negocio") desde fallback poblado con `docs/cv-pro.md` · About con stats reales (8+ años, 13 proyectos, 6 AAPP) · Process timeline horizontal/vertical · Contact con form Resend funcional (sin GitHub en los datos) · Footer stone-900 warm). Sanity wireado para services/process/profile con fallback seguro; cases hoy se sirven del fallback estático. `/api/contact` con Resend listo (pendiente verificar dominio).
+- **[`apps/es`](apps/es/)** → `ebecerra.es` — modo pro, escaparate comercial para captar clientes de desarrollo web (autónomos y PYMEs). Home renderizada al 100% con 8 secciones. **Servicios (2026-04-23):** 4 cards en grid 2x2 — Web profesional (900 €), Web editable (1.500 €), Rescate (2.500 €), Mantenimiento (60 €/mes). Auditoría eliminada del catálogo de pago. Sanity wireado para services/process/profile con fallback seguro; cases hoy se sirven del fallback estático. `/api/contact` con Resend funcional.
 - **[`apps/tech`](apps/tech/)** → `ebecerra.tech` — modo geek, identidad técnica para comunidad, reclutadores y contactos LinkedIn. Next.js completo con la estética geek CV-style (8 secciones: Nav · Hero · About · Experience · Skills · Projects · Contact · Footer). Nav con monograma bracket-B neón (`logo-bracket-b-neon.svg`) + `eBecerra.tech` tipográfico; menú colapsa a hamburguesa por debajo de `lg`. Terminal del Hero con input siempre visible y placeholder parpadeante hasta foco. Form de contacto portado de Formspree a Resend (`/api/contact` con idempotency + honeypot, paridad con `apps/es`).
-
-La rama `main` sigue desplegando el SPA React 19 + Vite original en `ebecerra.es` — producción cambia al monorepo cuando se haga el cutover.
 
 El "toggle geek mode" del plan original se sustituye por dominio: cada URL entra en su modo por defecto.
 
+**Código legacy del SPA React 19 + Vite archivado en [`_legacy/`](_legacy/)** — solo consultable. Detalles en el skill `/legacy-vite-codebase`.
+
 **Archivo histórico:** tags `archive/nextjs-geek-pure` (estado Next.js pre-split, single-app, commit `ba17925`) y `archive/migracion-nextjs-mixed` (estado con Fase B de mix geek+pro, commit `3763044`) permiten rollback si hace falta.
 
-**Pendiente para producción** (no bloqueante en dev):
-- Copiar `apps/tech/.env.local` → `apps/es/.env.local` (mismo `SANITY_REVALIDATE_SECRET`).
-- Verificar dominio `ebecerra.es` (y `ebecerra.tech` cuando toque el cutover) en Resend, generar `RESEND_API_KEY`, setear `CONTACT_TO_EMAIL` (+ opcional `CONTACT_FROM_EMAIL`) en **ambas apps** (Vercel + `.env.local` de cada app).
-- Crear segundo proyecto Vercel apuntando a `apps/es` (Root Directory) con sus env vars.
-- Cutover de DNS cuando se quiera publicar.
+**Pendiente menor** (no bloqueante):
+- Verificar dominio `ebecerra.tech` en Resend cuando se haga el cutover (ya hecho para `ebecerra.es`).
+- Crear segundo proyecto Vercel apuntando a `apps/tech` con sus env vars + cutover DNS cuando se quiera publicar ebecerra.tech.
 
 Plan completo y roadmap: [`docs/plan-migracion-nextjs-sanity.md`](docs/plan-migracion-nextjs-sanity.md).
 Progreso de ejecución: [`docs/progress.md`](docs/progress.md).
 
 ## Stack
 
-**Monorepo (`migracion-nextjs`):**
+**Monorepo (rama `main`, en producción):**
 - **Root:** npm workspaces + Turborepo 2.x. `packageManager: "npm@10.4.0"`.
 - **apps/es** y **apps/tech:** Next.js 16 + TypeScript + Tailwind v4 + next-intl 4. **Ambas** con Sanity v5 + Resend en `/api/contact` (idempotency + honeypot). apps/tech expone queries CV-style; apps/es expone queries comerciales (`getFeaturedServices`, `getProcessSteps`, `getFeaturedCaseForHome`, `getProfileFeatures`).
 - **packages/sanity-schemas:** `@ebecerra/sanity-schemas` — tipos y schemas compartidos (experience, skill, techTag, project, profile, service, processStep, caseStudy, locale).
@@ -35,9 +33,9 @@ Progreso de ejecución: [`docs/progress.md`](docs/progress.md).
 
 **Sanity project `gdtxcn4l`, dataset `production`** — único, compartido por ambas apps. Studio embebido en `apps/es/app/(misc)/studio/[[...tool]]`.
 
-**Legacy en `main` (en producción hasta Fase 7):** React 19 + Vite 8 + JS vanilla + CSS co-located. Solo consultable. Detalles en el skill `/legacy-vite-codebase`.
+**Legacy archivado en [`_legacy/`](_legacy/):** React 19 + Vite 8 + JS vanilla + CSS co-located. Solo consultable. Detalles en el skill `/legacy-vite-codebase`.
 
-**Destino (post-Fase 12):** mismo monorepo con packages adicionales (`ui`, `utils`), migración opcional de npm → pnpm workspaces (`packageManager` en root lo declara explícito), Resend para `/api/contact`, dos proyectos Vercel con `turbo-ignore` como Ignored Build Step apuntando al mismo repo con Root Directory distinto (`apps/es` y `apps/tech`).
+**Destino:** mismo monorepo con packages adicionales (`ui`, `utils` cuando se necesiten), migración opcional de npm → pnpm workspaces, dos proyectos Vercel con `turbo-ignore` como Ignored Build Step apuntando al mismo repo con Root Directory distinto (`apps/es` en producción, `apps/tech` pendiente de cutover DNS).
 
 ## Comandos monorepo
 

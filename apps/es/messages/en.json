@@ -35,8 +35,8 @@
   },
   "services": {
     "kicker": "// 01. Services",
-    "title": "What I build for you",
-    "lead": "Concrete offerings with clear scope from the first conversation. All born from real enterprise and public-sector projects, scaled to your business.",
+    "title": "How I can help you",
+    "lead": "Four ways to work together, with clear pricing from the first contact. Not sure which fits your case? Write me and I'll point you the right way — no strings attached.",
     "priceFrom": "from",
     "priceOnRequest": "Custom quote",
     "viewMore": "View details"

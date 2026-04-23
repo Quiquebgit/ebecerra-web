@@ -207,8 +207,8 @@ export default async function Services({ services }: Props) {
           border-color: var(--cta);
           box-shadow: var(--sh-2);
         }
-        @media (min-width: 1024px) {
-          .services-grid { grid-template-columns: repeat(3, 1fr); }
+        @media (min-width: 720px) {
+          .services-grid { grid-template-columns: repeat(2, 1fr); }
         }
       `}</style>
     </section>
