@@ -6,7 +6,8 @@
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "any",
+  "categories": ["business", "portfolio"],
   "theme_color": "#00ff88",
   "background_color": "#080808",
   "icons": [
