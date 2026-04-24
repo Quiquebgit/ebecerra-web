@@ -28,6 +28,7 @@ function ExternalIcon() {
 const statusClasses: Record<string, string> = {
   beta: "bg-[#00ff88]/[0.08] text-[#00ff88] border border-[#00ff88]/20",
   fan: "bg-[#00ccff]/[0.08] text-[#00ccff] border border-[#00ccff]/20",
+  live: "bg-[#00ff88]/[0.08] text-[#00ff88] border border-[#00ff88]/20",
 };
 
 export default function Projects({ items }: ProjectsProps) {

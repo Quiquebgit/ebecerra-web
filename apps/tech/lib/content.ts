@@ -163,12 +163,30 @@ const es: Fallback = {
         },
       ],
     },
+    {
+      id: "ebecerra-es",
+      label: "web · freelance",
+      title: "ebecerra.es",
+      description:
+        "Web comercial para mis servicios de desarrollo web freelance. Monorepo Next.js con dos apps (esta y la comercial), CMS headless con Sanity, i18n ES/EN y despliegue en Vercel.",
+      tech: ["Next.js", "TypeScript", "Sanity CMS", "Turborepo", "Vercel"],
+      status: "live",
+      statusText: "en producción",
+      links: [
+        {
+          text: "$ ver_web →",
+          href: "https://ebecerra.es",
+          external: true,
+        },
+      ],
+    },
   ],
   footerLinks: [
     {
       label: "LinkedIn",
       url: "https://www.linkedin.com/in/enrique-becerra-garcia/",
     },
+    { label: "ebecerra.es", url: "https://ebecerra.es" },
     { label: "Email", url: "mailto:quique.ebecerra@gmail.com" },
   ],
 };
@@ -311,12 +329,30 @@ const en: Fallback = {
         },
       ],
     },
+    {
+      id: "ebecerra-es",
+      label: "web · freelance",
+      title: "ebecerra.es",
+      description:
+        "Commercial website for my freelance web development services. Next.js monorepo with two apps (this one and the commercial site), headless CMS with Sanity, ES/EN i18n and deployment on Vercel.",
+      tech: ["Next.js", "TypeScript", "Sanity CMS", "Turborepo", "Vercel"],
+      status: "live",
+      statusText: "live",
+      links: [
+        {
+          text: "$ view_site →",
+          href: "https://ebecerra.es",
+          external: true,
+        },
+      ],
+    },
   ],
   footerLinks: [
     {
       label: "LinkedIn",
       url: "https://www.linkedin.com/in/enrique-becerra-garcia/",
     },
+    { label: "ebecerra.es", url: "https://ebecerra.es" },
     { label: "Email", url: "mailto:quique.ebecerra@gmail.com" },
   ],
 };
