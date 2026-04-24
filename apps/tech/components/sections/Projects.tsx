@@ -50,7 +50,7 @@ export default function Projects({ items }: ProjectsProps) {
         >
           {t("title")}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {items.map((p) => (
             <div
               key={p.id}
